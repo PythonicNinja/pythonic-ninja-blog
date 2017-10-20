@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Think. Code. Enjoy. - os admin devops</title><link href="http://pythonic.ninja/" rel="alternate"></link><link href="http://pythonic.ninja/feeds/os-admin-devops.atom.xml" rel="self"></link><id>http://pythonic.ninja/</id><updated>2017-10-20T01:00:00+02:00</updated><entry><title>How to easily find biggest files?</title><link href="http://pythonic.ninja/how-to-easily-find-biggest-files.html" rel="alternate"></link><published>2017-10-20T01:00:00+02:00</published><updated>2017-10-20T01:00:00+02:00</updated><author><name>PythonicNinja</name></author><id>tag:pythonic.ninja,2017-10-20:/how-to-easily-find-biggest-files.html</id><summary type="html">&lt;h1&gt;Problem 😱&lt;/h1&gt;
+&lt;p&gt;You run out of space!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="I'm full" src="https://i.giphy.com/media/QvwMDYpAMUm6Q/giphy.webp"&gt; &lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Solution 🤓&lt;/h1&gt;
+&lt;p&gt;ncdu - ncurses disk usage&lt;/p&gt;
+&lt;p&gt;Lets you easily track most used files without need to leave command line.&lt;/p&gt;
+&lt;p&gt;&lt;a href="ncdu wiki"&gt;https://en.wikipedia.org/wiki/Ncdu&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Problem 😱&lt;/h1&gt;
+&lt;p&gt;You run out of space!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="I'm full" src="https://i.giphy.com/media/QvwMDYpAMUm6Q/giphy.webp"&gt; &lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Solution 🤓&lt;/h1&gt;
+&lt;p&gt;ncdu - ncurses disk usage&lt;/p&gt;
+&lt;p&gt;Lets you easily track most used files without need to leave command line.&lt;/p&gt;
+&lt;p&gt;&lt;a href="ncdu wiki"&gt;https://en.wikipedia.org/wiki/Ncdu&lt;/a&gt;&lt;/p&gt;</content></entry></feed>
