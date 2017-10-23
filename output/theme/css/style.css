@@ -231,6 +231,7 @@ aside > h2 {
   {
     margin-left: 0;
     margin-right: 0;
+    margin-top: 0;
   }
 
   body > article {
@@ -250,6 +251,10 @@ aside > h2 {
     height: 50px;
     width: 50px;
     margin: 10px auto;
+  }
+
+  .social {
+    margin-top: 0;
   }
 }
 

@@ -1,6 +1,6 @@
 Title: How to name tab in shell?
 Date: 2017-10-23 17:00
-Category: os admin devops 
+Category: linux 
 
 # Problem 😱
 

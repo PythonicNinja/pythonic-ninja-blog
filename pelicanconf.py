@@ -48,11 +48,13 @@ SIDEBAR_DIGEST = 'mail@pythonic.ninja'
 FAVICON = 'https://avatars0.githubusercontent.com/u/1098417?s=460&v=4'
 
 DISPLAY_PAGES_ON_MENU = False
-DISPLAY_CATEGORIES_ON_MENU = False
+DISPLAY_CATEGORIES_ON_MENU = True
 
 # TWITTER_USERNAME = 'twitter-user-name'
 
-MENUITEMS = (('Blog', SITEURL),)
+MENUITEMS = (
+    ('Blog', SITEURL),
+)
 
 
 LINKS = []
