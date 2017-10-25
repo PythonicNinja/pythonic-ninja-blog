@@ -33,7 +33,7 @@ DEFAULT_PAGINATION = 10
 
 
 # THEME
-THEME = 'pelican-blue'
+THEME = 'themes/pelican-blue'
 
 
 SOCIAL = (

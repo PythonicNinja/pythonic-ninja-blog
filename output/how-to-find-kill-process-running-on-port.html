@@ -3,7 +3,7 @@
 <head>
             <meta charset="utf-8">
         <!-- Site Meta Data -->
-        <title>Add a progress meter to your loops in a second</title>
+        <title>How to find / kill process running on port?</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="PythonicNinja">
@@ -28,13 +28,13 @@
         <meta name="twitter:image" content="">
 
     <meta name="twitter:creator" content="">
-    <meta name="twitter:url" content="/add-a-progress-meter-to-your-loops-in-a-second.html">
-    <meta name="twitter:title" content="Think. Code. Enjoy. ~ Add a progress meter to your loops in a second">
-    <meta name="twitter:description" content="Add a progress meter to your loops in a second Instantly make your loops show a progress meter - just wrap any iterator with &#34;tqdm(iterator)&#34;, and you&#39;re done! pip install tqdm and your done! 🎉🎉🎉">
+    <meta name="twitter:url" content="/how-to-find-kill-process-running-on-port.html">
+    <meta name="twitter:title" content="Think. Code. Enjoy. ~ How to find / kill process running on port?">
+    <meta name="twitter:description" content="Problem 😱 You run your server and get: s.bind((hostname, port)) OSError: [Errno 48] Address already in use Solution 🤓 | =&gt; lsof -i :your-port-num | =&gt; lsof -i :8000 COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME python3.5 81097 pythonicninja 4u IPv4 0x5a7b2c523567dcd7 0t0 TCP *:irdmi (LISTEN) | =&gt; lsof -i :8000 -t …">
 
     <!-- Facebook Meta Data -->
-    <meta property="og:title" content="Think. Code. Enjoy. ~ Add a progress meter to your loops in a second"/>
-    <meta property="og:description" content="Add a progress meter to your loops in a second Instantly make your loops show a progress meter - just wrap any iterator with &#34;tqdm(iterator)&#34;, and you&#39;re done! pip install tqdm and your done! 🎉🎉🎉"/>
+    <meta property="og:title" content="Think. Code. Enjoy. ~ How to find / kill process running on port?"/>
+    <meta property="og:description" content="Problem 😱 You run your server and get: s.bind((hostname, port)) OSError: [Errno 48] Address already in use Solution 🤓 | =&gt; lsof -i :your-port-num | =&gt; lsof -i :8000 COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME python3.5 81097 pythonicninja 4u IPv4 0x5a7b2c523567dcd7 0t0 TCP *:irdmi (LISTEN) | =&gt; lsof -i :8000 -t …"/>
     <meta property="og:image" content=""/>
 </head>
 
@@ -65,11 +65,11 @@
         <ul class="navbar">
                 <li><a
                         href="/category/django.html">django</a></li>
-                <li><a
+                <li class="active"><a
                         href="/category/linux.html">linux</a></li>
                 <li><a
                         href="/category/osx.html">osx</a></li>
-                <li class="active"><a
+                <li><a
                         href="/category/python.html">python</a></li>
         </ul>
 
@@ -80,57 +80,86 @@
 <article>
     <section id="content">
         <article>
-            <h2 class="post_title post_detail"><a href="/add-a-progress-meter-to-your-loops-in-a-second.html" rel="bookmark"
-                                                  title="Permalink to Add a progress meter to your loops in a second">Add a progress meter to your loops in a second</a></h2>
+            <h2 class="post_title post_detail"><a href="/how-to-find-kill-process-running-on-port.html" rel="bookmark"
+                                                  title="Permalink to How to find / kill process running on port?">How to find / kill process running on port?</a></h2>
             <div class="entry-content blog-post">
-                <p>Add a progress meter to your loops in a second</p>
-<p><img alt="progressbar" src="https://camo.githubusercontent.com/48838faaa8d00ea297f18e5bf55d3c6bb4e0ba6b/68747470733a2f2f692e696d6775722e636f6d2f686539417735432e676966"></p>
-<p>Instantly make your loops show a progress meter - just wrap any iterator with "tqdm(iterator)", and you're done!</p>
-<div class="highlight"><pre><span></span>pip install tqdm
+                <h1>Problem 😱</h1>
+<p>You run your server and get:</p>
+<div class="highlight"><pre><span></span>s.bind((hostname, port))
+OSError: [Errno 48] Address already in use
 </pre></div>
 
 
-<p>and your done! 🎉🎉🎉</p>
+<hr>
+<h1>Solution 🤓</h1>
+<div class="highlight"><pre><span></span>| =&gt; lsof -i :your-port-num
+
+
+| =&gt; lsof -i :8000
+COMMAND     PID          USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+python3.5 81097 pythonicninja    4u  IPv4 0x5a7b2c523567dcd7      0t0  TCP *:irdmi (LISTEN)
+
+
+| =&gt; lsof -i :8000 -t | xargs kill -9
+</pre></div>
+
+
+<p>function:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">fport() {</span> <span class="nx">lsof</span> <span class="o">-</span><span class="nx">i</span> :<span class="kt">$</span><span class="err">@</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">kport() {</span> <span class="nx">lsof</span> <span class="o">-</span><span class="nx">i</span> :<span class="kt">$</span><span class="err">@</span> <span class="o">-</span><span class="nx">t</span> <span class="o">|</span> <span class="nx">xargs</span> <span class="nx">kill</span> <span class="o">-</span><span class="mi">9</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+
+
+<p>usage:</p>
+<div class="highlight"><pre><span></span>| =&gt; fport 8000
+COMMAND     PID          USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+python3.5 25369 pythonicninja    6u  IPv4 0x5a7b2c5216355cd7      0t0  TCP *:irdmi (LISTEN)
+python3.5 25373 pythonicninja    6u  IPv4 0x5a7b2c5216355cd7      0t0  TCP *:irdmi (LISTEN)
+python3.5 25373 pythonicninja    8u  IPv4 0x5a7b2c5216355cd7      0t0  TCP *:irdmi (LISTEN)
+
+| =&gt; kport 8000
+</pre></div>
+
+
+<h1>🎉🎉🎉</h1>
             </div>
             <div class="post_list">
                 <span>By </span>
                 <a href="/author/pythonicninja.html">@PythonicNinja</a>
                 <span> in </span>
-                <span class="post_category"><a href="/category/python.html" rel="bookmark"
-                                               title="Permalink to python">[ python ]</a></span>
-                <span class="post_date">ptk 20 października 2017</span>
+                <span class="post_category"><a href="/category/linux.html" rel="bookmark"
+                                               title="Permalink to linux">[ linux ]</a></span>
+                <span class="post_date">wto 24 października 2017</span>
                 <div><span>Tags : </span>
-                            <span><a href="/tag/python.html">#python, </a></span>
-                            <span><a href="/tag/utils.html">#utils, </a></span>
-                            <span><a href="/tag/shell.html">#shell, </a></span>
                 </div>
 
                 <div class="entry-social">
                     <span class="twitter"><a target="_blank" rel="nofollow"
                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
                                              title="Twitter"
-                                             href="https://twitter.com/share?url=/add-a-progress-meter-to-your-loops-in-a-second.html&text=Add a progress meter to your loops in a second&via="><img
+                                             href="https://twitter.com/share?url=/how-to-find-kill-process-running-on-port.html&text=How to find / kill process running on port?&via="><img
                             src="/theme/images/icons/twitter-s.png"></a></span>
 
                     <span class="gplus"><a target="_blank" title="Google +"
-                                           href="https://plus.google.com/share?url=/add-a-progress-meter-to-your-loops-in-a-second.html&hl=fr"
+                                           href="https://plus.google.com/share?url=/how-to-find-kill-process-running-on-port.html&hl=fr"
                                            rel="nofollow"
                                            onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
                             src="/theme/images/icons/google-s.png"></a></span>
 
                     <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
                                               onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
-                                              href="https://www.facebook.com/sharer.php?u=/add-a-progress-meter-to-your-loops-in-a-second.html&t=Add a progress meter to your loops in a second"><img
+                                              href="https://www.facebook.com/sharer.php?u=/how-to-find-kill-process-running-on-port.html&t=How to find / kill process running on port?"><img
                             src="/theme/images/icons/facebook-s.png"></a></span>
 
                     <a target="_blank" title="Linkedin"
-                       href="https://www.linkedin.com/shareArticle?mini=true&url=/add-a-progress-meter-to-your-loops-in-a-second.html&title=Add a progress meter to your loops in a second"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=/how-to-find-kill-process-running-on-port.html&title=How to find / kill process running on port?"
                        rel="nofollow"
                        onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
                             src="/theme/images/icons/linkedin-s.png"></a>
 
                     <span class="mail"><a
-                            href="mailto:?subject=Add a progress meter to your loops in a second&amp;body=Viens découvrir un article à propos de [Add a progress meter to your loops in a second] sur le site de PythonicNinja. /add-a-progress-meter-to-your-loops-in-a-second.html"
+                            href="mailto:?subject=How to find / kill process running on port?&amp;body=Viens découvrir un article à propos de [How to find / kill process running on port?] sur le site de PythonicNinja. /how-to-find-kill-process-running-on-port.html"
                             title="Share by Email" target="_blank"><img
                             src="/theme/images/icons/mail-s.png"></a></span>
                 </div>
