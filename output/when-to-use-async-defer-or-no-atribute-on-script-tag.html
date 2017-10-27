@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>When to use async defer or no atribute on script tag?</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="PythonicNinja">
+
+        <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/1098417?s=460&v=4">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="Think. Code. Enjoy.">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="/when-to-use-async-defer-or-no-atribute-on-script-tag.html">
+    <meta name="twitter:title" content="Think. Code. Enjoy. ~ When to use async defer or no atribute on script tag?">
+    <meta name="twitter:description" content="Problem 😱 You want to add script tag. But when to add specific attribute? Solution 🤓 &lt;script&gt; Let’s start by defining what &lt;script&gt; without any attributes does. The HTML file will be parsed until the script file is hit, at that point parsing will stop and a request will be made …">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="Think. Code. Enjoy. ~ When to use async defer or no atribute on script tag?"/>
+    <meta property="og:description" content="Problem 😱 You want to add script tag. But when to add specific attribute? Solution 🤓 &lt;script&gt; Let’s start by defining what &lt;script&gt; without any attributes does. The HTML file will be parsed until the script file is hit, at that point parsing will stop and a request will be made …"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href=""><img id="avatar" src=""></a></center>-->
+    <a href='/'><h1>Think. Code. Enjoy.</h1></a>
+        <p>mail@pythonic.ninja</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="">Blog</a></li>
+
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://github.com/PythonicNinja" target="_blank"><img
+                        src="/theme/images/icons/github.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="/category/django.html">django</a></li>
+                <li><a
+                        href="/category/linux.html">linux</a></li>
+                <li><a
+                        href="/category/osx.html">osx</a></li>
+                <li><a
+                        href="/category/python.html">python</a></li>
+                <li class="active"><a
+                        href="/category/webdev.html">webdev</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="/when-to-use-async-defer-or-no-atribute-on-script-tag.html" rel="bookmark"
+                                                  title="Permalink to When to use async defer or no atribute on script tag?">When to use async defer or no atribute on script tag?</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Problem 😱</h1>
+<p>You want to add script tag. But when to add specific attribute?</p>
+<hr>
+<h1>Solution 🤓</h1>
+<p><img alt="legend" src="http://www.growingwiththeweb.com/images/2014/02/26/legend.svg"></p>
+<p><code>&lt;script&gt;</code></p>
+<p>Let’s start by defining what <code>&lt;script&gt;</code> without any attributes does. 
+The HTML file will be parsed until the script file is hit, 
+at that point parsing will stop and a request will be made to fetch the file (if it’s external). 
+The script will then be executed before parsing is resumed.</p>
+<p><img alt="legend" src="http://www.growingwiththeweb.com/images/2014/02/26/script.svg"></p>
+<p><code>&lt;script async&gt;</code></p>
+<p>async downloads the file during HTML parsing and will pause the HTML parser to execute it when it has finished downloading.</p>
+<p><img alt="legend" src="http://www.growingwiththeweb.com/images/2014/02/26/script-async.svg"></p>
+<p><code>&lt;script defer&gt;</code></p>
+<p>defer downloads the file during HTML parsing and will only execute it after the parser has completed. defer scripts are also guarenteed to execute in the order that they appear in the document.</p>
+<p><img alt="legend" src="http://www.growingwiththeweb.com/images/2014/02/26/script-defer.svg"></p>
+<h1>When should I use what?</h1>
+<p>Typically you want to use async where possible, then defer then no attribute. </p>
+<p>Here are some general rules to follow:</p>
+<ul>
+<li>
+<p>If the script is modular and does not rely on any scripts then use async.</p>
+</li>
+<li>
+<p>If the script relies upon or is relied upon by another script then use defer.</p>
+</li>
+<li>
+<p>If the script is small and is relied upon by an async script then use an inline script with no attributes placed above the async scripts.</p>
+</li>
+</ul>
+<h2>References:</h2>
+<ul>
+<li>[1] https://github.com/h5bp/lazyweb-requests/issues/42</li>
+<li>[2] http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</li>
+</ul>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="/author/pythonicninja.html">@PythonicNinja</a>
+                <span> in </span>
+                <span class="post_category"><a href="/category/webdev.html" rel="bookmark"
+                                               title="Permalink to webdev">[ webdev ]</a></span>
+                <span class="post_date">ptk 27 października 2017</span>
+                <div><span>Tags : </span>
+                            <span><a href="/tag/html.html">#html, </a></span>
+                            <span><a href="/tag/webdev.html">#webdev, </a></span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=/when-to-use-async-defer-or-no-atribute-on-script-tag.html&text=When to use async defer or no atribute on script tag?&via="><img
+                            src="/theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=/when-to-use-async-defer-or-no-atribute-on-script-tag.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=/when-to-use-async-defer-or-no-atribute-on-script-tag.html&t=When to use async defer or no atribute on script tag?"><img
+                            src="/theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=/when-to-use-async-defer-or-no-atribute-on-script-tag.html&title=When to use async defer or no atribute on script tag?"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=When to use async defer or no atribute on script tag?&amp;body=Viens découvrir un article à propos de [When to use async defer or no atribute on script tag?] sur le site de PythonicNinja. /when-to-use-async-defer-or-no-atribute-on-script-tag.html"
+                            title="Share by Email" target="_blank"><img
+                            src="/theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Wanna contact me? <a href="mailto:mail@pythonic.ninja">email me :)</a>
+        </p>
+    </footer>
+
+
+</body>
+</html>
