@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>How to process audio into text?</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="PythonicNinja">
+
+        <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/1098417?s=460&v=4">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="Think. Code. Enjoy.">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="/how-to-process-audio-into-text.html">
+    <meta name="twitter:title" content="Think. Code. Enjoy. ~ How to process audio into text?">
+    <meta name="twitter:description" content="Problem 😱 You want to process audio file into text. Solution 🤓 We will use gapi which offers ability to transform audio files into text. # GOOGLE_APPLICATION_CREDENTIALS=./gapi-auth.json import json import subprocess from google.cloud import speech from google.cloud.proto.speech.v1 import cloud_speech_pb2 speech_client = speech.SpeechClient() path_to_file = &#39;./input.mp4&#39; output_path_to_file …">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="Think. Code. Enjoy. ~ How to process audio into text?"/>
+    <meta property="og:description" content="Problem 😱 You want to process audio file into text. Solution 🤓 We will use gapi which offers ability to transform audio files into text. # GOOGLE_APPLICATION_CREDENTIALS=./gapi-auth.json import json import subprocess from google.cloud import speech from google.cloud.proto.speech.v1 import cloud_speech_pb2 speech_client = speech.SpeechClient() path_to_file = &#39;./input.mp4&#39; output_path_to_file …"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href=""><img id="avatar" src=""></a></center>-->
+    <a href='/'><h1>Think. Code. Enjoy.</h1></a>
+        <p>mail@pythonic.ninja</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="">Blog</a></li>
+
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://github.com/PythonicNinja" target="_blank"><img
+                        src="/theme/images/icons/github.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="/category/django.html">django</a></li>
+                <li><a
+                        href="/category/linux.html">linux</a></li>
+                <li><a
+                        href="/category/osx.html">osx</a></li>
+                <li class="active"><a
+                        href="/category/python.html">python</a></li>
+                <li><a
+                        href="/category/webdev.html">webdev</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="/how-to-process-audio-into-text.html" rel="bookmark"
+                                                  title="Permalink to How to process audio into text?">How to process audio into text?</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Problem 😱</h1>
+<p>You want to process audio file into text.</p>
+<hr>
+<h1>Solution 🤓</h1>
+<p>We will use gapi which offers ability to transform audio files into text.</p>
+<div class="highlight"><pre><span></span><span class="c1"># GOOGLE_APPLICATION_CREDENTIALS=./gapi-auth.json</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">speech</span>
+<span class="kn">from</span> <span class="nn">google.cloud.proto.speech.v1</span> <span class="kn">import</span> <span class="n">cloud_speech_pb2</span>
+
+<span class="n">speech_client</span> <span class="o">=</span> <span class="n">speech</span><span class="o">.</span><span class="n">SpeechClient</span><span class="p">()</span>
+
+
+<span class="n">path_to_file</span> <span class="o">=</span> <span class="s1">&#39;./input.mp4&#39;</span>
+<span class="n">output_path_to_file</span> <span class="o">=</span> <span class="s1">&#39;./out.flac&#39;</span>
+
+
+<span class="c1"># command = &#39;ffmpeg -i {input_file} -ac 1 -c:a  flac answer_11.flac&#39;</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;ffmpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;{input_file}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_file</span><span class="o">=</span><span class="n">path_to_file</span><span class="p">),</span> <span class="s1">&#39;-ac&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;-c:a&#39;</span><span class="p">,</span> <span class="s1">&#39;flac&#39;</span><span class="p">,</span> <span class="n">output_path_to_file</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">parse_speech_recognition_result</span><span class="p">(</span><span class="n">speech_recognition_result</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">speech_recognition_result</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">alternative</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">alternatives</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;transcript&#39;</span><span class="p">:</span> <span class="n">alternative</span><span class="o">.</span><span class="n">transcript</span><span class="p">,</span>
+                <span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="n">alternative</span><span class="o">.</span><span class="n">confidence</span><span class="p">,</span>
+            <span class="p">})</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path_to_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">recording_file</span><span class="p">:</span>
+    <span class="n">recording_bytes</span> <span class="o">=</span> <span class="n">recording_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">cloud_speech_pb2</span><span class="o">.</span><span class="n">RecognitionAudio</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">recording_bytes</span><span class="p">)</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">cloud_speech_pb2</span><span class="o">.</span><span class="n">RecognitionConfig</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;FLAC&quot;</span><span class="p">,</span> <span class="n">sample_rate_hertz</span><span class="o">=</span><span class="mi">44100</span><span class="p">,</span> <span class="n">language_code</span><span class="o">=</span><span class="s2">&quot;en-US&quot;</span><span class="p">)</span>
+    <span class="n">speech_recognition_result</span> <span class="o">=</span> <span class="n">speech_client</span><span class="o">.</span><span class="n">recognize</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">audio</span><span class="o">=</span><span class="n">audio</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">parse_speech_recognition_result</span><span class="p">(</span><span class="n">speech_recognition_result</span><span class="p">)</span>
+
+    <span class="n">dump_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">dump_result</span><span class="p">)</span>
+</pre></div>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="/author/pythonicninja.html">@PythonicNinja</a>
+                <span> in </span>
+                <span class="post_category"><a href="/category/python.html" rel="bookmark"
+                                               title="Permalink to python">[ python ]</a></span>
+                <span class="post_date">sob 04 listopada 2017</span>
+                <div><span>Tags : </span>
+                            <span><a href="/tag/python.html">#python, </a></span>
+                            <span><a href="/tag/speach-to-text.html">#speach-to-text, </a></span>
+                            <span><a href="/tag/gapi.html">#gapi, </a></span>
+                            <span><a href="/tag/google.html">#google, </a></span>
+                            <span><a href="/tag/speach.html">#speach, </a></span>
+                            <span><a href="/tag/text.html">#text, </a></span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=/how-to-process-audio-into-text.html&text=How to process audio into text?&via="><img
+                            src="/theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=/how-to-process-audio-into-text.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=/how-to-process-audio-into-text.html&t=How to process audio into text?"><img
+                            src="/theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=/how-to-process-audio-into-text.html&title=How to process audio into text?"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=How to process audio into text?&amp;body=Viens découvrir un article à propos de [How to process audio into text?] sur le site de PythonicNinja. /how-to-process-audio-into-text.html"
+                            title="Share by Email" target="_blank"><img
+                            src="/theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Wanna contact me? <a href="mailto:mail@pythonic.ninja">email me :)</a>
+        </p>
+    </footer>
+
+
+</body>
+</html>
