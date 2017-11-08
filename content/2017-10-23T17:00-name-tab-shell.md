@@ -13,12 +13,12 @@ You have multiple shell tabs with not really nice names.
 
 # Solution 🤓
 
-```
+```bash
 function name() { echo -ne "\\033]0;$@\\007"; }
 ```
 
 usage:
-```
+```bash
 | => name writing blog post
 ```
 

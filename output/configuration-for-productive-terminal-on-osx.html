@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>Configuration for productive terminal on osx.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="PythonicNinja">
+
+        <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/1098417?s=460&v=4">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="Think. Code. Enjoy.">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="/configuration-for-productive-terminal-on-osx.html">
+    <meta name="twitter:title" content="Think. Code. Enjoy. ~ Configuration for productive terminal on osx.">
+    <meta name="twitter:description" content="Problem 😱 You would like to have: visor mode on cmd + . support for alt + (&lt; | &gt; | backspace) Solution 🤓 Before we begin let&#39;s ensure we have iterm2: brew cask install iterm2 Let&#39;s address remaining issues in step by step approach: 1. visor mode on cmd + . open iterm2 open preferences cmd + , head to keys tab …">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="Think. Code. Enjoy. ~ Configuration for productive terminal on osx."/>
+    <meta property="og:description" content="Problem 😱 You would like to have: visor mode on cmd + . support for alt + (&lt; | &gt; | backspace) Solution 🤓 Before we begin let&#39;s ensure we have iterm2: brew cask install iterm2 Let&#39;s address remaining issues in step by step approach: 1. visor mode on cmd + . open iterm2 open preferences cmd + , head to keys tab …"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href=""><img id="avatar" src=""></a></center>-->
+    <a href='/'><h1>Think. Code. Enjoy.</h1></a>
+        <p>mail@pythonic.ninja</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="">Blog</a></li>
+
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://github.com/PythonicNinja" target="_blank"><img
+                        src="/theme/images/icons/github.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="/category/django.html">django</a></li>
+                <li><a
+                        href="/category/linux.html">linux</a></li>
+                <li class="active"><a
+                        href="/category/osx.html">osx</a></li>
+                <li><a
+                        href="/category/python.html">python</a></li>
+                <li><a
+                        href="/category/webdev.html">webdev</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="/configuration-for-productive-terminal-on-osx.html" rel="bookmark"
+                                                  title="Permalink to Configuration for productive terminal on osx.">Configuration for productive terminal on osx.</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Problem 😱</h1>
+<p>You would like to have:</p>
+<ol>
+<li>visor mode on <code>cmd + .</code></li>
+<li>support for <code>alt + (&lt; | &gt; | backspace)</code></li>
+</ol>
+<hr>
+<h1>Solution 🤓</h1>
+<p>Before we begin let's ensure we have iterm2:</p>
+<p><code>brew cask install iterm2</code></p>
+<p>Let's address remaining issues in step by step approach:</p>
+<h2>1. visor mode on <code>cmd + .</code></h2>
+<ul>
+<li>
+<p>open iterm2</p>
+</li>
+<li>
+<p>open preferences 
+    <code>cmd + ,</code></p>
+</li>
+<li>
+<p>head to <code>keys</code> tab</p>
+</li>
+<li>
+<p>click <code>Create a dedicated Hotkey Window</code></p>
+</li>
+<li>
+<p>add hotkey <code>cmd + .</code></p>
+</li>
+<li>
+<p>check option of <code>floating window</code></p>
+</li>
+</ul>
+<p><img alt="hotkey-window-conf" src="https://i.imgur.com/J8tdUIo.png"></p>
+<ul>
+<li>head to profiles section again and select window tab where you will need to have following settings: 
+style = <code>fullscreen</code>, screen = <code>screen with cursor</code>, space = <code>all spaces</code></li>
+</ul>
+<p><img alt="keys" src="https://i.imgur.com/QjOVVV9.png"></p>
+<ul>
+<li>confirm changes and restart iterm2</li>
+</ul>
+<p>Result:</p>
+<p><img alt="result" src="https://i.imgur.com/l9mPmpa.gif"></p>
+<h2>2. support for <code>alt + (&lt; | &gt; | backspace)</code></h2>
+<p>iTerm &gt; Preferences &gt; Profiles &gt; Keys:</p>
+<ul>
+<li>Alt + left: Send Escape Sequence, Esc + b</li>
+<li>Alt + right: Send Escape Sequence, Esc + f</li>
+<li>Alt + backspace: Send Hex Code, 0x17</li>
+</ul>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="/author/pythonicninja.html">@PythonicNinja</a>
+                <span> in </span>
+                <span class="post_category"><a href="/category/osx.html" rel="bookmark"
+                                               title="Permalink to osx">[ osx ]</a></span>
+                <span class="post_date">ndz 05 listopada 2017</span>
+                <div><span>Tags : </span>
+                            <span><a href="/tag/osx.html">#osx, </a></span>
+                            <span><a href="/tag/terminal.html">#terminal, </a></span>
+                            <span><a href="/tag/iterm.html">#iterm, </a></span>
+                            <span><a href="/tag/iterm2.html">#iterm2, </a></span>
+                            <span><a href="/tag/shell.html">#shell, </a></span>
+                            <span><a href="/tag/bash.html">#bash, </a></span>
+                            <span><a href="/tag/command-line.html">#command-line, </a></span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=/configuration-for-productive-terminal-on-osx.html&text=Configuration for productive terminal on osx.&via="><img
+                            src="/theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=/configuration-for-productive-terminal-on-osx.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=/configuration-for-productive-terminal-on-osx.html&t=Configuration for productive terminal on osx."><img
+                            src="/theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=/configuration-for-productive-terminal-on-osx.html&title=Configuration for productive terminal on osx."
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=Configuration for productive terminal on osx.&amp;body=Viens découvrir un article à propos de [Configuration for productive terminal on osx.] sur le site de PythonicNinja. /configuration-for-productive-terminal-on-osx.html"
+                            title="Share by Email" target="_blank"><img
+                            src="/theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Wanna contact me? <a href="mailto:mail@pythonic.ninja">email me :)</a>
+        </p>
+    </footer>
+
+
+</body>
+</html>
