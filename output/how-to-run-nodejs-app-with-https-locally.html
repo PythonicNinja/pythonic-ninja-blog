@@ -3,7 +3,7 @@
 <head>
             <meta charset="utf-8">
         <!-- Site Meta Data -->
-        <title>How to easily find biggest files?</title>
+        <title>How to run nodejs app with https locally?</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="PythonicNinja">
@@ -28,13 +28,13 @@
         <meta name="twitter:image" content="">
 
     <meta name="twitter:creator" content="">
-    <meta name="twitter:url" content="/how-to-easily-find-biggest-files.html">
-    <meta name="twitter:title" content="Think. Code. Enjoy. ~ How to easily find biggest files?">
-    <meta name="twitter:description" content="Problem 😱 You run out of space! Solution 🤓 ncdu - ncurses disk usage Lets you easily track most used files without need to leave command line. https://en.wikipedia.org/wiki/Ncdu">
+    <meta name="twitter:url" content="/how-to-run-nodejs-app-with-https-locally.html">
+    <meta name="twitter:title" content="Think. Code. Enjoy. ~ How to run nodejs app with https locally?">
+    <meta name="twitter:description" content="How to generate an SSL certificate: openssl genrsa -des3 -out server.key 1024 you need to enter a password here which you need to retype in the following steps openssl req -new -key server.key -out server.csr when asked &#34;Common Name&#34; type in: localhost openssl x509 -req -days 1024 …">
 
     <!-- Facebook Meta Data -->
-    <meta property="og:title" content="Think. Code. Enjoy. ~ How to easily find biggest files?"/>
-    <meta property="og:description" content="Problem 😱 You run out of space! Solution 🤓 ncdu - ncurses disk usage Lets you easily track most used files without need to leave command line. https://en.wikipedia.org/wiki/Ncdu"/>
+    <meta property="og:title" content="Think. Code. Enjoy. ~ How to run nodejs app with https locally?"/>
+    <meta property="og:description" content="How to generate an SSL certificate: openssl genrsa -des3 -out server.key 1024 you need to enter a password here which you need to retype in the following steps openssl req -new -key server.key -out server.csr when asked &#34;Common Name&#34; type in: localhost openssl x509 -req -days 1024 …"/>
     <meta property="og:image" content=""/>
 </head>
 
@@ -65,9 +65,9 @@
         <ul class="navbar">
                 <li><a
                         href="/category/django.html">django</a></li>
-                <li class="active"><a
-                        href="/category/linux.html">linux</a></li>
                 <li><a
+                        href="/category/linux.html">linux</a></li>
+                <li class="active"><a
                         href="/category/nodejs.html">nodejs</a></li>
                 <li><a
                         href="/category/osx.html">osx</a></li>
@@ -84,29 +84,47 @@
 <article>
     <section id="content">
         <article>
-            <h2 class="post_title post_detail"><a href="/how-to-easily-find-biggest-files.html" rel="bookmark"
-                                                  title="Permalink to How to easily find biggest files?">How to easily find biggest files?</a></h2>
+            <h2 class="post_title post_detail"><a href="/how-to-run-nodejs-app-with-https-locally.html" rel="bookmark"
+                                                  title="Permalink to How to run nodejs app with https locally?">How to run nodejs app with https locally?</a></h2>
             <div class="entry-content blog-post">
-                <h1>Problem 😱</h1>
-<p>You run out of space!</p>
-<p><img alt="I'm full" src="https://i.giphy.com/media/QvwMDYpAMUm6Q/giphy.webp"> </p>
-<hr>
-<h1>Solution 🤓</h1>
-<p>ncdu - ncurses disk usage</p>
-<p>Lets you easily track most used files without need to leave command line.</p>
-<p><a href="ncdu wiki">https://en.wikipedia.org/wiki/Ncdu</a></p>
+                <p>How to generate an SSL certificate:</p>
+<div class="highlight"><pre><span></span>openssl genrsa -des3 -out server.key <span class="m">1024</span>
+</pre></div>
+
+
+<p>you need to enter a password here which you need to retype in the following steps</p>
+<div class="highlight"><pre><span></span>openssl req -new -key server.key -out server.csr
+</pre></div>
+
+
+<p>when asked "Common Name" type in: localhost</p>
+<div class="highlight"><pre><span></span>openssl x509 -req -days <span class="m">1024</span> -in server.csr -signkey server.key -out server.crt
+</pre></div>
+
+
+<p>```javascript 1.8
+const httpsOptions = {
+  key: fs.readFileSync('./server.key'),
+  cert: fs.readFileSync('./server.crt'),
+  passphrase: 'passpharase'
+};</p>
+<p>const httpsPort = 8086;</p>
+<p>const server = https.createServer(httpsOptions, app).listen(httpsPort, () =&gt; {
+  console.log('server running at ' + httpsPort);
+});
+```</p>
             </div>
             <div class="post_list">
                 <span>By </span>
                 <a href="/author/pythonicninja.html">@PythonicNinja</a>
                 <span> in </span>
-                <span class="post_category"><a href="/category/linux.html" rel="bookmark"
-                                               title="Permalink to linux">[ linux ]</a></span>
-                <span class="post_date">ptk 20 października 2017</span>
+                <span class="post_category"><a href="/category/nodejs.html" rel="bookmark"
+                                               title="Permalink to nodejs">[ nodejs ]</a></span>
+                <span class="post_date">ndz 15 października 2017</span>
                 <div><span>Tags : </span>
-                            <span><a href="/tag/disk-usage.html">#disk usage, </a></span>
-                            <span><a href="/tag/disk.html">#disk, </a></span>
-                            <span><a href="/tag/linux.html">#linux, </a></span>
+                            <span><a href="/tag/node.html">#node, </a></span>
+                            <span><a href="/tag/nodejs.html">#nodejs, </a></span>
+                            <span><a href="/tag/https.html">#https, </a></span>
                             <span><a href="/tag/devops.html">#devops, </a></span>
                 </div>
 
@@ -114,28 +132,28 @@
                     <span class="twitter"><a target="_blank" rel="nofollow"
                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
                                              title="Twitter"
-                                             href="https://twitter.com/share?url=/how-to-easily-find-biggest-files.html&text=How to easily find biggest files?&via="><img
+                                             href="https://twitter.com/share?url=/how-to-run-nodejs-app-with-https-locally.html&text=How to run nodejs app with https locally?&via="><img
                             src="/theme/images/icons/twitter-s.png"></a></span>
 
                     <span class="gplus"><a target="_blank" title="Google +"
-                                           href="https://plus.google.com/share?url=/how-to-easily-find-biggest-files.html&hl=fr"
+                                           href="https://plus.google.com/share?url=/how-to-run-nodejs-app-with-https-locally.html&hl=fr"
                                            rel="nofollow"
                                            onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
                             src="/theme/images/icons/google-s.png"></a></span>
 
                     <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
                                               onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
-                                              href="https://www.facebook.com/sharer.php?u=/how-to-easily-find-biggest-files.html&t=How to easily find biggest files?"><img
+                                              href="https://www.facebook.com/sharer.php?u=/how-to-run-nodejs-app-with-https-locally.html&t=How to run nodejs app with https locally?"><img
                             src="/theme/images/icons/facebook-s.png"></a></span>
 
                     <a target="_blank" title="Linkedin"
-                       href="https://www.linkedin.com/shareArticle?mini=true&url=/how-to-easily-find-biggest-files.html&title=How to easily find biggest files?"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=/how-to-run-nodejs-app-with-https-locally.html&title=How to run nodejs app with https locally?"
                        rel="nofollow"
                        onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
                             src="/theme/images/icons/linkedin-s.png"></a>
 
                     <span class="mail"><a
-                            href="mailto:?subject=How to easily find biggest files?&amp;body=Viens découvrir un article à propos de [How to easily find biggest files?] sur le site de PythonicNinja. /how-to-easily-find-biggest-files.html"
+                            href="mailto:?subject=How to run nodejs app with https locally?&amp;body=Viens découvrir un article à propos de [How to run nodejs app with https locally?] sur le site de PythonicNinja. /how-to-run-nodejs-app-with-https-locally.html"
                             title="Share by Email" target="_blank"><img
                             src="/theme/images/icons/mail-s.png"></a></span>
                 </div>
