@@ -23,7 +23,7 @@ openssl x509 -req -days 1024 -in server.csr -signkey server.key -out server.crt
 ```
 
 
-```javascript 1.8
+```javascript
 const httpsOptions = {
   key: fs.readFileSync('./server.key'),
   cert: fs.readFileSync('./server.crt'),
