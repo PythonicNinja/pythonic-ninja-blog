@@ -102,17 +102,18 @@
 </pre></div>
 
 
-<p>```javascript 1.8
-const httpsOptions = {
-  key: fs.readFileSync('./server.key'),
-  cert: fs.readFileSync('./server.crt'),
-  passphrase: 'passpharase'
-};</p>
-<p>const httpsPort = 8086;</p>
-<p>const server = https.createServer(httpsOptions, app).listen(httpsPort, () =&gt; {
-  console.log('server running at ' + httpsPort);
-});
-```</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">httpsOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">key</span><span class="o">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">&#39;./server.key&#39;</span><span class="p">),</span>
+  <span class="nx">cert</span><span class="o">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">&#39;./server.crt&#39;</span><span class="p">),</span>
+  <span class="nx">passphrase</span><span class="o">:</span> <span class="s1">&#39;passpharase&#39;</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">httpsPort</span> <span class="o">=</span> <span class="mi">8086</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">https</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">httpsOptions</span><span class="p">,</span> <span class="nx">app</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">httpsPort</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server running at &#39;</span> <span class="o">+</span> <span class="nx">httpsPort</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
             </div>
             <div class="post_list">
                 <span>By </span>
