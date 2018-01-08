@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>How to define type in type-script for dynamic property name?</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="PythonicNinja">
+
+        <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/1098417?s=460&v=4">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="Think. Code. Enjoy.">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="/how-to-define-type-in-type-script-for-dynamic-property-name.html">
+    <meta name="twitter:title" content="Think. Code. Enjoy. ~ How to define type in type-script for dynamic property name?">
+    <meta name="twitter:description" content="Problem 😱 You would like to create type for following object with dynamic property name: const gallery = { homepage: { key: &#39;gallery-of-users&#39;, activeSlide: 1, }, feed: { key: &#39;gallery-of-posts&#39;, activeSlide: 10 } } Solution 🤓 export interface IGalleryItem { key: string; activeSlide: string; } export interface IGallery { [slideKeyWhichIsDynamic:string]: IGalleryItem; } Usage: const gallery: IGallery = { ... }">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="Think. Code. Enjoy. ~ How to define type in type-script for dynamic property name?"/>
+    <meta property="og:description" content="Problem 😱 You would like to create type for following object with dynamic property name: const gallery = { homepage: { key: &#39;gallery-of-users&#39;, activeSlide: 1, }, feed: { key: &#39;gallery-of-posts&#39;, activeSlide: 10 } } Solution 🤓 export interface IGalleryItem { key: string; activeSlide: string; } export interface IGallery { [slideKeyWhichIsDynamic:string]: IGalleryItem; } Usage: const gallery: IGallery = { ... }"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href=""><img id="avatar" src=""></a></center>-->
+    <a href='/'><h1>Think. Code. Enjoy.</h1></a>
+        <p>mail@pythonic.ninja</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="">Blog</a></li>
+
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://github.com/PythonicNinja" target="_blank"><img
+                        src="/theme/images/icons/github.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="/category/django.html">django</a></li>
+                <li><a
+                        href="/category/linux.html">linux</a></li>
+                <li><a
+                        href="/category/nodejs.html">nodejs</a></li>
+                <li><a
+                        href="/category/osx.html">osx</a></li>
+                <li><a
+                        href="/category/python.html">python</a></li>
+                <li><a
+                        href="/category/react-native.html">react-native</a></li>
+                <li class="active"><a
+                        href="/category/type-script.html">type-script</a></li>
+                <li><a
+                        href="/category/webdev.html">webdev</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="/how-to-define-type-in-type-script-for-dynamic-property-name.html" rel="bookmark"
+                                                  title="Permalink to How to define type in type-script for dynamic property name?">How to define type in type-script for dynamic property name?</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Problem 😱</h1>
+<p>You would like to create type for following object with dynamic property name:</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">gallery</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">homepage</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;gallery-of-users&#39;</span><span class="p">,</span>
+    <span class="nx">activeSlide</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">feed</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;gallery-of-posts&#39;</span><span class="p">,</span>
+    <span class="nx">activeSlide</span><span class="o">:</span> <span class="mi">10</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr>
+<h1>Solution 🤓</h1>
+<div class="highlight"><pre><span></span><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">IGalleryItem</span> <span class="p">{</span>
+  <span class="nx">key</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="nx">activeSlide</span>: <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="kr">interface</span> <span class="nx">IGallery</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">slideKeyWhichIsDynamic</span>:<span class="kt">string</span><span class="p">]</span><span class="o">:</span> <span class="nx">IGalleryItem</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Usage:</p>
+<div class="highlight"><pre><span></span>const gallery: IGallery = {
+    ...
+}
+</pre></div>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="/author/pythonicninja.html">@PythonicNinja</a>
+                <span> in </span>
+                <span class="post_category"><a href="/category/type-script.html" rel="bookmark"
+                                               title="Permalink to type-script">[ type-script ]</a></span>
+                <span class="post_date">pon 08 stycznia 2018</span>
+                <div><span>Tags : </span>
+                            <span><a href="/tag/es6.html">#es6, </a></span>
+                            <span><a href="/tag/typescript.html">#typescript, </a></span>
+                            <span><a href="/tag/type-script.html">#type-script, </a></span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=/how-to-define-type-in-type-script-for-dynamic-property-name.html&text=How to define type in type-script for dynamic property name?&via="><img
+                            src="/theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=/how-to-define-type-in-type-script-for-dynamic-property-name.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=/how-to-define-type-in-type-script-for-dynamic-property-name.html&t=How to define type in type-script for dynamic property name?"><img
+                            src="/theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=/how-to-define-type-in-type-script-for-dynamic-property-name.html&title=How to define type in type-script for dynamic property name?"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="/theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=How to define type in type-script for dynamic property name?&amp;body=Viens découvrir un article à propos de [How to define type in type-script for dynamic property name?] sur le site de PythonicNinja. /how-to-define-type-in-type-script-for-dynamic-property-name.html"
+                            title="Share by Email" target="_blank"><img
+                            src="/theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Wanna contact me? <a href="mailto:mail@pythonic.ninja">email me :)</a>
+        </p>
+    </footer>
+
+
+</body>
+</html>
