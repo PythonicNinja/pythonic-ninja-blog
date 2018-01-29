@@ -49,18 +49,22 @@ You can now enter your https or http external url and hit your own server. 🎉
 
 ## Protips:
 
-1. ngrok comes with dashboard
+### ngrok comes with dashboard
 ```
 open http://localhost:4040
 ```
 ![dashboard](https://i.imgur.com/FGUnPwK.png)
-2. reply requests
+
+
+### reply requests
 ![reply](https://i.imgur.com/6WD5Ucf.png)
-3. enable basic auth
+
+### enable basic auth
 `ngrok http 8000 -auth "user:password"`
 > you will need to have account for this feature visit https://dashboard.ngrok.com/auth
 ![auth](https://i.imgur.com/ozTJnIe.png)
-4. file based config
+
+### file based config
 `nano ~/.ngrok2/ngrok.yml`
 ```
 tunnels:
@@ -71,5 +75,6 @@ tunnels:
 `ngrok start service`
 it will start service.
 ![magic](https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif)
-5. interested checkout more:
+
+### interested? links:
 [docs](https://ngrok.com/docs)

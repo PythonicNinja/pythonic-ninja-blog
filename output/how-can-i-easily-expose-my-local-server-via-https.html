@@ -132,23 +132,17 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
 </pre></div>
 
 
-<p><img alt="dashboard" src="https://i.imgur.com/FGUnPwK.png"></p>
-<ol>
-<li>reply requests</li>
-</ol>
-<p><img alt="reply" src="https://i.imgur.com/6WD5Ucf.png"></p>
-<ol>
-<li>enable basic auth</li>
-</ol>
-<p><code>ngrok http 8000 -auth "user:password"</code></p>
-<p><img alt="auth" src="https://i.imgur.com/ozTJnIe.png"></p>
+<p><img alt="dashboard" src="https://i.imgur.com/FGUnPwK.png">
+2. reply requests
+<img alt="reply" src="https://i.imgur.com/6WD5Ucf.png">
+3. enable basic auth
+<code>ngrok http 8000 -auth "user:password"</code></p>
 <blockquote>
-<p>you will need to have account for this feature visit https://dashboard.ngrok.com/auth</p>
+<p>you will need to have account for this feature visit https://dashboard.ngrok.com/auth
+<img alt="auth" src="https://i.imgur.com/ozTJnIe.png">
+4. file based config
+<code>nano ~/.ngrok2/ngrok.yml</code></p>
 </blockquote>
-<ol>
-<li>file based config</li>
-</ol>
-<p><code>nano ~/.ngrok2/ngrok.yml</code></p>
 <div class="highlight"><pre><span></span><span class="n">tunnels</span><span class="o">:</span>
   <span class="n">service</span><span class="o">:</span>
     <span class="n">proto</span><span class="o">:</span> <span class="n">http</span>
@@ -156,13 +150,11 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
 </pre></div>
 
 
-<p><code>ngrok start service</code></p>
-<p>it will start service.</p>
-<p><img alt="magic" src="https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif"></p>
-<ol>
-<li>interested checkout more:</li>
-</ol>
-<p><a href="https://ngrok.com/docs">docs</a></p>
+<p><code>ngrok start service</code>
+it will start service.
+<img alt="magic" src="https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif">
+5. interested checkout more:
+<a href="https://ngrok.com/docs">docs</a></p>
             </div>
             <div class="post_list">
                 <span>By </span>
