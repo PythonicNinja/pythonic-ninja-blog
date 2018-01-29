@@ -8,15 +8,18 @@ Tags: devops, linux, webdev
 You would like to expose securly 🔓 your local server on the web?
 
 Default route for this would be to:
+
 - configure https
+
 - configure your router
+
 - etc.
 
 ---
 
 # Solution 🤓
 
-## ngrok
+## 🎉 🎉 🎉 ngrok 🎉 🎉 🎉
 
 ```
 Secure tunnels to localhost
@@ -24,11 +27,11 @@ Secure tunnels to localhost
 
 Install - [link](https://ngrok.com/download)
 or on osx:
-`brew cask install ngrok`
+```brew cask install ngrok```
 
 
 ## Usage:
-`ngrok http 8000`
+```ngrok http 8000```
 
 ```bash
 ngrok by @inconshreveable                                                                                                                                    (Ctrl+C to quit)
@@ -60,21 +63,26 @@ open http://localhost:4040
 ![reply](https://i.imgur.com/6WD5Ucf.png)
 
 ### enable basic auth
-`ngrok http 8000 -auth "user:password"`
+```ngrok http 8000 -auth "user:password"```
 > you will need to have account for this feature visit https://dashboard.ngrok.com/auth
 ![auth](https://i.imgur.com/ozTJnIe.png)
 
 ### file based config
-`nano ~/.ngrok2/ngrok.yml`
+```nano ~/.ngrok2/ngrok.yml```
 ```
 tunnels:
   service:
     proto: http
     addr: 8000
 ```
-`ngrok start service`
-it will start service.
+
+it will start service:
+
+```ngrok start service```
+
+
 ![magic](https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif)
 
 ### interested? links:
+
 [docs](https://ngrok.com/docs)
