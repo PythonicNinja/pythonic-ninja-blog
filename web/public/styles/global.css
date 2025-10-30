@@ -75,7 +75,7 @@ body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, 
 .prose p{margin:14px 0;color:var(--ink)}
 .prose a{color:var(--accent);text-underline-offset:3px}
 .prose a:hover{text-decoration:underline}
-.prose pre{background: color-mix(in oklab, var(--bg) 90%, var(--ink)); color: var(--ink); padding:16px;border-radius:8px;overflow:auto;border:1px solid var(--line)}
+.prose pre{background: color-mix(in oklab, var(--bg) 88%, var(--ink)); color: var(--ink); padding:16px;border-radius:8px;overflow:auto;border:1px solid var(--line); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.95rem;}
 .prose pre code{color: inherit}
 .prose code{background: color-mix(in oklab, var(--ink) 6%, var(--bg)); padding:2px 5px;border-radius:4px}
 .prose ul,.prose ol{padding-left:22px}
@@ -83,7 +83,9 @@ body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, 
 .post-header{margin-top:24px;margin-bottom:16px}
 
 /* Dark theme code block overrides */
-:root[data-theme='dark'] .prose pre{background:#0f1317;color:var(--ink);border-color:var(--line)}
+:root[data-theme='dark'] .prose pre{background:#0f1317;color:#eae7df;border-color:#262a2e}
+/* Explicit light override to ensure high contrast when forced light */
+:root[data-theme='light'] .prose pre{background:#f2efe9;color:#1c1b19;border-color:#e0dbd3}
 
 /* Theme toggle */
 .theme-toggle{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
