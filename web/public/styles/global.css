@@ -193,6 +193,7 @@ a:hover {
   gap: 5px;
   align-items: center;
   justify-content: end;
+  margin-bottom: 1rem;
 }
 
 .pill {
