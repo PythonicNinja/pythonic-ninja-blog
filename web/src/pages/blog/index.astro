@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const modules = import.meta.glob('./*.md', { eager: true });
+const posts = Object.values(modules)
+  .map((m) => ({ url: (m as any).url, frontmatter: (m as any).frontmatter }))
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+---
+<BaseLayout title="Blog — Pythonic Ninja">
+  <h1 class="page-title">All Posts</h1>
+  <ul class="post-list-basic">
+    {posts.map(({ url, frontmatter }) => (
+      <li>
+        <a href={url}>{frontmatter.title}</a>
+        <time> · {new Date(frontmatter.date).toLocaleDateString()}</time>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

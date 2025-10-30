@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const modules = import.meta.glob('./blog/*.md', { eager: true });
+const posts = Object.values(modules)
+  .map((m) => ({
+    url: (m as any).url,
+    frontmatter: (m as any).frontmatter
+  }))
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+---
+<BaseLayout title="Pythonic Ninja — Tech & AI" description="Fast, refined notes on engineering, AI, and craft.">
+  <section class="hero">
+    <h1 class="hero-title">Calm engineering. Sharp insights.</h1>
+    <p class="hero-sub">Tech and AI notes with an old-money × Japandi vibe.</p>
+  </section>
+  <section class="post-list">
+    {posts.map(({ url, frontmatter }) => (
+      <article class="post-card">
+        <a href={url} class="post-title">{frontmatter.title}</a>
+        <div class="post-meta">
+          <time>{new Date(frontmatter.date).toLocaleDateString()}</time>
+          {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
+        </div>
+        {frontmatter.summary && <p class="post-summary">{frontmatter.summary}</p>}
+      </article>
+    ))}
+  </section>
+</BaseLayout>

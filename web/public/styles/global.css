@@ -1,0 +1,30 @@
+:root{
+  --bg: #f8f6f3;            /* warm off-white */
+  --ink: #1c1b19;           /* deep charcoal */
+  --muted: #6e6b67;         /* soft taupe */
+  --accent: #8b7e74;        /* subdued stone */
+  --line: #e6e1da;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink)}
+body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.65}
+.container{max-width:880px;margin:0 auto;padding:24px}
+.site-header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--line);backdrop-filter:saturate(120%) blur(6px);position:sticky;top:0;background:color-mix(in oklab, var(--bg) 85%, white)}
+.brand{font-family:"Cormorant Garamond", serif;font-weight:600;font-size:24px;letter-spacing:0.3px;color:var(--ink);text-decoration:none}
+.nav{display:flex;gap:18px}
+.nav-link{color:var(--muted);text-decoration:none}
+.nav-link:hover{color:var(--ink)}
+.hero{padding:56px 0 8px 0;border-bottom:1px solid var(--line)}
+.hero-title{font-family:"Cormorant Garamond", serif;font-weight:500;font-size:44px;margin:0 0 8px 0;letter-spacing:0.2px}
+.hero-sub{margin:0;color:var(--muted)}
+.post-list{display:grid;grid-template-columns:1fr;gap:20px;padding:24px 0}
+.post-card{padding:18px 0;border-bottom:1px solid var(--line)}
+.post-title{font-family:"Cormorant Garamond", serif;color:var(--ink);text-decoration:none;font-size:26px}
+.post-title:hover{text-decoration:underline}
+.post-meta{color:var(--muted);font-size:14px;margin-top:6px}
+.post-summary{margin:8px 0 0 0;color:var(--ink)}
+.page-title{font-family:"Cormorant Garamond", serif;font-size:36px;margin:12px 0 12px 0}
+.post-list-basic{list-style:none;padding:0;margin:0}
+.post-list-basic li{padding:12px 0;border-bottom:1px solid var(--line)}
+.footer{padding:32px 24px;color:var(--muted);border-top:1px solid var(--line);text-align:center}
+@media(min-width:900px){.hero-title{font-size:54px}.post-title{font-size:28px}}

@@ -1,0 +1,15 @@
+{
+  "name": "pythonic-ninja-blog-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "migrate:pelican": "node scripts/convert-pelican-frontmatter.js"
+  },
+  "dependencies": {
+    "astro": "^4.13.0"
+  }
+}
