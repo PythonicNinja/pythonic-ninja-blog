@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to run android emulator without opening Android Studio?
-date: 2018-03-01 09:40
+date: 2018-03-01
 category: android
 tags: ['android', 'linux', 'tips', 'react-native']
 ---# Problem 😱

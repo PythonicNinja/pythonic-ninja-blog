@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to define type in type-script for dynamic property name?
-date: 2018-01-08 14:35
+date: 2018-01-08
 category: type-script
 tags: ['es6', 'typescript', 'type-script']
 ---# Problem 😱

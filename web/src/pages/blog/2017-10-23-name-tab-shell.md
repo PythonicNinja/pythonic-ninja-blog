@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to name tab in shell?
-date: 2017-10-23 17:00
+date: 2017-10-23
 category: linux
 ---# Problem 😱
 

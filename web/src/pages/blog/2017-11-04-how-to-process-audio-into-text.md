@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to process audio into text?
-date: 2017-11-04 23:50
+date: 2017-11-04
 category: python
 tags: ['python', 'speach-to-text', 'gapi', 'google', 'speach', 'text']
 ---# Problem 😱

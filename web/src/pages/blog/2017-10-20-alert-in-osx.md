@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to create alert in osx?
-date: 2017-10-20 02:00
+date: 2017-10-20
 category: osx
 tags: ['alert', 'shell', 'linux', 'osx', 'apple', 'mac']
 ---# Problem 😱

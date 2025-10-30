@@ -61,13 +61,21 @@ for (const file of fs.readdirSync(pelicanDir)) {
   const abs = path.join(pelicanDir, file);
   const raw = fs.readFileSync(abs, 'utf8');
   const { meta, body } = parsePelican(raw);
+  const { datePrefix } = parseDateFromFilename(file);
   const slug = slugifyFilename(file, meta.title);
+  // Determine YYYY-MM-DD date for frontmatter
+  let fmDate = '';
+  if (meta.date) {
+    const m = String(meta.date).match(/(\d{4}-\d{2}-\d{2})/);
+    if (m) fmDate = m[1];
+  }
+  if (!fmDate && datePrefix) fmDate = datePrefix;
   const outPath = path.join(outDir, `${slug}.md`);
   const frontmatter = [
     '---',
     `layout: ../../layouts/PostLayout.astro`,
     `title: ${meta.title || slug}`,
-    meta.date ? `date: ${meta.date}` : '',
+    fmDate ? `date: ${fmDate}` : '',
     meta.category ? `category: ${meta.category}` : '',
     meta.tags && meta.tags.length ? `tags: [${meta.tags.map(t => `'${t.replace(/'/g, "''")}'`).join(', ')}]` : '',
     meta.summary ? `summary: ${meta.summary}` : '',

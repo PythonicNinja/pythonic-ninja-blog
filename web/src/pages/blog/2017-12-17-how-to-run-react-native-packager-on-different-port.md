@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to run react-native packager on different port?
-date: 2017-12-17 19:31
+date: 2017-12-17
 category: react-native
 tags: ['react-native', 'ios', 'android', 'mobile']
 ---# Problem 😱

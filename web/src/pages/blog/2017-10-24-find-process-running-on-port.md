@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to find / kill process running on port?
-date: 2017-10-24 15:15
+date: 2017-10-24
 category: linux
 ---# Problem 😱
 

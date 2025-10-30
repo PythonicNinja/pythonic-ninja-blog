@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: Add a progress meter to your loops in a second
-date: 2017-10-20 00:00
+date: 2017-10-20
 category: python
 tags: ['python', 'utils', 'shell']
 ---Add a progress meter to your loops in a second

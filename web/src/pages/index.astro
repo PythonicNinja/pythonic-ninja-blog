@@ -18,7 +18,7 @@ const posts = Object.values(modules)
       <article class="post-card">
         <a href={url} class="post-title">{frontmatter.title}</a>
         <div class="post-meta">
-          <time>{new Date(frontmatter.date).toLocaleDateString()}</time>
+          <time>{new Date(frontmatter.date).toISOString()}</time>
           {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
         </div>
         {frontmatter.summary && <p class="post-summary">{frontmatter.summary}</p>}
