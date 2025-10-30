@@ -15,4 +15,6 @@ Instantly make your loops show a progress meter - just wrap any iterator with "t
 ```bash
 pip install tqdm
 ```
-and your done! 🎉🎉🎉
+and your done! 
+
+# 🎉🎉🎉

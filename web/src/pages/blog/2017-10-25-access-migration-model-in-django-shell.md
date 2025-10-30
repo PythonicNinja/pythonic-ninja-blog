@@ -23,4 +23,4 @@ You want to query migrations model from django.
 
 ```
 
-#🎉🎉🎉
+# 🎉🎉🎉

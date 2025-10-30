@@ -318,6 +318,11 @@ a.post-card:hover {
   text-underline-offset: 3px
 }
 
+.prose img {
+  object-fit: contain;
+  width: 100%;
+}
+
 .prose a:hover {
   text-decoration: underline
 }
