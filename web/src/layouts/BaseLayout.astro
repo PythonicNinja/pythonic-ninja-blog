@@ -19,11 +19,30 @@ const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', og
       <nav class="nav">
         <a href="/blog/" class="nav-link">Blog</a>
         <a href="/about/" class="nav-link">About</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">☾</button>
       </nav>
     </header>
     <main class="container">
       <slot />
     </main>
     <footer class="footer">© {new Date().getFullYear()} Pythonic Ninja</footer>
+    <script>
+      const storageKey = 'theme';
+      const root = document.documentElement;
+      function applyTheme(value){
+        if (value === 'dark') { root.setAttribute('data-theme','dark'); }
+        else if (value === 'light') { root.setAttribute('data-theme','light'); }
+        else { root.removeAttribute('data-theme'); }
+      }
+      // Initialize from storage
+      try { applyTheme(localStorage.getItem(storageKey)); } catch {}
+      // Toggle handler
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const current = root.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try { localStorage.setItem(storageKey, next); } catch {}
+      });
+    </script>
   </body>
 </html>
