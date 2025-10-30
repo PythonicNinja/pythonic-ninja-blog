@@ -7,17 +7,22 @@ const {
   date,
   tags = []
 } = Astro.props;
+const hasTags = Array.isArray(tags) && tags.length > 0;
+const hasDate = Boolean(date);
+const dateText = hasDate
+  ? (/^\d{4}-\d{2}-\d{2}$/.test(String(date)) ? String(date) : new Date(date).toLocaleDateString())
+  : null;
 ---
 <BaseLayout title={`${title} — Pythonic Ninja`} description={description}>
   <article class="prose">
     <header class="post-header">
       <h1 class="post-title">{title}</h1>
-      {(date || (tags && tags.length)) && (
+      {(hasDate || hasTags) ? (
         <div class="post-meta">
-          {date && <time>{new Date(date).toLocaleDateString()}</time>}
-          {tags && tags.length ? <span> · {tags.join(', ')}</span> : null}
+          {hasDate && <time>{dateText}</time>}
+          {hasTags ? <span> · {tags.join(', ')}</span> : null}
         </div>
-      )}
+      ) : null}
     </header>
     <slot />
   </article>
