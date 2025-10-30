@@ -131,7 +131,7 @@ body {
 .hero-title {
   font-family: "Cormorant Garamond", serif;
   font-weight: 500;
-  font-size: 44px;
+  font-size: 24px;
   margin: 0 0 8px 0;
   letter-spacing: 0.2px
 }
@@ -153,7 +153,8 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  margin: 16px 0
+  margin: 16px 0;
+  justify-content: end;
 }
 
 .pill {
@@ -173,7 +174,8 @@ body {
 
 .post-card {
   padding: 18px 0;
-  border-bottom: 1px solid var(--line)
+  border-bottom: 1px solid var(--line);
+  transition: background 120ms ease, transform 120ms ease
 }
 
 .post-title {
@@ -186,6 +188,13 @@ body {
 .post-title:hover {
   text-decoration: underline
 }
+
+.post-card:hover{
+  background: color-mix(in oklab, var(--bg) 95%, var(--ink));
+}
+
+.post-cta{color: var(--accent); text-decoration: none}
+.post-cta:hover{text-decoration: underline}
 
 .post-meta {
   color: var(--muted);
