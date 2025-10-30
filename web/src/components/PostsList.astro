@@ -82,7 +82,7 @@ const posts = Object.values(modules)
             {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
           <span> · {minutes} min read</span>
         </div>
-          {summary && <p class="post-summary">{summary}</p>}
+          {false && summary && <p class="post-summary">{summary}</p>}
       </a>
     ))}
 </section>

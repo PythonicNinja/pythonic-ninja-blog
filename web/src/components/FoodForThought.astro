@@ -1,8 +1,8 @@
 ---
-const {raindropUri = 'https://raindrop.io/vojtek-nowak/food-for-thought-62612689/embed/sort=-created'} = Astro.props;
+const {raindropUri = 'https://raindrop.io/vojtek-nowak/food-for-thought-62612689/embed/sort=-created', fullyCollapsed = false} = Astro.props;
 
 ---
-<section class="food-for-thought">
+<section class="food-for-thought" data-fully-collapsed={fullyCollapsed}>
   <button
     id="toggleButton"
     class="btn"
@@ -13,10 +13,13 @@ const {raindropUri = 'https://raindrop.io/vojtek-nowak/food-for-thought-62612689
 <script>
     const button = document.getElementById('toggleButton');
     const iframe = document.querySelector('iframe');
+    const container = document.querySelector('.food-for-thought');
+    const fullyCollapsed = container.getAttribute('data-fully-collapsed') === 'true';
     let expanded = false;
 
     const handleVisibility = () => {
-        iframe.style.height = expanded ? '500px' : '53px';
+        iframe.style.height = expanded ? '500px' : (fullyCollapsed ? '0px' : '53px');
+        iframe.style.border = expanded ? '1px solid' : (fullyCollapsed ? 'none' : '1px solid');
         button.textContent = expanded ? '📫Hide food-for-thought' : '📭 Show food-for-thought';
     }
     handleVisibility();
