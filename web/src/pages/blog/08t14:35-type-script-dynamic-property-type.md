@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to define type in type-script for dynamic property name?
 date: 2018-01-08T13:35:00.000Z
 category: type-script

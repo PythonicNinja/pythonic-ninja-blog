@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to run react-native packager on different port?
 date: 2017-12-17T18:31:00.000Z
 category: react-native

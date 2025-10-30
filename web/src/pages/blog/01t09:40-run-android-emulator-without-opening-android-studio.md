@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to run android emulator without opening Android Studio?
 date: 2018-03-01T08:40:00.000Z
 category: android

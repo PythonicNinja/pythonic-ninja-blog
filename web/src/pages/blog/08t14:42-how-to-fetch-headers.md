@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to fetch only headers using curl?
 date: 2017-11-08T13:42:00.000Z
 category: linux

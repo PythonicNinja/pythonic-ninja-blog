@@ -1,0 +1,24 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const {
+  title = 'Post',
+  summary,
+  description = summary,
+  date,
+  tags = []
+} = Astro.props;
+---
+<BaseLayout title={`${title} — Pythonic Ninja`} description={description}>
+  <article class="prose">
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      {(date || (tags && tags.length)) && (
+        <div class="post-meta">
+          {date && <time>{new Date(date).toLocaleDateString()}</time>}
+          {tags && tags.length ? <span> · {tags.join(', ')}</span> : null}
+        </div>
+      )}
+    </header>
+    <slot />
+  </article>
+</BaseLayout>

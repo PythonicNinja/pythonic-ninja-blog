@@ -46,6 +46,7 @@ for (const file of fs.readdirSync(pelicanDir)) {
   const outPath = path.join(outDir, `${slug}.md`);
   const frontmatter = [
     '---',
+    `layout: ../../layouts/PostLayout.astro`,
     `title: ${meta.title || slug}`,
     meta.date ? `date: ${new Date(meta.date).toISOString()}` : '',
     meta.category ? `category: ${meta.category}` : '',

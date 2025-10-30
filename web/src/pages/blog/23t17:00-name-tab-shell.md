@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to name tab in shell?
 date: 2017-10-23T15:00:00.000Z
 category: linux

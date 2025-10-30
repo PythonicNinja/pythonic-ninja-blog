@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: Configuration for productive terminal on osx.
 date: 2017-11-05T11:35:00.000Z
 category: osx

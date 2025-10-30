@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to create alert in osx?
 date: 2017-10-20T00:00:00.000Z
 category: osx

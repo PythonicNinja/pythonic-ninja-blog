@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to easily find biggest files?
 date: 2017-10-19T23:00:00.000Z
 category: linux

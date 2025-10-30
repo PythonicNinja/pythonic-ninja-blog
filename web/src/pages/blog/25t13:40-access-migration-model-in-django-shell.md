@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to access migration model from django shell?
 date: 2017-10-25T11:40:00.000Z
 category: django

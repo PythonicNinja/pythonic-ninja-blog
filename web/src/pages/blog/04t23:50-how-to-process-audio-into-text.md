@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: How to process audio into text?
 date: 2017-11-04T22:50:00.000Z
 category: python
