@@ -25,7 +25,14 @@ const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', og
     <main class="container">
       <slot />
     </main>
-    <footer class="footer">© {new Date().getFullYear()} Pythonic Ninja</footer>
+    <footer class="footer">
+      <div>© {new Date().getFullYear()} Pythonic Ninja</div>
+      <div style="margin-top:8px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="nav-link" href="https://github.com/PythonicNinja" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="nav-link" href="https://www.linkedin.com/in/wojtek-nowak-78639a196/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="nav-link" href="https://www.skills.google/public_profiles/d46f18e0-9d4a-4197-b9b7-6d5a8317700f" target="_blank" rel="noopener noreferrer">Google Skills</a>
+      </div>
+    </footer>
     <script>
       const storageKey = 'theme';
       const root = document.documentElement;
