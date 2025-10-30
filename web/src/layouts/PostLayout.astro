@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import FoodForThought from "../components/FoodForThought.astro";
 const fm = (Astro.props && Astro.props.frontmatter) ? Astro.props.frontmatter : {};
 const title = (Astro.props && Astro.props.title) ?? fm.title ?? 'Post';
 const summary = (Astro.props && Astro.props.summary) ?? fm.summary;
@@ -23,4 +24,6 @@ const dateText = hasDate ? date.split("T")[0] : null;
     </header>
     <slot />
   </article>
+
+  <FoodForThought />
 </BaseLayout>
