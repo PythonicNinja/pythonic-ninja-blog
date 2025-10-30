@@ -1,0 +1,52 @@
+---
+const {raindropUri = 'https://raindrop.io/vojtek-nowak/food-for-thought-62612689/embed'} = Astro.props;
+
+---
+<section class="food-for-thought">
+  <button
+    id="toggleButton"
+    class="btn"
+  ></button>
+  <iframe style="height: 0px;" allowfullscreen frameborder="0" src={raindropUri}></iframe>
+</section>
+
+<script>
+    const button = document.getElementById('toggleButton');
+    const iframe = document.querySelector('iframe');
+    let expanded = false;
+
+    const handleVisibility = () => {
+        iframe.style.height = expanded ? '500px' : '53px';
+        button.textContent = expanded ? '📫Hide food-for-thought' : '📭 Show food-for-thought';
+    }
+    handleVisibility();
+
+    button.addEventListener('click', () => {
+        expanded = !expanded;
+        console.log(`button @click`, {
+            expanded,
+        })
+        handleVisibility();
+    });
+</script>
+
+<style>
+  .food-for-thought {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .food-for-thought #toggleButton {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .food-for-thought iframe {
+    width: 100%;
+    transition: height 0.3s ease-in-out;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+</style>
