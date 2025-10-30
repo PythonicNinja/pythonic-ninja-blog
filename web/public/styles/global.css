@@ -173,9 +173,15 @@ body {
 }
 
 .post-card {
-  padding: 18px 0;
+  padding: 1rem;
   border-bottom: 1px solid var(--line);
-  transition: background 120ms ease, transform 120ms ease
+  transition: background 120ms ease, transform 120ms ease;
+  position: relative
+}
+
+.post-card a:hover {
+  color: var(--ink);
+  text-decoration: none;
 }
 
 .post-title {
@@ -195,6 +201,10 @@ body {
 
 .post-cta{color: var(--accent); text-decoration: none}
 .post-cta:hover{text-decoration: underline}
+
+/* Make entire card clickable */
+.stretched-link{position:absolute;inset:0;z-index:1;text-indent:-9999px;overflow:hidden}
+.post-card > *{position:relative;z-index:2}
 
 .post-meta {
   color: var(--muted);

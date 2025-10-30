@@ -53,16 +53,15 @@ const posts = Object.values(modules)
 <section class="post-list" id="post-list">
   {posts.map(({ url, frontmatter, summary, minutes }) => (
     <article class="post-card" data-tags={(frontmatter.tags || []).map((t: any) => String(t).toLowerCase()).join(' ')} data-date={new Date(frontmatter.date).getTime()}>
-      <a href={url} class="post-title">{frontmatter.title}</a>
+      <a href={url} class="stretched-link" aria-label={`Open ${frontmatter.title}`}>Open</a>
+      <div class="post-title">{frontmatter.title}</div>
       <div class="post-meta">
         <time>{String(frontmatter.date).split('T')[0]}</time>
         {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
         <span> · {minutes} min read</span>
       </div>
       {summary && <p class="post-summary">{summary}</p>}
-      <div>
-        <a class="post-cta" href={url} aria-label={`Open ${frontmatter.title}`}>Read →</a>
-      </div>
+      <div><span class="post-cta">Read →</span></div>
     </article>
   ))}
 </section>
