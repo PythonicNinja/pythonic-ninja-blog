@@ -1,0 +1,7 @@
+windows:
+  - name: pythonic-ninja-blog
+    root: ~/PycharmProjects/pythonic-ninja-blog
+    layout: even-horizontal
+    panes:
+      - make dev
+      - cursor-agent

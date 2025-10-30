@@ -21,3 +21,6 @@ clean:
 
 fmt:
 	npx --yes prettier -w web
+
+itermocil:
+	cp pythonic-ninja-blog.yml ~/.itermocil/.
