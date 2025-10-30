@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/Hero.astro";
 const modules = import.meta.glob('./*.md', { eager: true });
 const posts = Object.values(modules)
   .map((m) => ({
@@ -9,12 +10,7 @@ const posts = Object.values(modules)
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 <BaseLayout title="Pythonic Ninja — Tech & AI" description="Fast, refined notes on engineering, AI, and craft.">
-  <section class="hero">
-    <h1 class="hero-title">Think. Code. Enjoy.</h3>
-    <p class="hero-sub">
-      Practical Tech & AI insights - minimal, mindful, Japandi.
-    </p>
-  </section>
+  <Hero />
   <section class="post-list">
     {posts.map(({ url, frontmatter }) => (
       <article class="post-card">
