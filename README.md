@@ -1,56 +1,45 @@
-# Pythonic Ninja Blog (Astro + Cloudflare Pages)
+**Live site**: https://pythonic.ninja
 
-A fast, elegant tech/AI blog rebuilt with Astro. Content migrated from Pelican Markdown.
+## Pythonic Ninja Blog
 
-## Structure
-- `web/`: Astro site (layouts, pages, styles, scripts)
-- `content/`: Original Pelican Markdown sources (read-only)
+A static blog powered by Astro, deployed to `https://pythonic.ninja`.
 
-## Quickstart
+### Tech stack
+- **Framework**: Astro
+- **Output**: Static site
+- **Language**: TypeScript/JS for build scripts; Markdown/MDX for content
+
+### Local development
 ```bash
-# Install deps
-make install
+cd web
+npm install
+npm run dev
+```
+- **Dev server**: Starts on a local port (shown in terminal).
 
-# Start local dev server
-make dev
+### Build
+```bash
+cd web
+npm run build
+```
+- Outputs to `web/dist/`.
 
-# Convert Pelican -> Astro markdown (idempotent)
-make migrate
-
-# Build production assets
-make build
-
-# Preview production build
-make preview
+### Preview production build
+```bash
+cd web
+npm run preview
 ```
 
-## Cloudflare Pages
-Use either approach:
+### Project structure
+- **web/src/**: Astro components and pages
+- **web/src/content/** or **web/src/pages/**: Blog posts and site pages (Markdown/MD)
+- **web/public/**: Static assets served as-is
+- **web/dist/**: Production build output
+- **web/scripts/**: One-off or migration scripts
 
-- Project root: repository root
-  - Build command: `npm ci --prefix web && npm run build --prefix web`
-  - Output directory: `web/dist`
+### Deployment
+- Configured `site` in `web/astro.config.mjs` to `https://pythonic.ninja` for correct canonical URLs.
+- Any static host or CDN can serve `web/dist/` after `npm run build`.
 
-- Or set project root to `web/`
-  - Build command: `npm ci && npm run build`
-  - Output directory: `dist`
-
-## Content
-- Converted posts live in `web/src/pages/blog/YYYY-MM-DD-title.md`
-- Frontmatter uses:
-  - `layout: ../../layouts/PostLayout.astro`
-  - `title`, `date` (YYYY-MM-DD), `category`, `tags`, `summary`
-
-## Theming
-- Old-money ? Japandi aesthetic; light/dark themes with a header toggle
-- Edit palette and typography in `web/public/styles/global.css`
-
-## Scripts
-- Migration tool: `web/scripts/convert-pelican-frontmatter.js`
-
-## Requirements
-- Node 18+
-- npm 9+
-
-## License
+### License
 MIT
