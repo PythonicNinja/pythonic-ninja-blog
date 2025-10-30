@@ -1,22 +1,62 @@
 ---
-const modules = import.meta.glob('./../pages/blog/*.md', { eager: true });
+// Load posts once for both index and blog pages
+const modules = import.meta.glob('../pages/blog/*.md', { eager: true }) as Record<string, any>;
 const posts = Object.values(modules)
-  .map((m) => ({
-    url: (m as any).url,
-    frontmatter: (m as any).frontmatter
-  }))
+  .map((m) => ({ url: m.url, frontmatter: m.frontmatter }))
+  .filter((p) => p.frontmatter && p.frontmatter.title)
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
-
-<section class="post-list">
-    {posts.map(({url, frontmatter}) => (
-      <article class="post-card">
-        <a href={url} class="post-title">{frontmatter.title}</a>
-        <div class="post-meta">
-          <time>{frontmatter.date.split("T")[0]}</time>
-            {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
-        </div>
-          {frontmatter.summary && <p class="post-summary">{frontmatter.summary}</p>}
-      </article>
-    ))}
+<div class="post-filters" id="filters">
+  <button class="pill active" data-view="latest">Latest</button>
+  <button class="pill" data-view="popular">Popular</button>
+  <button class="pill" data-tag="ai">AI</button>
+  <button class="pill" data-tag="python">Python</button>
+  <button class="pill" data-tag="devops">DevOps</button>
+</div>
+<section class="post-list" id="post-list">
+  {posts.map(({ url, frontmatter }) => (
+    <article class="post-card" data-tags={(frontmatter.tags || []).map((t: any) => String(t).toLowerCase()).join(' ')} data-date={new Date(frontmatter.date).getTime()}>
+      <a href={url} class="post-title">{frontmatter.title}</a>
+      <div class="post-meta">
+        <time>{String(frontmatter.date).split('T')[0]}</time>
+        {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
+      </div>
+      {frontmatter.summary && <p class="post-summary">{frontmatter.summary}</p>}
+    </article>
+  ))}
 </section>
+<script>
+  const list = document.getElementById('post-list');
+  const items = Array.from(list?.children || []);
+  const pills = Array.from(document.querySelectorAll('#filters .pill'));
+  function setActive(el){ pills.forEach(p=>p.classList.toggle('active', p===el)); }
+  function apply(view, tag){
+    let filtered = items;
+    if (tag){
+      filtered = items.filter((el)=>{
+        const tags = (el.getAttribute('data-tags')||'').split(' ');
+        return tags.includes(tag);
+      });
+    }
+    if (view==='popular'){
+      filtered.sort((a,b)=>{
+        const at = (a.getAttribute('data-tags')||'').split(' ').filter(Boolean).length;
+        const bt = (b.getAttribute('data-tags')||'').split(' ').filter(Boolean).length;
+        if (bt!==at) return bt-at;
+        return Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date'));
+      });
+    } else {
+      filtered.sort((a,b)=> Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date')));
+    }
+    list.innerHTML='';
+    filtered.forEach(el=>list.appendChild(el));
+  }
+  document.getElementById('filters')?.addEventListener('click', (e)=>{
+    const target = (e.target as HTMLElement).closest('.pill') as HTMLElement | null;
+    if (!target) return;
+    setActive(target);
+    const tag = target.getAttribute('data-tag');
+    const view = target.getAttribute('data-view') || 'latest';
+    apply(view, tag||'');
+  });
+</script>

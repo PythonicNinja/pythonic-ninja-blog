@@ -124,7 +124,7 @@ body {
 }
 
 .hero {
-  padding: 56px 0 8px 0;
+  padding: 1rem;
   border-bottom: 1px solid var(--line)
 }
 
@@ -146,6 +146,29 @@ body {
   grid-template-columns:1fr;
   gap: 20px;
   padding: 24px 0
+}
+
+.post-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 16px 0
+}
+
+.pill {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font: inherit;
+  cursor: pointer
+}
+
+.pill.active {
+  background: color-mix(in oklab, var(--bg) 85%, var(--ink));
 }
 
 .post-card {
