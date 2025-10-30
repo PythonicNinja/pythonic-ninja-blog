@@ -18,7 +18,7 @@ const posts = Object.values(modules)
       <article class="post-card">
         <a href={url} class="post-title">{frontmatter.title}</a>
         <div class="post-meta">
-          <time>{frontmatter.date}</time>
+          <time>{frontmatter.date.split("T")[0]}</time>
           {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
         </div>
         {frontmatter.summary && <p class="post-summary">{frontmatter.summary}</p>}
