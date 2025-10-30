@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How can I easily expose my local-server via https?
-date: 2018-01-29T13:03:00.000Z
+date: 2018-01-29 14:03
 category: webdev
 tags: ['devops', 'linux', 'webdev']
 ---# Problem 😱

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to navigate to nested tab using react-native-router-flux?
-date: 2017-12-19T14:00:00.000Z
+date: 2017-12-19 15:00
 category: react-native
 tags: ['react-native', 'ios', 'android', 'mobile']
 ---# Problem 😱

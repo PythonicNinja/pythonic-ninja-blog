@@ -48,7 +48,7 @@ for (const file of fs.readdirSync(pelicanDir)) {
     '---',
     `layout: ../../layouts/PostLayout.astro`,
     `title: ${meta.title || slug}`,
-    meta.date ? `date: ${new Date(meta.date).toISOString()}` : '',
+    meta.date ? `date: ${meta.date}` : '',
     meta.category ? `category: ${meta.category}` : '',
     meta.tags && meta.tags.length ? `tags: [${meta.tags.map(t => `'${t.replace(/'/g, "''")}'`).join(', ')}]` : '',
     meta.summary ? `summary: ${meta.summary}` : '',

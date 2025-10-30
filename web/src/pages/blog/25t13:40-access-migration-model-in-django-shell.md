@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to access migration model from django shell?
-date: 2017-10-25T11:40:00.000Z
+date: 2017-10-25 13:40
 category: django
 tags: ['python', 'django', 'migrations']
 ---# Problem 😱

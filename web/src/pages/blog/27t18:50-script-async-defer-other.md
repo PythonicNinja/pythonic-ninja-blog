@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: When to use async defer or no atribute on script tag?
-date: 2017-10-27T16:50:00.000Z
+date: 2017-10-27 18:50
 category: webdev
 tags: ['html', 'webdev']
 ---# Problem 😱

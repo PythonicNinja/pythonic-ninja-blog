@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to find my external ip in shell?
-date: 2017-10-30T21:33:00.000Z
+date: 2017-10-30 22:33
 category: linux
 tags: ['linux', 'ip', 'shell', 'bash']
 ---# Problem 😱

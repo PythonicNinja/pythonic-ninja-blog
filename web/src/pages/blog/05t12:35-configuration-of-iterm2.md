@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: Configuration for productive terminal on osx.
-date: 2017-11-05T11:35:00.000Z
+date: 2017-11-05 12:35
 category: osx
 tags: ['osx', 'terminal', 'iterm', 'iterm2', 'shell', 'bash', 'command-line']
 ---# Problem 😱

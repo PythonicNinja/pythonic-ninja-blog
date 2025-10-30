@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: How to run nodejs app with https locally?
-date: 2017-12-15T13:54:00.000Z
+date: 2017-12-15 14:54
 category: nodejs
 tags: ['node', 'nodejs', 'https', 'devops']
 ---How to generate an SSL certificate:
