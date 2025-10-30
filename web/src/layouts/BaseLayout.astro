@@ -16,7 +16,7 @@ const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', og
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" />
     </noscript>
-    <link rel="stylesheet" href="/styles/global.css?v={Date.now()}" />
+    <link rel="stylesheet" href={`/styles/global.css?v=${Date.now()}`} />
     {ogImage && <meta property="og:image" content={ogImage} />}
   </head>
   <body>
