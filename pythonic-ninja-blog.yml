@@ -4,4 +4,4 @@ windows:
     layout: even-horizontal
     panes:
       - make dev
-      - cursor-agent
+      - pycharm . && cursor-agent
