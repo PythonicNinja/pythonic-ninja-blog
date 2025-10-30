@@ -1,99 +1,200 @@
 ---
 // Load posts once for both index and blog pages
-const modules = import.meta.glob('../pages/blog/*.md', { eager: true }) as Record<string, any>;
-const rawModules = import.meta.glob('../pages/blog/*.md', { as: 'raw', eager: true }) as Record<string, string>;
+const modules = import.meta.glob('../pages/blog/*.md', {eager: true}) as Record<string, any>;
+const rawModules = import.meta.glob('../pages/blog/*.md', {as: 'raw', eager: true}) as Record<string, string>;
 
 function extractBody(md: string): string {
-  // strip frontmatter
-  if (md.startsWith('---')) {
-    const end = md.indexOf('\n---', 3);
-    if (end !== -1) md = md.slice(end + 4);
-  }
-  return md.trim();
+    // strip frontmatter
+    if (md.startsWith('---')) {
+        const end = md.indexOf('\n---', 3);
+        if (end !== -1) md = md.slice(end + 4);
+    }
+    return md.trim();
+}
+
+function toPlainText(text: string): string {
+    const plain = text
+        .replace(/```[\s\S]*?```/g, '')
+        .replace(/`[^`]*`/g, '')
+        .replace(/\!\[[^\]]*\]\([^\)]*\)/g, '')
+        .replace(/\[([^\]]*)\]\([^\)]*\)/g, '$1')
+        .replace(/[#>*_>-]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return plain;
 }
 
 function summarize(text: string): string {
-  const plain = text
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/`[^`]*`/g, '')
-    .replace(/\!\[[^\]]*\]\([^\)]*\)/g, '')
-    .replace(/\[[^\]]*\]\([^\)]*\)/g, '$1')
-    .replace(/[#>*_>-]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  const sentences = plain.split(/(?<=[.!?])\s+/).slice(0, 2).join(' ');
-  return sentences.slice(0, 220);
+    const plain = toPlainText(text);
+    const sentences = plain.split(/(?<=[.!?])\s+/).slice(0, 2).join(' ');
+    return sentences.slice(0, 220);
 }
 
 function estimateMinutes(text: string): number {
-  const words = text.split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(words / 220));
+    const words = text.split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.ceil(words / 220));
 }
 
 const posts = Object.values(modules)
-  .map((m) => {
-    const url = (m as any).url as string;
-    const frontmatter = (m as any).frontmatter as any;
-    const raw = rawModules[(m as any).file] || '';
-    const body = extractBody(raw);
-    const summary = frontmatter.summary || summarize(body);
-    const minutes = estimateMinutes(body);
-    return { url, frontmatter, summary, minutes };
-  })
-  .filter((p) => p.frontmatter && p.frontmatter.title)
-  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+    .map((m) => {
+        const url = (m as any).url as string;
+        const frontmatter = (m as any).frontmatter as any;
+        const raw = m.rawContent();
+        const body = extractBody(raw);
+        const summary = frontmatter.summary || summarize(body);
+        const minutes = estimateMinutes(body);
+        const searchText = [
+            String(frontmatter.title || '').toLowerCase(),
+            (frontmatter.tags || []).join(' ').toLowerCase(),
+            toPlainText(body).toLowerCase()
+        ]
+            .join(' ')
+            .toLowerCase()
+            .slice(0, 12000);
+        return {url, frontmatter, summary, minutes, searchText};
+    })
+    .filter((p) => p.frontmatter && p.frontmatter.title)
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
-<div class="post-filters" id="filters">
-  <button class="pill active" data-view="latest">Latest</button>
-  <button class="pill" data-tag="ai">AI</button>
-  <button class="pill" data-tag="python">Python</button>
-  <button class="pill" data-tag="devops">DevOps</button>
+
+<div class="filters-and-search">
+  <div class="post-search">
+    <label for="post-search" class="sr-only">Search posts</label>
+    <input id="post-search" type="search" placeholder="Search posts..." autocomplete="off"/>
+  </div>
+
+  <div class="post-filters" id="filters">
+    <button class="pill active" data-view="latest">Latest</button>
+    <button class="pill" data-tag="ai">AI</button>
+    <button class="pill" data-tag="python">Python</button>
+    <button class="pill" data-tag="devops">DevOps</button>
+  </div>
 </div>
+
 <section class="post-list" id="post-list">
-  {posts.map(({ url, frontmatter, summary, minutes }) => (
-    <a href={url} class="post-card" data-tags={(frontmatter.tags || []).map((t: any) => String(t).toLowerCase()).join(' ')} data-date={new Date(frontmatter.date).getTime()}>
-      <div class="post-title">{frontmatter.title}</div>
-      <div class="post-meta">
-        <time>{String(frontmatter.date).split('T')[0]}</time>
-        {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
-        <span> · {minutes} min read</span>
-      </div>
-      {summary && <p class="post-summary">{summary}</p>}
-    </a>
-  ))}
+    {posts.map(({url, frontmatter, summary, minutes, searchText}) => (
+      <a href={url} class="post-card"
+         data-tags={(frontmatter.tags || []).map((t: any) => String(t).toLowerCase()).join(' ')}
+         data-date={new Date(frontmatter.date).getTime()} data-search={searchText}>
+        <div class="post-title">{frontmatter.title}</div>
+        <div class="post-meta">
+          <time>{String(frontmatter.date).split('T')[0]}</time>
+            {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
+          <span> · {minutes} min read</span>
+        </div>
+          {summary && <p class="post-summary">{summary}</p>}
+      </a>
+    ))}
 </section>
 <script>
-  const list = document.getElementById('post-list');
-  const items = Array.from(list?.children || []);
-  const pills = Array.from(document.querySelectorAll('#filters .pill'));
-  function setActive(el){ pills.forEach(p=>p.classList.toggle('active', p===el)); }
-  function apply(view, tag){
-    let filtered = items;
-    if (tag){
-      filtered = items.filter((el)=>{
-        const tags = (el.getAttribute('data-tags')||'').split(' ');
-        return tags.includes(tag);
-      });
+    const list = document.getElementById('post-list');
+    const items = Array.from(list?.children || []);
+    const pills = Array.from(document.querySelectorAll('#filters .pill'));
+    const searchInput = document.getElementById('post-search');
+    const postCount = document.getElementById('post-count');
+
+    function setActive(el) {
+        pills.forEach(p => p.classList.toggle('active', p === el));
     }
-    if (view==='popular'){
-      filtered.sort((a,b)=>{
-        const at = (a.getAttribute('data-tags')||'').split(' ').filter(Boolean).length;
-        const bt = (b.getAttribute('data-tags')||'').split(' ').filter(Boolean).length;
-        if (bt!==at) return bt-at;
-        return Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date'));
-      });
-    } else {
-      filtered.sort((a,b)=> Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date')));
+
+    function apply(view, tag, query) {
+        let filtered = items;
+        if (tag) {
+            filtered = items.filter((el) => {
+                const tags = (el.getAttribute('data-tags') || '').split(' ');
+                return tags.includes(tag);
+            });
+        }
+        if (query && query.length > 0) {
+            const q = query.toLowerCase();
+            filtered = filtered.filter((el) => {
+                const text = el.getAttribute('data-search') || '';
+                return text.includes(q);
+            });
+        }
+        if (view === 'popular') {
+            filtered.sort((a, b) => {
+                const at = (a.getAttribute('data-tags') || '').split(' ').filter(Boolean).length;
+                const bt = (b.getAttribute('data-tags') || '').split(' ').filter(Boolean).length;
+                if (bt !== at) return bt - at;
+                return Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date'));
+            });
+        } else {
+            filtered.sort((a, b) => Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date')));
+        }
+        list.innerHTML = '';
+        filtered.forEach(el => list.appendChild(el));
+        if (postCount) {
+            postCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'post' : 'posts'}`;
+        }
     }
-    list.innerHTML='';
-    filtered.forEach(el=>list.appendChild(el));
-  }
-  document.getElementById('filters')?.addEventListener('click', (e)=>{
-    const target = (e.target as HTMLElement).closest('.pill') as HTMLElement | null;
-    if (!target) return;
-    setActive(target);
-    const tag = target.getAttribute('data-tag');
-    const view = target.getAttribute('data-view') || 'latest';
-    apply(view, tag||'');
-  });
+
+    document.getElementById('filters')?.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement).closest('.pill') as HTMLElement | null;
+        if (!target) return;
+        setActive(target);
+        const tag = target.getAttribute('data-tag');
+        const view = target.getAttribute('data-view') || 'latest';
+        apply(view, tag || '', (searchInput as HTMLInputElement | null)?.value || '');
+    });
+    searchInput?.addEventListener('input', (e) => {
+        const query = (e.target as HTMLInputElement).value || '';
+        const active = document.querySelector('#filters .pill.active') as HTMLElement | null;
+        const tag = active?.getAttribute('data-tag') || '';
+        const view = active?.getAttribute('data-view') || 'latest';
+        apply(view, tag, query);
+    });
+    // initialize count
+    apply('latest', '', '');
 </script>
+
+
+<style>
+  .filters-and-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .filters-and-search {
+      flex-direction: column;
+    }
+  }
+
+  .post-search {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .post-search input[type="search"] {
+    flex: 1 1 280px;
+    max-width: 520px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 8px;
+    background: var(--bg, #fff);
+    color: inherit;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #post-count {
+    color: var(--text-muted, #666);
+    font-size: 0.95em;
+  }
+</style>

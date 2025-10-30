@@ -4,6 +4,7 @@
   --muted: #6e6b67; /* soft taupe */
   --accent: #8b7e74; /* subdued stone */
   --line: #e6e1da;
+  --border-color: #262a2e;
 }
 
 /* Dark theme variables (explicit) */
@@ -13,6 +14,7 @@
   --muted: #a6a39e;
   --accent: #b1a79d;
   --line: #262a2e;
+  --border-color: #262a2e;
 }
 
 /* Respect system preference by default */
@@ -23,6 +25,7 @@
     --muted: #a6a39e;
     --accent: #b1a79d;
     --line: #262a2e;
+    --border-color: #262a2e;
   }
 }
 
@@ -187,9 +190,8 @@ a:hover {
 .post-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
-  margin: 16px 0;
   justify-content: end;
 }
 
