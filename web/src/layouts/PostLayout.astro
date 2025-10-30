@@ -1,12 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-const {
-  title = 'Post',
-  summary,
-  description = summary,
-  date,
-  tags = []
-} = Astro.props;
+const fm = (Astro.props && Astro.props.frontmatter) ? Astro.props.frontmatter : {};
+const title = (Astro.props && Astro.props.title) ?? fm.title ?? 'Post';
+const summary = (Astro.props && Astro.props.summary) ?? fm.summary;
+const description = (Astro.props && Astro.props.description) ?? summary;
+const date = (Astro.props && Astro.props.date) ?? fm.date;
+const tags = (Astro.props && Astro.props.tags) ?? fm.tags ?? [];
 const hasTags = Array.isArray(tags) && tags.length > 0;
 const hasDate = Boolean(date);
 const dateText = hasDate
