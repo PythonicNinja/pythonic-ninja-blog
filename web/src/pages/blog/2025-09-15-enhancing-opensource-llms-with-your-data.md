@@ -3,7 +3,7 @@ layout: ../../layouts/PostLayout.astro
 title: "Enhancing Open-Source LLMs with Your Own Data"
 subtitle: "From prompt context to fine-tuning: a comprehensive guide to customizing open-weight models"
 tags: ["AI", "LLM", "RAG", "Fine-tuning", "MCP"]
-date: 2025-09-15 12:00
+date: 2025-09-15
 category: ai
 image: "https://i.imgur.com/f32wZZu.png"
 seo:

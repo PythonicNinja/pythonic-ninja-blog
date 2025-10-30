@@ -1,5 +1,5 @@
 :root{
-  --bg: #f8f6f3;            /* warm off-white */
+  --bg: #dddcd8;            /* warm off-white */
   --ink: #1c1b19;           /* deep charcoal */
   --muted: #6e6b67;         /* soft taupe */
   --accent: #8b7e74;        /* subdued stone */
@@ -77,7 +77,6 @@ body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, 
 .prose a:hover{text-decoration:underline}
 .prose pre{background: color-mix(in oklab, var(--bg) 88%, var(--ink)); color: var(--ink); padding:16px;border-radius:8px;overflow:auto;border:1px solid var(--line); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.95rem;}
 .prose pre code{color: inherit}
-.prose code{background: color-mix(in oklab, var(--ink) 6%, var(--bg)); padding:2px 5px;border-radius:4px}
 .prose ul,.prose ol{padding-left:22px}
 .prose blockquote{margin:16px 0;padding-left:16px;border-left:2px solid var(--line);color:var(--muted)}
 .post-header{margin-top:24px;margin-bottom:16px}
