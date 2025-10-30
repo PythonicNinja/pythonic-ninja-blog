@@ -71,17 +71,15 @@ for (const file of fs.readdirSync(pelicanDir)) {
   }
   if (!fmDate && datePrefix) fmDate = datePrefix;
   const outPath = path.join(outDir, `${slug}.md`);
-  const frontmatter = [
-    '---',
-    `layout: ../../layouts/PostLayout.astro`,
-    `title: ${meta.title || slug}`,
-    fmDate ? `date: ${fmDate}` : '',
-    meta.category ? `category: ${meta.category}` : '',
-    meta.tags && meta.tags.length ? `tags: [${meta.tags.map(t => `'${t.replace(/'/g, "''")}'`).join(', ')}]` : '',
-    meta.summary ? `summary: ${meta.summary}` : '',
-    '---',
-    ''
-  ].filter(Boolean).join('\n');
+  const fmLines = ['---'];
+  fmLines.push(`layout: ../../layouts/PostLayout.astro`);
+  fmLines.push(`title: ${meta.title || slug}`);
+  if (fmDate) fmLines.push(`date: ${fmDate}`);
+  if (meta.category) fmLines.push(`category: ${meta.category}`);
+  if (meta.tags && meta.tags.length) fmLines.push(`tags: [${meta.tags.map(t => `'${t.replace(/'/g, "''")}'`).join(', ')}]`);
+  if (meta.summary) fmLines.push(`summary: ${meta.summary}`);
+  fmLines.push('---');
+  const frontmatter = fmLines.join('\n') + '\n\n';
   fs.writeFileSync(outPath, frontmatter + body, 'utf8');
   console.log('Converted:', file, '->', path.relative(process.cwd(), outPath));
 }

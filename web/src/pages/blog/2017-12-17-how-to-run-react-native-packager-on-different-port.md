@@ -4,7 +4,9 @@ title: How to run react-native packager on different port?
 date: 2017-12-17
 category: react-native
 tags: ['react-native', 'ios', 'android', 'mobile']
----# Problem 😱
+---
+
+# Problem 😱
 
 You have some program running on react-native default port.
 

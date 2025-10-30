@@ -4,7 +4,9 @@ title: Configuration for productive terminal on osx.
 date: 2017-11-05
 category: osx
 tags: ['osx', 'terminal', 'iterm', 'iterm2', 'shell', 'bash', 'command-line']
----# Problem 😱
+---
+
+# Problem 😱
 
 You would like to have:
 

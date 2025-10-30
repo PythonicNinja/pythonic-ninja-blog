@@ -4,7 +4,9 @@ title: When to use async defer or no atribute on script tag?
 date: 2017-10-27
 category: webdev
 tags: ['html', 'webdev']
----# Problem 😱
+---
+
+# Problem 😱
 
 You want to add script tag. But when to add specific attribute?
 

@@ -4,7 +4,9 @@ title: How to define type in type-script for dynamic property name?
 date: 2018-01-08
 category: type-script
 tags: ['es6', 'typescript', 'type-script']
----# Problem 😱
+---
+
+# Problem 😱
 
 You would like to create type for following object with dynamic property name:
 

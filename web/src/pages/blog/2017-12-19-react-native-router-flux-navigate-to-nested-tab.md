@@ -4,7 +4,9 @@ title: How to navigate to nested tab using react-native-router-flux?
 date: 2017-12-19
 category: react-native
 tags: ['react-native', 'ios', 'android', 'mobile']
----# Problem 😱
+---
+
+# Problem 😱
 
 You would like to navigate to nested tab using `react-native-router-flux`?
 

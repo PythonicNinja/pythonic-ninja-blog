@@ -4,7 +4,9 @@ title: How to run nodejs app with https locally?
 date: 2017-12-15
 category: nodejs
 tags: ['node', 'nodejs', 'https', 'devops']
----How to generate an SSL certificate:
+---
+
+How to generate an SSL certificate:
 
 ```bash
 openssl genrsa -des3 -out server.key 1024

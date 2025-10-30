@@ -4,7 +4,9 @@ title: How to fetch only headers using curl?
 date: 2017-11-08
 category: linux
 tags: ['terminal', 'shell', 'bash', 'command-line', 'linux', 'curl']
----# Problem 😱
+---
+
+# Problem 😱
 
 You would like to have get only headers from request.
 

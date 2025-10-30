@@ -4,7 +4,9 @@ title: How to run android emulator without opening Android Studio?
 date: 2018-03-01
 category: android
 tags: ['android', 'linux', 'tips', 'react-native']
----# Problem 😱
+---
+
+# Problem 😱
 
 You would like to run android_emulator from shell:
 

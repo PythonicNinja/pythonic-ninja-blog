@@ -3,7 +3,9 @@ layout: ../../layouts/PostLayout.astro
 title: How to name tab in shell?
 date: 2017-10-23
 category: linux
----# Problem 😱
+---
+
+# Problem 😱
 
 You have multiple shell tabs with not really nice names.
 

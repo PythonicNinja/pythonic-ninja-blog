@@ -4,7 +4,9 @@ title: How to access migration model from django shell?
 date: 2017-10-25
 category: django
 tags: ['python', 'django', 'migrations']
----# Problem 😱
+---
+
+# Problem 😱
 
 You want to query migrations model from django.
 
