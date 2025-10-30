@@ -6,6 +6,12 @@ const pelicanDir = path.join(repoRoot, 'content');
 const outDir = path.resolve(process.cwd(), 'src/pages/blog');
 
 fs.mkdirSync(outDir, { recursive: true });
+// Clean existing markdown files to avoid stale filenames
+for (const f of fs.readdirSync(outDir)) {
+  if (f.endsWith('.md')) {
+    fs.unlinkSync(path.join(outDir, f));
+  }
+}
 
 function parsePelican(mdContent) {
   const lines = mdContent.split(/\r?\n/);
@@ -29,12 +35,25 @@ function parsePelican(mdContent) {
   return { meta, body };
 }
 
-function slugifyFromFilename(filename, fallbackTitle) {
+function toKebabCase(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+
+function parseDateFromFilename(filename) {
+  // Expect formats like 2017-10-20T00:00-title.md or 2017-10-20-title.md
   const base = path.basename(filename, path.extname(filename));
-  const parts = base.split('-');
-  const firstAlphaIndex = parts.findIndex(p => /[a-zA-Z]/.test(p));
-  const usable = firstAlphaIndex > -1 ? parts.slice(firstAlphaIndex).join('-') : (fallbackTitle || base).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-  return usable.toLowerCase();
+  const m = base.match(/^(\d{4}-\d{2}-\d{2})(?:[T_\-]?(\d{2}):?(\d{2})?)?[-_]?(.+)?$/);
+  if (!m) return { datePrefix: null, titlePart: base };
+  const [, ymd, hh, mm, rest] = m;
+  const datePrefix = ymd; // keep ISO date only in filename
+  const titlePart = rest || base;
+  return { datePrefix, titlePart };
+}
+
+function slugifyFilename(filename, fallbackTitle) {
+  const { datePrefix, titlePart } = parseDateFromFilename(filename);
+  const titleSlug = toKebabCase(titlePart || fallbackTitle || 'post');
+  return datePrefix ? `${datePrefix}-${titleSlug}` : titleSlug;
 }
 
 for (const file of fs.readdirSync(pelicanDir)) {
@@ -42,7 +61,7 @@ for (const file of fs.readdirSync(pelicanDir)) {
   const abs = path.join(pelicanDir, file);
   const raw = fs.readFileSync(abs, 'utf8');
   const { meta, body } = parsePelican(raw);
-  const slug = slugifyFromFilename(file, meta.title);
+  const slug = slugifyFilename(file, meta.title);
   const outPath = path.join(outDir, `${slug}.md`);
   const frontmatter = [
     '---',
