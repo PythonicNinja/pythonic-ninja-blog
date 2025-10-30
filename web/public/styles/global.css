@@ -255,6 +255,7 @@ body {
   border: 1px solid var(--line);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.95rem;
+  position: relative;
 }
 
 .prose pre code {
@@ -289,6 +290,23 @@ body {
   background: #f2efe9;
   color: #1c1b19;
   border-color: #e0dbd3
+}
+
+/* Copy button on code blocks */
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--bg) 85%, white);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.copy-btn:hover {
+  background: color-mix(in oklab, var(--bg) 80%, var(--ink));
 }
 
 /* Theme toggle */
