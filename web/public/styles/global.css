@@ -176,10 +176,11 @@ body {
   padding: 1rem;
   border-bottom: 1px solid var(--line);
   transition: background 120ms ease, transform 120ms ease;
-  position: relative
+  position: relative;
+  text-decoration: none;
 }
 
-.post-card a:hover {
+a.post-card:hover {
   color: var(--ink);
   text-decoration: none;
 }
@@ -189,10 +190,6 @@ body {
   color: var(--ink);
   text-decoration: none;
   font-size: 26px
-}
-
-.post-title:hover {
-  text-decoration: underline
 }
 
 .post-card:hover{
