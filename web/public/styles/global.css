@@ -6,7 +6,11 @@
   --muted: #67665f;
   --accent: #284a4a;
   --line: #e6dcc6;
-  --border-color: #232423;
+  --border-color: #284a4a;
+
+  --font-normal: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-fancy: "Cormorant Garamond", serif;
+  --font-code: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /* Dark theme variables (explicit) */
@@ -45,13 +49,14 @@ html, body {
 }
 
 body {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: var(--font-normal);
   line-height: 1.65
 }
 
 a {
   text-decoration: none;
   color: var(--ink);
+  font-family: var(--font-fancy);
 }
 
 a.underline {
@@ -104,12 +109,12 @@ a:hover {
   font: inherit;
   cursor: pointer;
   font-size: 14px;
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-fancy);
   letter-spacing: 0;
 }
 
 .brand {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-fancy);
   font-weight: 600;
   font-size: 24px;
   letter-spacing: 0.3px;
@@ -176,7 +181,7 @@ a:hover {
 }
 
 .hero-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-fancy);
   font-weight: 500;
   font-size: 24px;
   margin: 0 0 8px 0;
@@ -211,12 +216,13 @@ a:hover {
   color: var(--ink);
   border-radius: 999px;
   padding: 6px 12px;
-  font: inherit;
-  cursor: pointer
+  font-family: var(--font-fancy);
+  cursor: pointer;
 }
 
 .pill.active {
-  background: color-mix(in oklab, var(--bg) 85%, var(--ink));
+  background: var(--accent);
+  color: var(--ink-inverted);
 }
 
 .post-card {
@@ -233,7 +239,7 @@ a.post-card:hover {
 }
 
 .post-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-fancy);
   color: var(--ink);
   text-decoration: none;
   font-size: 26px
@@ -251,6 +257,7 @@ a.post-card:hover {
 .post-card > *{position:relative;z-index:2}
 
 .post-meta {
+  font-family: var(--font-normal);
   color: var(--muted);
   font-size: 14px;
   margin-top: 6px
@@ -262,7 +269,7 @@ a.post-card:hover {
 }
 
 .page-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-fancy);
   font-size: 36px;
   margin: 12px 0 12px 0
 }
@@ -302,7 +309,7 @@ a.post-card:hover {
 }
 
 .prose h1, .prose h2, .prose h3 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-fancy);
   color: var(--ink);
   margin: 28px 0 8px 0
 }
@@ -345,7 +352,7 @@ a.post-card:hover {
   border-radius: 8px;
   overflow: auto;
   border: 1px solid var(--line);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-code);
   font-size: 0.95rem;
   position: relative;
 }

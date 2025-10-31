@@ -173,15 +173,20 @@ const posts = Object.values(modules)
   }
 
   .post-search input[type="search"] {
+    font-family: var(--font-fancy);
     flex: 1 1 280px;
     max-width: 520px;
     padding: 10px 12px;
-    border: 1px solid var(--border-color, #ddd);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: var(--bg, #fff);
-    color: inherit;
+    background: var(--bg);
+    color: var(--accent);
     font-size: 16px;
     margin-bottom: 1rem;
+  }
+
+  .post-search input[type="search"]::placeholder {
+    color: var(--accent);
   }
 
   .sr-only {
