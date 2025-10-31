@@ -292,6 +292,11 @@ a.post-card:hover {
   text-align: center
 }
 
+.footer-main-text {
+  font-family: var(--font-fancy);
+  font-size: 20px;
+}
+
 @media (min-width: 900px) {
   .hero-title {
     font-size: 54px
