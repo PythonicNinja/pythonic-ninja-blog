@@ -1,16 +1,20 @@
 :root {
-  --bg: #dddcd8; /* warm off-white */
-  --ink: #1c1b19; /* deep charcoal */
-  --muted: #6e6b67; /* soft taupe */
-  --accent: #8b7e74; /* subdued stone */
-  --line: #e6e1da;
-  --border-color: #262a2e;
+  --bg: #f1ebde;
+  --bg-darker: #284a4a;
+  --ink: #161614;
+  --ink-inverted: #f1ebde;
+  --muted: #67665f;
+  --accent: #284a4a;
+  --line: #e6dcc6;
+  --border-color: #232423;
 }
 
 /* Dark theme variables (explicit) */
 :root[data-theme='dark'] {
   --bg: #0f1113;
+  --bg-darker: #0f1113;
   --ink: #ece9e2;
+  --ink-inverted: #ece9e2;
   --muted: #a6a39e;
   --accent: #b1a79d;
   --line: #262a2e;
@@ -86,18 +90,22 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 3;
-  background: color-mix(in oklab, var(--bg) 85%, black)
+  background: var(--bg-darker);
+  color: var(--ink-inverted);
 }
 
 .btn {
   appearance: none;
   border: 1px solid var(--line);
-  background: color-mix(in oklab, var(--bg) 85%, black);
-  color: var(--ink);
+  background: var(--bg-darker);
+  color: var(--ink-inverted);
   border-radius: 999px;
   padding: 6px;
   font: inherit;
   cursor: pointer;
+  font-size: 14px;
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 0;
 }
 
 .brand {
@@ -105,7 +113,7 @@ a:hover {
   font-weight: 600;
   font-size: 24px;
   letter-spacing: 0.3px;
-  color: var(--ink);
+  color: var(--ink-inverted);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -148,7 +156,7 @@ a:hover {
   justify-content: center;
   border-radius: 999px;
   border: 1px solid var(--line);
-  color: var(--ink);
+  color: var(--ink-inverted);
   background: transparent;
   text-decoration: none;
 }
@@ -398,7 +406,7 @@ a.post-card:hover {
   appearance: none;
   border: 1px solid var(--line);
   background: transparent;
-  color: var(--ink);
+  color: var(--ink-inverted);
   border-radius: 999px;
   padding: 6px 12px;
   font: inherit;
