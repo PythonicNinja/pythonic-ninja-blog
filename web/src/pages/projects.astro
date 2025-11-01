@@ -100,12 +100,14 @@ const projects = [
     border: 1px solid var(--line);
     border-radius: 8px;
     background: var(--bg);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease-in-out;
+    filter: brightness(1.1);
   }
 
   .project-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    filter: brightness(1.2);
   }
 
   .project-header {
