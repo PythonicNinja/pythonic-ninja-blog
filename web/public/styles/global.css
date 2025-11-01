@@ -152,16 +152,41 @@ a:hover {
 
 .nav {
   display: flex;
-  gap: 18px
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .nav {
+    gap: 12px;
+  }
+  
+  .nav-link {
+    font-size: 0.9rem;
+  }
 }
 
 .nav-link {
-  color: var(--muted);
-  text-decoration: none
+  color: var(--ink-inverted);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  font-family: var(--font-normal);
+  font-size: 0.95rem;
 }
 
 .nav-link:hover {
-  color: var(--ink)
+  opacity: 1;
+}
+
+/* Footer nav links - different color since footer is on main bg */
+.footer .nav-link {
+  color: var(--muted);
+}
+
+.footer .nav-link:hover {
+  color: var(--ink);
 }
 
 .icon {

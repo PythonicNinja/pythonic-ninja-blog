@@ -1,0 +1,105 @@
+---
+// Load all posts to find related ones
+const modules = import.meta.glob('../pages/blog/*.md', { eager: true }) as Record<string, any>;
+const currentPost = Astro.props.currentPost; // { url, frontmatter }
+
+const allPosts = Object.values(modules)
+  .map((m) => {
+    const url = (m as any).url as string;
+    const frontmatter = (m as any).frontmatter as any;
+    return { url, frontmatter };
+  })
+  .filter((p) => p.frontmatter && p.frontmatter.title && p.url !== currentPost.url);
+
+// Find related posts by matching tags
+const currentTags = (currentPost.frontmatter.tags || []).map((t: string) => String(t).toLowerCase());
+const relatedPosts = allPosts
+  .map((post) => {
+    const postTags = (post.frontmatter.tags || []).map((t: string) => String(t).toLowerCase());
+    const commonTags = postTags.filter((tag: string) => currentTags.includes(tag));
+    return { ...post, score: commonTags.length };
+  })
+  .filter((post) => post.score > 0)
+  .sort((a, b) => {
+    // Sort by tag match score, then by date
+    if (b.score !== a.score) return b.score - a.score;
+    return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+  })
+  .slice(0, 3); // Show top 3 related posts
+
+if (relatedPosts.length === 0) {
+  // If no related posts by tags, show 3 most recent
+  const recentPosts = allPosts
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+    .slice(0, 3);
+  relatedPosts.push(...recentPosts);
+}
+---
+
+{relatedPosts.length > 0 && (
+  <section class="related-posts">
+    <h2 class="related-posts-title">Related Posts</h2>
+    <div class="related-posts-list">
+      {relatedPosts.map(({ url, frontmatter }) => (
+        <a href={url} class="related-post-card">
+          <h3 class="related-post-title">{frontmatter.title}</h3>
+          <div class="related-post-meta">
+            {frontmatter.date && (
+              <time>{String(frontmatter.date).split('T')[0]}</time>
+            )}
+            {frontmatter.tags && frontmatter.tags.length > 0 && (
+              <span> ? {frontmatter.tags.slice(0, 2).join(', ')}</span>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-posts {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .related-posts-title {
+    font-family: var(--font-fancy);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .related-posts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .related-post-card {
+    display: block;
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--bg);
+  }
+
+  .related-post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .related-post-title {
+    font-family: var(--font-fancy);
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--ink);
+  }
+
+  .related-post-meta {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+</style>
