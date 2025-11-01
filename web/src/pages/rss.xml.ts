@@ -38,7 +38,7 @@ export const GET: APIRoute = async () => {
   <channel>
     <title>Pythonic Ninja</title>
     <link>${siteURL}</link>
-    <description>Tech & AI ? serene speed</description>
+    <description>Tech &amp; AI ? serene speed</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${siteURL}/rss.xml" rel="self" type="application/rss+xml" />
