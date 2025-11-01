@@ -12,11 +12,23 @@ export const GET: APIRoute = async ({ site }) => {
     })
     .filter((p) => p.frontmatter && p.frontmatter.title);
 
+  // Get all unique tags
+  const allTags = new Set<string>();
+  posts.forEach(({ frontmatter }) => {
+    const tags = frontmatter.tags || [];
+    tags.forEach((tag: string) => allTags.add(String(tag).toLowerCase()));
+  });
+
   const urls = [
     { loc: siteURL, changefreq: 'daily', priority: '1.0' },
     { loc: `${siteURL}/blog/`, changefreq: 'daily', priority: '0.9' },
     { loc: `${siteURL}/about/`, changefreq: 'monthly', priority: '0.7' },
     { loc: `${siteURL}/projects/`, changefreq: 'monthly', priority: '0.8' },
+    ...Array.from(allTags).map(tag => ({
+      loc: `${siteURL}/tags/${encodeURIComponent(tag)}/`,
+      changefreq: 'weekly' as const,
+      priority: '0.7',
+    })),
     ...posts.map(({ url, frontmatter }) => ({
       loc: new URL(url, siteURL).toString(),
       changefreq: 'monthly' as const,

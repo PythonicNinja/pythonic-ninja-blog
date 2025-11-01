@@ -53,23 +53,6 @@ body {
   line-height: 1.65
 }
 
-/* Skip link for accessibility */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--accent);
-  color: var(--ink-inverted);
-  padding: 8px 16px;
-  text-decoration: none;
-  z-index: 100;
-  border-radius: 0 0 4px 0;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
 a {
   text-decoration: none;
   color: var(--ink);
@@ -273,6 +256,7 @@ a:hover {
   transition: background 120ms ease, transform 120ms ease;
   position: relative;
   text-decoration: none;
+  display: block;
 }
 
 a.post-card:hover {
@@ -284,7 +268,9 @@ a.post-card:hover {
   font-family: var(--font-fancy);
   color: var(--ink);
   text-decoration: none;
-  font-size: 26px
+  font-size: 26px;
+  margin: 0;
+  display: block;
 }
 
 .post-card:hover{
@@ -302,7 +288,15 @@ a.post-card:hover {
   font-family: var(--font-normal);
   color: var(--muted);
   font-size: 14px;
-  margin-top: 6px
+  margin-top: 6px;
+  display: block;
+  line-height: 1.5;
+}
+
+.post-meta time,
+.post-meta span,
+.post-meta a {
+  display: inline;
 }
 
 .post-summary {

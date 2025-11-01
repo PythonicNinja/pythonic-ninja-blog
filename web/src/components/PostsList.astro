@@ -1,4 +1,5 @@
 ---
+import { Fragment } from 'astro/jsx-runtime';
 // Load posts once for both index and blog pages
 const modules = import.meta.glob('../pages/blog/*.md', {eager: true}) as Record<string, any>;
 const rawModules = import.meta.glob('../pages/blog/*.md', {as: 'raw', eager: true}) as Record<string, string>;
@@ -60,7 +61,7 @@ const posts = Object.values(modules)
 <div class="filters-and-search">
   <div class="post-search">
     <label for="post-search" class="sr-only">Search posts</label>
-    <input id="post-search" type="search" placeholder="Search posts..." autocomplete="off"/>
+    <input id="post-search" type="search" placeholder="Search posts... (Press / to focus)" autocomplete="off"/>
   </div>
 
   <div class="post-filters" id="filters">
@@ -72,19 +73,45 @@ const posts = Object.values(modules)
 </div>
 
 <section class="post-list" id="post-list">
-    {posts.map(({url, frontmatter, summary, minutes, searchText}) => (
-      <a href={url} class="post-card"
-         data-tags={(frontmatter.tags || []).map((t: any) => String(t).toLowerCase()).join(' ')}
-         data-date={new Date(frontmatter.date).getTime()} data-search={searchText}>
-        <div class="post-title">{frontmatter.title}</div>
-        <div class="post-meta">
-          <time>{String(frontmatter.date).split('T')[0]}</time>
-            {frontmatter.tags && <span> · {frontmatter.tags.join(', ')}</span>}
-          <span> · {minutes} min read</span>
-        </div>
-          {false && summary && <p class="post-summary">{summary}</p>}
-      </a>
-    ))}
+    {posts.map(({url, frontmatter, summary, minutes, searchText}) => {
+      const tags = frontmatter.tags || [];
+      return (
+        <a 
+          href={url} 
+          class="post-card"
+          data-tags={tags.map((t: any) => String(t).toLowerCase()).join(' ')}
+          data-date={new Date(frontmatter.date).getTime()} 
+          data-search={searchText}
+        >
+          <div class="post-title" data-title={frontmatter.title}>{frontmatter.title}</div>
+          <div class="post-meta">
+            <time>{String(frontmatter.date).split('T')[0]}</time>
+            {tags.length > 0 && (
+              <Fragment>
+                <span> · </span>
+                {tags.map((tag: string, idx: number) => {
+                  const tagLower = String(tag).toLowerCase();
+                  return (
+                    <Fragment>
+                      {idx > 0 && <span>, </span>}
+                      <span 
+                        class="tag-link-inline" 
+                        data-tag-url={`/tags/${encodeURIComponent(tagLower)}/`}
+                        role="link"
+                        tabindex="0"
+                      >
+                        {tag}
+                      </span>
+                    </Fragment>
+                  );
+                })}
+              </Fragment>
+            )}
+            <span> · {minutes} min read</span>
+          </div>
+        </a>
+      );
+    })}
 </section>
 <script>
     const list = document.getElementById('post-list');
@@ -123,9 +150,32 @@ const posts = Object.values(modules)
             filtered.sort((a, b) => Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date')));
         }
         list.innerHTML = '';
-        filtered.forEach(el => list.appendChild(el));
+        
+        // Highlight search terms in filtered results
+        filtered.forEach(el => {
+            const cloned = el.cloneNode(true) as HTMLElement;
+            if (query && query.length > 0) {
+                highlightSearchTerms(cloned, query);
+            }
+            list.appendChild(cloned);
+        });
+        
         if (postCount) {
             postCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'post' : 'posts'}`;
+        }
+    }
+
+    function highlightSearchTerms(element: HTMLElement, query: string) {
+        const terms = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+        const titleEl = element.querySelector('.post-title');
+        if (titleEl && terms.length > 0) {
+            const originalText = titleEl.textContent || '';
+            let highlighted = originalText;
+            terms.forEach(term => {
+                const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                highlighted = highlighted.replace(regex, '<mark>$1</mark>');
+            });
+            titleEl.innerHTML = highlighted;
         }
     }
 
@@ -144,6 +194,52 @@ const posts = Object.values(modules)
         const view = active?.getAttribute('data-view') || 'latest';
         apply(view, tag, query);
     });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Press / to focus search (but not when typing in input)
+        if (e.key === '/' && e.target !== searchInput && !(e.target as HTMLElement).isContentEditable) {
+            e.preventDefault();
+            searchInput?.focus();
+        }
+        // Press Esc to clear search
+        if (e.key === 'Escape' && e.target === searchInput) {
+            (searchInput as HTMLInputElement).value = '';
+            const active = document.querySelector('#filters .pill.active') as HTMLElement | null;
+            const tag = active?.getAttribute('data-tag') || '';
+            const view = active?.getAttribute('data-view') || 'latest';
+            apply(view, tag, '');
+            searchInput?.blur();
+        }
+    });
+
+    // Handle tag link clicks and prevent post card navigation
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const tagLink = target.closest('.tag-link-inline');
+      if (tagLink) {
+        e.stopPropagation();
+        e.preventDefault();
+        const url = tagLink.getAttribute('data-tag-url');
+        if (url) {
+          window.location.href = url;
+        }
+      }
+    }, true);
+
+    // Handle keyboard navigation on tag links
+    document.addEventListener('keydown', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('tag-link-inline') && (e.key === 'Enter' || e.key === ' ')) {
+        e.stopPropagation();
+        e.preventDefault();
+        const url = target.getAttribute('data-tag-url');
+        if (url) {
+          window.location.href = url;
+        }
+      }
+    }, true);
+
     // initialize count
     apply('latest', '', '');
 </script>
@@ -204,5 +300,32 @@ const posts = Object.values(modules)
   #post-count {
     color: var(--text-muted, #666);
     font-size: 0.95em;
+  }
+
+  .tag-link-inline {
+    color: var(--accent);
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+    cursor: pointer;
+  }
+
+  .tag-link-inline:hover {
+    text-decoration: underline;
+  }
+
+  .tag-link-inline:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  mark {
+    background: rgba(255, 255, 0, 0.3);
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  :root[data-theme='dark'] mark {
+    background: rgba(255, 255, 0, 0.2);
   }
 </style>
