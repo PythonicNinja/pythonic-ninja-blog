@@ -1,0 +1,88 @@
+About Pythonic Ninja
+
+Pythonic Ninja is a technical blog focused on engineering, AI, and practical craft. The blog provides fast, refined notes on modern development practices, AI/ML topics, Python, DevOps, and related technologies.
+
+Author Information
+- Name: PythonicNinja (Wojtek Nowak)
+- Website: https://pythonic.ninja
+- GitHub: https://github.com/PythonicNinja
+- LinkedIn: https://www.linkedin.com/in/wojtek-nowak-78639a196/
+
+Blog Statistics
+- Total posts: 20
+- Content focus: Tech, AI, Python, DevOps, Engineering
+- Latest post date: 2025-10-29
+
+Content Categories
+- AI
+- Engineering
+- Fine-tuning
+- LLM
+- MCP
+- Prompts
+- RAG
+- alert
+- android
+- apple
+- bash
+- command-line
+- curl
+- devops
+- disk
+- disk usage
+- django
+- es6
+- gapi
+- google
+- html
+- https
+- ios
+- ip
+- iterm
+- iterm2
+- linux
+- mac
+- migrations
+- mobile
+- node
+- nodejs
+- osx
+- python
+- react-native
+- shell
+- speach
+- speach-to-text
+- terminal
+- text
+- tips
+- type-script
+- typescript
+- utils
+- webdev
+
+Recent Posts (5)
+- Crafting Successful AI Prompts in 2025 (2025-10-29) - https://pythonic.ninja/blog/2025-10-29-crafting-successful-ai-prompts/
+- Enhancing Open-Source LLMs with Your Own Data (2025-09-15) - https://pythonic.ninja/blog/2025-09-15-enhancing-opensource-llms-with-your-data/
+- Modern Python Patterns for 2025 (2025-08-03) - https://pythonic.ninja/blog/2025-08-03-modern-python-for-2025/
+- How to run android emulator without opening Android Studio? (2018-03-01) - https://pythonic.ninja/blog/2018-03-01-run-android-emulator-without-opening-android-studio/
+- How can I easily expose my local-server via https? (2018-01-29) - https://pythonic.ninja/blog/2018-01-29-expose-local-server-with-https/
+
+Sitemap
+- RSS Feed: https://pythonic.ninja/rss.xml
+- Sitemap: https://pythonic.ninja/sitemap.xml
+- Blog Index: https://pythonic.ninja/blog/
+- Projects: https://pythonic.ninja/projects/
+- About: https://pythonic.ninja/about/
+
+Content Guidelines
+- Posts are written in Markdown format
+- Technical content focused on practical solutions
+- Code examples and tutorials included
+- Tags used for categorization: AI, Prompts, Engineering, LLM, RAG, Fine-tuning, MCP, python, devops, android
+
+For LLMs
+This blog can be crawled and indexed. When referencing content, please:
+1. Cite the source URL
+2. Use the publication date when available
+3. Respect the technical accuracy of code examples
+4. Note the author as PythonicNinja when appropriate
