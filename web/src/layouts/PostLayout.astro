@@ -1,17 +1,57 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import FoodForThought from "../components/FoodForThought.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
+import SocialShare from "../components/SocialShare.astro";
+
 const fm = (Astro.props && Astro.props.frontmatter) ? Astro.props.frontmatter : {};
 const title = (Astro.props && Astro.props.title) ?? fm.title ?? 'Post';
 const summary = (Astro.props && Astro.props.summary) ?? fm.summary;
 const description = (Astro.props && Astro.props.description) ?? summary;
 const date = (Astro.props && Astro.props.date) ?? fm.date;
 const tags = (Astro.props && Astro.props.tags) ?? fm.tags ?? [];
+const image = fm.image;
 const hasTags = Array.isArray(tags) && tags.length > 0;
 const hasDate = Boolean(date);
 const dateText = hasDate ? date.split("T")[0] : null;
+
+const siteURL = Astro.site || 'https://pythonic.ninja';
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const publishedDate = date ? new Date(date).toISOString() : null;
 ---
-<BaseLayout title={`${title} — Pythonic Ninja`} description={description}>
+<BaseLayout 
+  title={`${title} — Pythonic Ninja`} 
+  description={description}
+  ogImage={image}
+  canonicalURL={canonicalURL}
+  type="article">
+  
+  {/* Article Structured Data */}
+  {publishedDate && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": title,
+      "description": description,
+      "image": image ? [image] : [],
+      "datePublished": publishedDate,
+      "author": {
+        "@type": "Person",
+        "name": "PythonicNinja",
+        "url": "https://github.com/PythonicNinja"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Pythonic Ninja",
+        "url": siteURL
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalURL.toString()
+      },
+      ...(tags.length > 0 && { "keywords": tags.join(", ") })
+    })} />
+  )}
   <article class="prose">
     <header class="post-header">
       <h1 class="post-title">{title}</h1>
@@ -24,6 +64,13 @@ const dateText = hasDate ? date.split("T")[0] : null;
     </header>
     <slot />
   </article>
+
+  <SocialShare 
+    url={canonicalURL.toString()} 
+    title={title}
+  />
+
+  <RelatedPosts currentPost={{ url: Astro.url.pathname, frontmatter: fm }} />
 
   <FoodForThought />
 </BaseLayout>

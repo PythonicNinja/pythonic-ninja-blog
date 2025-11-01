@@ -1,5 +1,16 @@
 ---
-const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', ogImage } = Astro.props;
+const { 
+  title = 'Pythonic Ninja', 
+  description = 'Tech & AI — serene speed', 
+  ogImage,
+  canonicalURL,
+  type = 'website'
+} = Astro.props;
+
+const siteURL = Astro.site || 'https://pythonic.ninja';
+const currentURL = canonicalURL || new URL(Astro.url.pathname, siteURL);
+const image = ogImage || `${siteURL}/og-default.png`;
+const siteName = 'Pythonic Ninja';
 ---
 <html lang="en">
   <head>
@@ -8,7 +19,28 @@ const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', og
     <title>{title}</title>
     <meta name="author" content="PythonicNinja">
     <meta name="description" content={description} />
+    
+    {/* Canonical URL */}
+    <link rel="canonical" href={currentURL} />
+    
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={currentURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content={siteName} />
+    
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    
+    {/* Favicon */}
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/1098417?s=460&v=4">
+    
+    {/* Fonts */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" />
@@ -16,10 +48,24 @@ const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', og
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" />
     </noscript>
+    
+    {/* Styles */}
     <link rel="stylesheet" href={`/styles/global.css?v=${Date.now()}`} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    
+    {/* Structured Data */}
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": siteName,
+      "url": siteURL,
+      "author": {
+        "@type": "Person",
+        "name": "PythonicNinja"
+      }
+    })} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
       <a href="/" class="brand">
         <img src="https://avatars0.githubusercontent.com/u/1098417?s=460&v=4" alt={title} />
@@ -37,12 +83,13 @@ const { title = 'Pythonic Ninja', description = 'Tech & AI — serene speed', og
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">☾</button>
       </nav>
     </header>
-    <main class="container">
+    <main id="main-content" class="container">
       <slot />
     </main>
     <footer class="footer">
       <div class="footer-main-text">© {new Date().getFullYear()} Pythonic Ninja</div>
       <div style="margin-top:8px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="nav-link" href="/rss.xml" rel="alternate" type="application/rss+xml" title="RSS Feed">RSS</a>
         <a class="nav-link" href="https://github.com/PythonicNinja" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="nav-link" href="https://www.linkedin.com/in/wojtek-nowak-78639a196/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="nav-link" href="https://www.skills.google/public_profiles/d46f18e0-9d4a-4197-b9b7-6d5a8317700f" target="_blank" rel="noopener noreferrer">Google Skills</a>
