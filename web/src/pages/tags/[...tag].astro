@@ -1,0 +1,228 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../blog/*.md', { eager: true }) as Record<string, any>;
+  const allTags = new Set<string>();
+  
+  Object.values(modules).forEach((m: any) => {
+    const tags = m.frontmatter?.tags || [];
+    tags.forEach((tag: string) => allTags.add(String(tag).toLowerCase()));
+  });
+
+  return Array.from(allTags).map((tag) => ({
+    params: { tag },
+  }));
+}
+
+const modules = import.meta.glob('../blog/*.md', { eager: true }) as Record<string, any>;
+const tag = Astro.params.tag || '';
+
+// Normalize tag (handle URL encoding and case)
+const normalizedTag = decodeURIComponent(tag).toLowerCase();
+
+const allPosts = Object.values(modules)
+  .map((m) => {
+    const url = (m as any).url as string;
+    const frontmatter = (m as any).frontmatter as any;
+    return { url, frontmatter };
+  })
+  .filter((p) => {
+    if (!p.frontmatter || !p.frontmatter.title) return false;
+    const tags = (p.frontmatter.tags || []).map((t: string) => String(t).toLowerCase());
+    return tags.includes(normalizedTag);
+  })
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+
+// Get all unique tags for navigation
+const allTags = new Set<string>();
+Object.values(modules).forEach((m: any) => {
+  const tags = m.frontmatter?.tags || [];
+  tags.forEach((tag: string) => allTags.add(String(tag).toLowerCase()));
+});
+
+const tagDisplayName = normalizedTag.charAt(0).toUpperCase() + normalizedTag.slice(1);
+---
+
+<BaseLayout 
+  title={`${tagDisplayName} ? Pythonic Ninja`} 
+  description={`Posts tagged with ${tagDisplayName}`}>
+  
+  <div class="tag-header">
+    <nav class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="separator">/</span>
+      <a href="/blog/">Blog</a>
+      <span class="separator">/</span>
+      <span class="current">Tag: {tagDisplayName}</span>
+    </nav>
+    <h1 class="page-title">Tag: {tagDisplayName}</h1>
+    <p class="page-subtitle">{allPosts.length} {allPosts.length === 1 ? 'post' : 'posts'} tagged with {tagDisplayName}</p>
+  </div>
+
+  <div class="tag-posts-container">
+    {allPosts.length > 0 ? (
+      <section class="post-list" id="post-list">
+        {allPosts.map(({ url, frontmatter }) => {
+          const tags = (frontmatter.tags || []).map((t: string) => String(t).toLowerCase());
+          const minutes = Math.max(1, Math.ceil((frontmatter.summary || '').split(/\s+/).length / 220));
+          
+          return (
+            <a href={url} class="post-card"
+               data-tags={tags.join(' ')}
+               data-date={new Date(frontmatter.date).getTime()}>
+              <div class="post-title">{frontmatter.title}</div>
+              <div class="post-meta">
+                <time>{String(frontmatter.date).split('T')[0]}</time>
+                {frontmatter.tags && frontmatter.tags.length > 0 && (
+                  <span> ? {frontmatter.tags.join(', ')}</span>
+                )}
+                <span> ? {minutes} min read</span>
+              </div>
+            </a>
+          );
+        })}
+      </section>
+    ) : (
+      <div class="no-posts">
+        <p>No posts found with this tag.</p>
+        <a href="/blog/" class="back-link">? Back to all posts</a>
+      </div>
+    )}
+  </div>
+
+  {allTags.size > 0 && (
+    <aside class="all-tags">
+      <h2 class="tags-section-title">All Tags</h2>
+      <div class="tags-cloud">
+        {Array.from(allTags).sort().map((t) => (
+          <a 
+            href={`/tags/${encodeURIComponent(t)}/`}
+            class={`tag-link ${t === normalizedTag ? 'active' : ''}`}
+          >
+            {t.charAt(0).toUpperCase() + t.slice(1)}
+          </a>
+        ))}
+      </div>
+    </aside>
+  )}
+</BaseLayout>
+
+<style>
+  .tag-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--ink);
+  }
+
+  .separator {
+    color: var(--muted);
+  }
+
+  .breadcrumb .current {
+    color: var(--ink);
+  }
+
+  .page-title {
+    font-family: var(--font-fancy);
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+    color: var(--ink);
+  }
+
+  .page-subtitle {
+    color: var(--muted);
+    margin: 0.5rem 0;
+  }
+
+  .tag-posts-container {
+    margin-top: 2rem;
+  }
+
+  .no-posts {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .all-tags {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .tags-section-title {
+    font-family: var(--font-fancy);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tag-link {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--bg);
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    font-family: var(--font-normal);
+  }
+
+  .tag-link:hover {
+    background: var(--accent);
+    color: var(--ink-inverted);
+    border-color: var(--accent);
+  }
+
+  .tag-link.active {
+    background: var(--accent);
+    color: var(--ink-inverted);
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .page-title {
+      font-size: 2rem;
+    }
+  }
+</style>
