@@ -24,6 +24,8 @@ export const GET: APIRoute = async ({ site }) => {
     { loc: `${siteURL}/blog/`, changefreq: 'daily', priority: '0.9' },
     { loc: `${siteURL}/about/`, changefreq: 'monthly', priority: '0.7' },
     { loc: `${siteURL}/projects/`, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${siteURL}/llm.txt`, changefreq: 'weekly', priority: '0.6' },
+    { loc: `${siteURL}/rss.xml`, changefreq: 'daily', priority: '0.8' },
     ...Array.from(allTags).map(tag => ({
       loc: `${siteURL}/tags/${encodeURIComponent(tag)}/`,
       changefreq: 'weekly' as const,
