@@ -50,8 +50,8 @@ Content Categories
 - python
 - react-native
 - shell
-- speach
-- speach-to-text
+- speech
+- speech-to-text
 - terminal
 - text
 - tips
