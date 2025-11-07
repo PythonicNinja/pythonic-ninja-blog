@@ -14,11 +14,11 @@ seo:
 
 Most takes about "agents" come from people who have never actually built one. Skip the hype about massive control planes and just wire up the smallest loop you can. Once you’ve seen where determinism ends and useful nondeterminism begins, the debates finally make sense.
 
-# Problem 😱
+# 😱Problem
 
 Large language models are stateless function calls. Developers keep bolting on ceremony: 16k-token prompts, sprawling plugins, pseudoscience "prompt engineering" instead of shipping a loop with memory. Until you test it yourself, you can’t tell whether failures are on the model, your context strategy, or your tooling choices.
 
-# Solution 🧠 
+# 🧠Solution
 
 ## Minimal loop, some memory, and discipline
 
