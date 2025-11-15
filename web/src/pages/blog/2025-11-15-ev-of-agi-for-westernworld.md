@@ -14,7 +14,7 @@ seo:
 
 # 😰Problem
 
-Tom Phillips’ [“AGI fantasy” essay](https://www.tomwphillips.co.uk/2025/11/agi-fantasy-is-a-blocker-to-actual-engineering/) jokes that believers happily multiply a microscopic chance (0.001%) with an astronomical payoff and still walk away claiming an enormous expected value (EV). The thought experiment is catchy, but it stays abstract-no numbers tied to real GDP streams, no grounding in the payrolls we actually pay today. Meanwhile, we now estimate (thanks to a quick [Perplexity pull](https://www.perplexity.ai/search/what-is-total-amount-of-paid-l-rPgDlLG0Sx2FRM7rQY7hgw#0)) that white-collar workers in “Western” economies earn roughly **15-30 trillion USD per year**. If AGI targets that pool, why aren’t we doing the math with it?
+Tom Phillips’ “AGI fantasy” essay [1] jokes that believers happily multiply a microscopic chance (0.001%) with an astronomical payoff and still walk away claiming an enormous expected value (EV). The thought experiment is catchy, but it stays abstract-no numbers tied to real GDP streams, no grounding in the payrolls we actually pay today. Meanwhile, we now estimate (thanks to a quick Perplexity pull [2]) that white-collar workers in “Western” economies earn roughly **15-30 trillion USD per year**. If AGI targets that pool, why aren’t we doing the math with it?
 
 # 🧮Solution
 
@@ -76,3 +76,8 @@ Suppose there’s only a 1% chance that AGI covers 15% of an 18T payroll and cre
 - Recalculate `W` country by country using employee-compensation data so policy teams can see how much of “their” payroll is at stake.  
 - Run Monte Carlo simulations over `p`, `a`, and `c` to visualize when AGI bets beat baseline automation investments.  
 - Add opportunity-cost terms (delayed net-zero build-out, demographic adaptation) so the EV model competes against every other trillion-dollar program, not just against hype.
+
+## References
+
+[1] https://www.tomwphillips.co.uk/2025/11/agi-fantasy-is-a-blocker-to-actual-engineering/  
+[2] https://www.perplexity.ai/search/what-is-total-amount-of-paid-l-rPgDlLG0Sx2FRM7rQY7hgw
