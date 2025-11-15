@@ -33,3 +33,4 @@
 - Use concise, imperative commit messages (`Add agent blog post`, `Fix RSS feed path`). Group related changes to keep diffs reviewable.
 - Every PR should describe the change, note testing steps (`npm run build`, screenshots if UI), and link tracking issues when applicable.
 - Highlight content changes touching dates, metadata, or SEO fields so reviewers can double-check the site map and RSS impacts.
+- NOT use emdash
