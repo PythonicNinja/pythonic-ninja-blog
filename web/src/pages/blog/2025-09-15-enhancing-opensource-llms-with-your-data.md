@@ -14,7 +14,7 @@ seo:
 
 The rise of open-weight large language models (LLMs) like Llama 3, Mistral, and Gemma has democratized AI development. But while these models are powerful out of the box, their true potential is unlocked when you customize them with your own data. Whether you're building a domain-specific chatbot, a customer support system, or an internal knowledge assistant, understanding how to enhance LLMs with your data is crucial.
 
-In this post, we'll explore four complementary approaches: **prompt context injection**, **fine-tuning**, **Retrieval-Augmented Generation (RAG)**, and **Model Context Protocol (MCP)**. Each has its place in the AI engineer's toolkit, and choosing the right one—or combination—can make the difference between a mediocre and a game-changing application.
+In this post, we'll explore four complementary approaches: **prompt context injection**, **fine-tuning**, **Retrieval-Augmented Generation (RAG)**, and **Model Context Protocol (MCP)**. Each has its place in the AI engineer's toolkit, and choosing the right one-or combination-can make the difference between a mediocre and a game-changing application.
 
 ---
 
@@ -263,7 +263,7 @@ print(f"Trainable params: {model.print_trainable_parameters()}")
 
 **What it is:** MCP is an emerging standard (developed by Anthropic) that allows LLMs to securely connect to external data sources and tools in real-time.
 
-Think of it as "plug-and-play APIs for AI models"—instead of embedding knowledge or training on it, you give the model *access* to live data sources.
+Think of it as "plug-and-play APIs for AI models"-instead of embedding knowledge or training on it, you give the model *access* to live data sources.
 
 **How it works:**
 
@@ -440,7 +440,7 @@ The techniques we've covered are just the beginning. The next wave includes:
 
 ## Conclusion
 
-Enhancing open-source LLMs with your own data isn't a one-size-fits-all problem. Each approach—prompt context, RAG, fine-tuning, and MCP—has unique strengths:
+Enhancing open-source LLMs with your own data isn't a one-size-fits-all problem. Each approach-prompt context, RAG, fine-tuning, and MCP-has unique strengths:
 
 - **Prompt context** for speed and simplicity
 - **RAG** for scale and freshness

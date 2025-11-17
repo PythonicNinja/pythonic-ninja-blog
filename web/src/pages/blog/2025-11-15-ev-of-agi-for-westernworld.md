@@ -24,7 +24,7 @@ Keep the EV math simple and defensible:
 2. **Decide the automation share `a`.** This is the percent of white-collar labor AGI could replicate or amplify.
 3. **Add spillovers `s`.** Fast-follow GDP growth from new goods/services. To stay grounded, measure this as a share of today’s 60T USD advanced-economy GDP.
 4. **Include transition costs `c`.** Failed AGI bets still burn capital, political focus, and lost R&D time, so give the downside a real dollar figure.
-5. **Multiply by probability `p`.** This is the only speculative piece—and the one you should argue about openly.
+5. **Multiply by probability `p`.** This is the only speculative piece-and the one you should argue about openly.
 
 That yields a reusable expected-value skeleton:
 
