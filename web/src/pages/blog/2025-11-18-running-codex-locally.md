@@ -12,10 +12,10 @@ seo:
   noindex: false
 ---
 
-Want to use Codex with maximum privacy and performance? Running it against a local model is the answer. By connecting Codex to a model like Qwen 2.5 Coder hosted by LM Studio on your own machine, you gain several advantages:
+Want to use Codex with maximum privacy and control? Running it against a local model is the answer. By connecting Codex to a model like Qwen 2.5 Coder hosted by LM Studio on your own machine, you gain several advantages:
 
 *   **Privacy:** Your code and prompts never leave your computer.
-*   **Speed:** Latency is minimal since requests don't travel over the internet.
+*   **Offline Capability:** Code anywhere, even without an internet connection.
 *   **No Rate Limits:** You're not subject to API quotas or rate limits.
 *   **Cost-Effective:** Avoid paying for API calls, especially during heavy development.
 *   **Customization:** Easily experiment with different models and context settings.
@@ -143,11 +143,11 @@ If the response is coherent and pertains to CSV parsing, congratulations! You ar
 
 Your local setup is ready, but you can optimize it for a true power-user workflow:
 
-*   **Enable GPU Offload:** In LM Studio, ensure the "GPU Offload" slider is set to Max. This moves the entire model to VRAM for lightning-fast responses.
+*   **Enable GPU Offload:** In LM Studio, ensure the "GPU Offload" slider is set to Max. This moves the entire model to VRAM for significantly faster generation.
 *   **Local Tools:** If your Codex version supports tool use, enable "unsafe" mode to allow the local model to read files, run shell commands, and edit code directly. Since it's local, the security risk is contained to your user environment.
 *   **Multi-Model Architecture:** Run two instances of LM Studio on different ports (e.g., `1234` and `1235`). Configure Codex to use a small model (7B) for quick chat and a large model (32B) for complex architecture planning.
 *   **Backup:** Backup your `~/.config/codex` folder. It's the brain of your operation now.
 
 # ✅ Done
 
-That's it! You've successfully decoupled Codex from the cloud and are now running a powerful, private AI development environment right on your desktop. Enjoy the speed, privacy, and freedom of local-first AI.
+That's it! You've successfully decoupled Codex from the cloud and are now running a powerful, private AI development environment right on your desktop. Enjoy the privacy, control, and freedom of local-first AI.
