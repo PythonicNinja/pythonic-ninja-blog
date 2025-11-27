@@ -71,8 +71,8 @@ Now chain them with `runprompt`:
 
 ```bash
 curl -s "https://github.com/google/dotprompt" \
-  | runprompt summarize.prompt \
-  | runprompt fr.prompt
+  | runprompt ~/summarize.prompt \
+  | runprompt ~/fr.prompt
 ```
 
 What happens:
@@ -82,6 +82,40 @@ What happens:
 3. `fr.prompt` translates that summary to French (`french`).
 
 Because each prompt declares its inputs and outputs, you can swap steps without rewriting glue code.
+
+One-liner code review from staged changes:
+
+```bash
+git diff | runprompt ~/codereview.prompt
+```
+
+`codereview.prompt`
+
+```handlebars
+---
+model: googleai/gemini-2.5-flash
+---
+do code review on current changeset:
+<CODE>
+{{STDIN}}
+</CODE>
+```
+
+Pipe a review straight into a summary for teammates:
+
+```bash
+git diff | runprompt ~/codereview.prompt | runprompt ~/summarize.prompt
+```
+
+Example output:
+
+```
+Here's a summary of the text in bullet points:
+
+* The new section is clear, concise, and illustrates Unix-style piping with dotprompt.
+* `git diff | runprompt codereview.prompt` shows how piped input becomes `<CODE>` via `{{STDIN}}`.
+* Including the full `codereview.prompt` keeps the example self-contained and readable.
+```
 
 # Take it further
 
