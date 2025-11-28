@@ -33,6 +33,25 @@ Reference specs and tooling:
 - Dotprompt spec and examples: https://github.com/google/dotprompt
 - runprompt CLI that executes `.prompt` files: https://github.com/chr15m/runprompt
 
+Make prompts directly executable
+
+1. Download `runprompt` from the repo and place it at `/usr/bin/local/runprompt`.
+2. Edit its shebang to your Python, for example `#!/opt/homebrew/bin/python3.12`.
+3. Create prompts like `~/codereview.prompt` with a shebang that points to the runner:
+
+```bash
+#!/usr/bin/env -S /usr/local/bin/runprompt
+---
+model: googleai/gemini-2.5-flash
+---
+do code review on current changeset:
+<CODE>
+{{STDIN}}
+</CODE>
+```
+
+Now every `~/*.prompt` is an executable: `chmod +x ~/codereview.prompt` and pipe data straight in.
+
 # Example
 
 Create two prompts and a one-line pipeline.
@@ -105,6 +124,12 @@ Pipe a review straight into a summary for teammates:
 
 ```bash
 git diff | runprompt ~/codereview.prompt | runprompt ~/summarize.prompt
+```
+
+Or call the executable version directly and chain a summarizer:
+
+```bash
+git diff HEAD...main | ~/codereview.prompt | ~/summarize.prompt
 ```
 
 Example output:
