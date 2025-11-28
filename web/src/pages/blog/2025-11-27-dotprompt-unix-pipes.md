@@ -14,11 +14,11 @@ seo:
 
 Dotprompt turns prompt engineering into small, reusable files and lets you run them like programs. Pair it with `runprompt` and you can wire prompts together with pipes the same way you chain `curl`, `grep`, and `sed`.
 
-# Problem
+# 🤔 Problem
 
 Most prompt workflows are copy-paste scripts hidden in notebooks or docs. They are hard to reuse, hard to review, and fragile when you change models or providers. You need a way to package prompts so they are executable, typed, and composable from the command line.
 
-# Solution
+# 🛠️ Solution
 
 Use Dotprompt (`.prompt` files) for the prompt definition and `runprompt` as the runner. Each `.prompt` file:
 
@@ -52,7 +52,7 @@ do code review on current changeset:
 
 Now every `~/*.prompt` is an executable: `chmod +x ~/codereview.prompt` and pipe data straight in.
 
-# Example
+# 🧪 Example
 
 Create two prompts and a one-line pipeline.
 
@@ -142,7 +142,7 @@ Here's a summary of the text in bullet points:
 * Including the full `codereview.prompt` keeps the example self-contained and readable.
 ```
 
-# Take it further
+# 🚀 Take it further
 
 - Add a `detect-language.prompt` before translation to branch between French, Spanish, or Japanese outputs.
 - Store shared defaults (temperature, max_tokens) in the frontmatter so every prompt runs consistently across providers.
