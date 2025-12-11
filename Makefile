@@ -4,6 +4,9 @@
 install:
 	npm ci --prefix web
 
+run:
+	npm run dev --prefix web
+
 dev:
 	npm run dev --prefix web
 
