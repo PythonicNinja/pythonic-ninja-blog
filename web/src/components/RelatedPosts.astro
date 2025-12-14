@@ -25,10 +25,10 @@ const relatedPosts = allPosts
     if (b.score !== a.score) return b.score - a.score;
     return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
   })
-  .slice(0, 3); // Show top 3 related posts
+  .slice(0, 3); // Show the top 3 related posts
 
 if (relatedPosts.length === 0) {
-  // If no related posts by tags, show 3 most recent
+  // If no related posts by tags, show the 3 most recent
   const recentPosts = allPosts
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
     .slice(0, 3);
