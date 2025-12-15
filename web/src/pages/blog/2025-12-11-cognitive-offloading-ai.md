@@ -81,4 +81,4 @@ Cognitive hygiene is the meta-layer above offloading: habits that keep judgment 
 # 📚 References
 
 - MIT Technology Review (2017), Nature Communications study on hippocampal activity dropping when people follow turn-by-turn GPS: https://www.technologyreview.com/2017/03/22/153068/this-is-your-brain-on-gps-navigation/
-- Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task - https://arxiv.org/abs/2506.08872
+- Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task: https://arxiv.org/abs/2506.08872
