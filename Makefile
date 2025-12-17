@@ -11,6 +11,7 @@ dev:
 	npm run dev --prefix web
 
 build:
+	npm run prebuild --prefix web
 	npm run build --prefix web
 
 preview:

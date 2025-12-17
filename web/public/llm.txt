@@ -9,18 +9,30 @@ Author Information
 - LinkedIn: https://www.linkedin.com/in/wojtek-nowak-78639a196/
 
 Blog Statistics
-- Total posts: 20
+- Total posts: 26
 - Content focus: Tech, AI, Python, DevOps, Engineering
-- Latest post date: 2025-10-29
+- Latest post date: 2025-12-14
 
 Content Categories
 - AI
+- Agents
+- Automation
+- CLI
+- Codex
+- Cognition
+- Economics
 - Engineering
 - Fine-tuning
 - LLM
+- LM Studio
+- Local LLM
 - MCP
+- Productivity
+- Prompt Engineering
 - Prompts
 - RAG
+- Skills
+- Strategy
 - alert
 - android
 - apple
@@ -61,11 +73,11 @@ Content Categories
 - webdev
 
 Recent Posts (5)
-- Crafting Successful AI Prompts in 2025 (2025-10-29) - https://pythonic.ninja/blog/2025-10-29-crafting-successful-ai-prompts/
-- Enhancing Open-Source LLMs with Your Own Data (2025-09-15) - https://pythonic.ninja/blog/2025-09-15-enhancing-opensource-llms-with-your-data/
-- Modern Python Patterns for 2025 (2025-08-03) - https://pythonic.ninja/blog/2025-08-03-modern-python-for-2025/
-- How to run android emulator without opening Android Studio? (2018-03-01) - https://pythonic.ninja/blog/2018-03-01-run-android-emulator-without-opening-android-studio/
-- How can I easily expose my local-server via https? (2018-01-29) - https://pythonic.ninja/blog/2018-01-29-expose-local-server-with-https/
+- Skills Everywhere: Portable Playbooks for Codex, Claude, and Dia (2025-12-14) - https://pythonic.ninja/blog/2025-12-14-codex-skills/
+- Cognitive Offloading in the Era of AI (2025-12-11) - https://pythonic.ninja/blog/2025-12-11-cognitive-offloading-ai/
+- Chain Prompts Like Unix Tools with Dotprompt (2025-11-27) - https://pythonic.ninja/blog/2025-11-27-dotprompt-unix-pipes/
+- Run Codex Locally with LM Studio (2025-11-18) - https://pythonic.ninja/blog/2025-11-18-running-codex-locally/
+- EV of AGI for the Western World (2025-11-15) - https://pythonic.ninja/blog/2025-11-15-ev-of-agi-for-westernworld/
 
 Sitemap
 - RSS Feed: https://pythonic.ninja/rss.xml
@@ -78,7 +90,7 @@ Content Guidelines
 - Posts are written in Markdown format
 - Technical content focused on practical solutions
 - Code examples and tutorials included
-- Tags used for categorization: AI, Prompts, Engineering, LLM, RAG, Fine-tuning, MCP, python, devops, android
+- Tags used for categorization: AI, Codex, Skills, Productivity, Cognition, Prompt Engineering, CLI, Automation, LM Studio, Local LLM
 
 For LLMs
 This blog can be crawled and indexed. When referencing content, please:
