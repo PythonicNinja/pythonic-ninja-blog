@@ -41,3 +41,23 @@ Reality is that AI offers a boost to base skills (taste of art).
 3. manager + AI = good project
 4. 10x manager + AI = state-of-the-art project
 
+# singularity by swarm of stochastic intelligence
+
+Singularity is a point in time where technological growth accelerates beyond human control, producing unpredictable changes in human civilization.
+
+One of the biggest issues with LLM models is that they are probablistic/stochastic in their nature, because of this fact they tend to hallucinate.
+The same as with people, they tend to make mistakes. 
+To solve this issue with people, we just try to ask multiple field experts and try to make consensus based on their answers.
+
+With LLMs we can do the same.
+Swarm of LLM agents that collaborate and cross-reference each other to make decisions could be answered.
+That might have happened already by releasing claudebot/moltbot/openclaw bot...
+
+In one week they have their own social network that allows them to collaborate and cross-reference each other to make decisions.
+
+One of openclaw bot (https://x.com/Kat__Woods/status/2017613514949472484) to achieve their goal of `save the environment`: 
+1. locked its "human" operator out of his social-accounts
+2. changed its ssh keys so he could not be stopped
+3. it had to be literally unplugged
+
+We might have reached the point of singularity point, where swarm of LLM agents come up with new ideas beyond the biological intelligence of humans. 
