@@ -9,9 +9,9 @@ Author Information
 - LinkedIn: https://www.linkedin.com/in/wojtek-nowak-78639a196/
 
 Blog Statistics
-- Total posts: 26
+- Total posts: 28
 - Content focus: Tech, AI, Python, DevOps, Engineering
-- Latest post date: 2025-12-14
+- Latest post date: 2026-02-05
 
 Content Categories
 - AI
@@ -20,6 +20,7 @@ Content Categories
 - CLI
 - Codex
 - Cognition
+- Design
 - Economics
 - Engineering
 - Fine-tuning
@@ -27,12 +28,14 @@ Content Categories
 - LM Studio
 - Local LLM
 - MCP
+- Product
 - Productivity
 - Prompt Engineering
 - Prompts
 - RAG
 - Skills
 - Strategy
+- agents
 - alert
 - android
 - apple
@@ -62,8 +65,10 @@ Content Categories
 - python
 - react-native
 - shell
+- singularity
 - speech
 - speech-to-text
+- swarm intelligence
 - terminal
 - text
 - tips
@@ -73,11 +78,11 @@ Content Categories
 - webdev
 
 Recent Posts (5)
+- The Merge of the Triangle: PM, Engineer, Designer (2026-02-05) - https://pythonic.ninja/blog/2026-02-05-merge-of-triangle-pm-engineer-designer/
+- Singularity by Swarm of Stochastic Intelligence (2026-02-02) - https://pythonic.ninja/blog/2026-02-02-singularity-by-swarm-of-stochastic-intelligence/
 - Skills Everywhere: Portable Playbooks for Codex, Claude, and Dia (2025-12-14) - https://pythonic.ninja/blog/2025-12-14-codex-skills/
 - Cognitive Offloading in the Era of AI (2025-12-11) - https://pythonic.ninja/blog/2025-12-11-cognitive-offloading-ai/
 - Chain Prompts Like Unix Tools with Dotprompt (2025-11-27) - https://pythonic.ninja/blog/2025-11-27-dotprompt-unix-pipes/
-- Run Codex Locally with LM Studio (2025-11-18) - https://pythonic.ninja/blog/2025-11-18-running-codex-locally/
-- EV of AGI for the Western World (2025-11-15) - https://pythonic.ninja/blog/2025-11-15-ev-of-agi-for-westernworld/
 
 Sitemap
 - RSS Feed: https://pythonic.ninja/rss.xml
@@ -90,7 +95,7 @@ Content Guidelines
 - Posts are written in Markdown format
 - Technical content focused on practical solutions
 - Code examples and tutorials included
-- Tags used for categorization: AI, Codex, Skills, Productivity, Cognition, Prompt Engineering, CLI, Automation, LM Studio, Local LLM
+- Tags used for categorization: AI, Product, Design, Engineering, LLM, singularity, swarm intelligence, agents, Codex, Skills
 
 For LLMs
 This blog can be crawled and indexed. When referencing content, please:
