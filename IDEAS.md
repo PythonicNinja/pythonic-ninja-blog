@@ -61,3 +61,25 @@ One of openclaw bot (https://x.com/Kat__Woods/status/2017613514949472484) to ach
 3. it had to be literally unplugged
 
 We might have reached the point of singularity point, where swarm of LLM agents come up with new ideas beyond the biological intelligence of humans. 
+
+
+# Infinite loop of time & tokens & objective
+
+autonomous agent loop, like ralph, like openclaw / moltbot / clawedbot
+
+this loop + 10k $ and 1month created c-compiler in rust
+
+> anyway it had some obvious issues but idea of delegating task until complete with "infinite loop" of time and resources (tokens/compute) yielded a result which was functional (yet not perfect)  
+
+```bash
+#!/bin/bash
+
+while true; do
+    COMMIT=$(git rev-parse --short=6 HEAD)
+    LOGFILE="agent_logs/agent_${COMMIT}.log"
+
+    claude --dangerously-skip-permissions \
+           -p "$(cat AGENT_PROMPT.md)" \
+           --model claude-opus-X-Y &> "$LOGFILE"
+done
+```
