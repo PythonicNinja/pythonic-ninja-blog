@@ -468,3 +468,46 @@ a.post-card:hover {
 .theme-toggle:hover {
   background: color-mix(in oklab, var(--bg) 90%, var(--ink))
 }
+
+/* Mermaid diagram wrapper */
+.prose .mermaid-wrapper {
+  margin: 2em 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: color-mix(in oklab, var(--bg) 95%, var(--line));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.prose .mermaid-wrapper svg {
+  max-width: 100%;
+  height: auto;
+}
+:root[data-theme='dark'] .prose .mermaid-wrapper {
+  background: color-mix(in oklab, var(--bg) 98%, var(--line));
+}
+
+/* Fix Mermaid text colors (classDef color not always applied) */
+.prose .mermaid-wrapper .node.some text,
+.prose .mermaid-wrapper .node.some tspan {
+  fill: #161614 !important;
+}
+.prose .mermaid-wrapper .node.good text,
+.prose .mermaid-wrapper .node.good tspan,
+.prose .mermaid-wrapper .node.state text,
+.prose .mermaid-wrapper .node.state tspan {
+  fill: #f1ebde !important;
+}
+.prose .mermaid-wrapper .cluster text,
+.prose .mermaid-wrapper .cluster tspan,
+.prose .mermaid-wrapper .node:not(.some):not(.good):not(.state) text,
+.prose .mermaid-wrapper .node:not(.some):not(.good):not(.state) tspan {
+  fill: #161614 !important;
+}
+/* Dark mode: all text light (wrapper has data-theme=dark when rendered in dark mode) */
+.prose .mermaid-wrapper[data-theme="dark"] foreignObject,
+.prose .mermaid-wrapper[data-theme="dark"] foreignObject * {
+  color: #161614 !important;
+}
