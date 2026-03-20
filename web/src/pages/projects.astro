@@ -18,6 +18,30 @@ const projects = [
         featured: true
     },
     {
+        title: "Audio · Pythonic Ninja",
+        description: "Local-first audio lab for turning text and ebooks into speech with on‑device Kokoro TTS.",
+        url: "https://audio.pythonic.ninja/",
+        technologies: ["Audio", "WebGPU", "Kokoro TTS"],
+        featured: true
+    },
+    {
+        title: "ThreadMd",
+        description: "Chrome extension for turning threads into Markdown.",
+        url: "https://chromewebstore.google.com/detail/threadmd/lifkdmifpgbplcpifliiccpipccicmkl?authuser=0&hl=en-GB",
+        technologies: ["Chrome Extension", "Markdown"],
+        featured: true,
+        links: [
+            {
+                label: "Chrome Web Store",
+                url: "https://chromewebstore.google.com/detail/threadmd/lifkdmifpgbplcpifliiccpipccicmkl?authuser=0&hl=en-GB"
+            },
+            {
+                label: "GitHub",
+                url: "https://github.com/PythonicNinja/ThreadMD"
+            }
+        ]
+    },
+    {
         title: "pydrill",
         description: "Python driver for Apache Drill - schema‑free SQL over Hadoop/NoSQL/Cloud.",
         url: "https://github.com/PythonicNinja/pydrill",
@@ -66,6 +90,20 @@ const projects = [
               )}
           </div>
           <p class="project-description">{project.description}</p>
+            {project.links && project.links.length > 0 && (
+              <div class="project-links">
+                  {project.links.map((link) => (
+                    <a
+                      class="project-link"
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+              </div>
+            )}
             {project.technologies && project.technologies.length > 0 && (
               <div class="project-tech">
                   {project.technologies.map((tech) => (
@@ -175,6 +213,23 @@ const projects = [
     color: var(--muted);
     line-height: 1.6;
     margin-bottom: 1rem;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .project-link:hover {
+    text-decoration: underline;
   }
 
   .project-tech {

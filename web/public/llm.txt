@@ -11,7 +11,7 @@ Author Information
 Blog Statistics
 - Total posts: 28
 - Content focus: Tech, AI, Python, DevOps, Engineering
-- Latest post date: 2026-02-05
+- Latest post date: 2026-02-08
 
 Content Categories
 - AI
@@ -78,7 +78,7 @@ Content Categories
 - webdev
 
 Recent Posts (5)
-- The Merge of the Triangle: PM, Engineer, Designer (2026-02-05) - https://pythonic.ninja/blog/2026-02-05-merge-of-triangle-pm-engineer-designer/
+- The Merge of the Triangle: PM, Engineer, Designer (2026-02-08) - https://pythonic.ninja/blog/2026-02-08-merge-of-triangle-pm-engineer-designer/
 - Singularity by Swarm of Stochastic Intelligence (2026-02-02) - https://pythonic.ninja/blog/2026-02-02-singularity-by-swarm-of-stochastic-intelligence/
 - Skills Everywhere: Portable Playbooks for Codex, Claude, and Dia (2025-12-14) - https://pythonic.ninja/blog/2025-12-14-codex-skills/
 - Cognitive Offloading in the Era of AI (2025-12-11) - https://pythonic.ninja/blog/2025-12-11-cognitive-offloading-ai/
