@@ -255,9 +255,10 @@ a:hover {
 }
 
 .post-card {
-  padding: 1rem;
+  padding: 1rem 1rem 1rem calc(1rem - 3px);
   border-bottom: 1px solid var(--line);
-  transition: background 120ms ease, transform 120ms ease;
+  border-left: 3px solid transparent;
+  transition: background 120ms ease, border-left-color 150ms ease;
   position: relative;
   text-decoration: none;
   display: block;
@@ -275,10 +276,12 @@ a.post-card:hover {
   font-size: 26px;
   margin: 0;
   display: block;
+  line-height: 1.2;
 }
 
 .post-card:hover{
   background: color-mix(in oklab, var(--bg) 95%, var(--ink));
+  border-left-color: var(--accent);
 }
 
 .post-cta{color: var(--accent); text-decoration: none}
@@ -305,7 +308,7 @@ a.post-card:hover {
 
 .post-summary {
   margin: 8px 0 0 0;
-  color: var(--ink)
+  color: var(--muted)
 }
 
 .page-title {
@@ -413,7 +416,7 @@ a.post-card:hover {
 .prose blockquote {
   margin: 16px 0;
   padding-left: 16px;
-  border-left: 2px solid var(--line);
+  border-left: 3px solid var(--accent);
   color: var(--muted)
 }
 

@@ -94,8 +94,8 @@ const posts = Object.values(modules)
                   return (
                     <Fragment>
                       {idx > 0 && <span>, </span>}
-                      <span 
-                        class="tag-link-inline" 
+                      <span
+                        class="tag-link-inline"
                         data-tag-url={`/tags/${encodeURIComponent(tagLower)}/`}
                         role="link"
                         tabindex="0"
@@ -109,6 +109,7 @@ const posts = Object.values(modules)
             )}
             <span> · {minutes} min read</span>
           </div>
+          {summary && <p class="post-summary">{summary}</p>}
         </a>
       );
     })}
@@ -272,17 +273,24 @@ const posts = Object.values(modules)
     font-family: var(--font-fancy);
     flex: 1 1 280px;
     max-width: 520px;
-    padding: 10px 12px;
+    padding: 10px 16px;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 999px;
     background: var(--bg);
-    color: var(--accent);
+    color: var(--ink);
     font-size: 16px;
     margin-bottom: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .post-search input[type="search"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent);
   }
 
   .post-search input[type="search"]::placeholder {
-    color: var(--accent);
+    color: var(--muted);
   }
 
   .sr-only {
