@@ -376,7 +376,9 @@ a.post-card:hover {
 
 .prose p {
   margin: 14px 0;
-  color: var(--ink)
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.8
 }
 
 .prose a {
