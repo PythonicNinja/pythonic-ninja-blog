@@ -413,6 +413,15 @@ a.post-card:hover {
   color: inherit
 }
 
+.prose :not(pre) > code {
+  font-family: var(--font-code);
+  font-size: 0.875em;
+  background: color-mix(in oklab, var(--bg) 82%, var(--ink));
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
 .prose ul, .prose ol {
   padding-left: 22px
 }
