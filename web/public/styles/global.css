@@ -423,7 +423,13 @@ a.post-card:hover {
 }
 
 .prose ul, .prose ol {
-  padding-left: 22px
+  padding-left: 22px;
+  margin: 14px 0;
+}
+
+.prose li {
+  margin-bottom: 6px;
+  line-height: 1.8;
 }
 
 .prose blockquote {
