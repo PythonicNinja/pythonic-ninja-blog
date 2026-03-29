@@ -367,11 +367,13 @@ a.post-card:hover {
 }
 
 .prose h2 {
-  font-size: 28px
+  font-size: 28px;
+  margin-top: 2.5rem
 }
 
 .prose h3 {
-  font-size: 22px
+  font-size: 22px;
+  margin-top: 2rem
 }
 
 .prose p {
