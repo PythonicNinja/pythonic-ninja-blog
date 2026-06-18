@@ -9,9 +9,9 @@ Author Information
 - LinkedIn: https://www.linkedin.com/in/wojtek-nowak-78639a196/
 
 Blog Statistics
-- Total posts: 28
+- Total posts: 30
 - Content focus: Tech, AI, Python, DevOps, Engineering
-- Latest post date: 2026-02-08
+- Latest post date: 2026-06-18
 
 Content Categories
 - AI
@@ -21,6 +21,8 @@ Content Categories
 - Codex
 - Cognition
 - Design
+- Developer
+- Developer Tools
 - Economics
 - Engineering
 - Fine-tuning
@@ -28,6 +30,7 @@ Content Categories
 - LM Studio
 - Local LLM
 - MCP
+- Privacy
 - Product
 - Productivity
 - Prompt Engineering
@@ -78,11 +81,11 @@ Content Categories
 - webdev
 
 Recent Posts (5)
+- Local Models Are Not Worse Cloud Models (2026-06-18) - https://pythonic.ninja/blog/2026-06-18-local-models-are-not-worse-cloud-models/
+- You Can Outsource Thinking, Not Understanding (2026-05-08) - https://pythonic.ninja/blog/2026-05-08-outsource-thinking-not-understanding/
 - The Merge of the Triangle: PM, Engineer, Designer (2026-02-08) - https://pythonic.ninja/blog/2026-02-08-merge-of-triangle-pm-engineer-designer/
 - Singularity by Swarm of Stochastic Intelligence (2026-02-02) - https://pythonic.ninja/blog/2026-02-02-singularity-by-swarm-of-stochastic-intelligence/
 - Skills Everywhere: Portable Playbooks for Codex, Claude, and Dia (2025-12-14) - https://pythonic.ninja/blog/2025-12-14-codex-skills/
-- Cognitive Offloading in the Era of AI (2025-12-11) - https://pythonic.ninja/blog/2025-12-11-cognitive-offloading-ai/
-- Chain Prompts Like Unix Tools with Dotprompt (2025-11-27) - https://pythonic.ninja/blog/2025-11-27-dotprompt-unix-pipes/
 
 Sitemap
 - RSS Feed: https://pythonic.ninja/rss.xml
@@ -95,7 +98,7 @@ Content Guidelines
 - Posts are written in Markdown format
 - Technical content focused on practical solutions
 - Code examples and tutorials included
-- Tags used for categorization: AI, Product, Design, Engineering, LLM, singularity, swarm intelligence, agents, Codex, Skills
+- Tags used for categorization: AI, Local LLM, Developer Tools, Privacy, Developer, Cognition, Product, Design, Engineering, LLM
 
 For LLMs
 This blog can be crawled and indexed. When referencing content, please:
