@@ -54,7 +54,7 @@ body {
 }
 
 p {
-  text-align: justify;
+  text-wrap: pretty;
 }
 
 a {
@@ -87,6 +87,12 @@ a:hover {
   max-width: 880px;
   margin: 0 auto;
   padding: 24px
+}
+
+.container-wide {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
 .site-header {
@@ -139,18 +145,34 @@ a:hover {
 
 .nav {
   display: flex;
-  gap: 18px;
+  gap: 14px;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 @media (max-width: 640px) {
+  .site-header {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
   .nav {
-    gap: 12px;
+    gap: 8px;
   }
   
   .nav-link {
-    font-size: 0.9rem;
+    font-size: 0.84rem;
+  }
+
+  .icon-btn {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -161,6 +183,7 @@ a:hover {
   transition: opacity 0.2s;
   font-family: var(--font-normal);
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .nav-link:hover {

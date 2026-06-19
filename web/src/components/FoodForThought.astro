@@ -1,52 +1,96 @@
 ---
-const {raindropUri = 'https://raindrop.io/vojtek-nowak/food-for-thought-62612689/embed/sort=-created', fullyCollapsed = false} = Astro.props;
-
+const {
+  raindropUri = "https://raindrop.io/vojtek-nowak/food-for-thought-62612689/embed/sort=-created",
+  fullyCollapsed = false,
+} = Astro.props;
 ---
-<section class="food-for-thought" data-fully-collapsed={fullyCollapsed}>
+
+<section
+  class="food-for-thought"
+  data-food-for-thought
+  data-fully-collapsed={fullyCollapsed}
+  data-src={raindropUri}
+>
   <button
-    id="toggleButton"
-    class="btn"
-  ></button>
-  <iframe style="height: 0px;" allowfullscreen frameborder="0" title="Food for thought" src={raindropUri}></iframe>
+    type="button"
+    class="btn food-toggle"
+    aria-expanded="false"
+    data-food-toggle
+  >
+    Show food for thought
+  </button>
+  <iframe
+    allowfullscreen
+    data-food-frame
+    frameborder="0"
+    loading="lazy"
+    title="Food for thought"
+  ></iframe>
 </section>
 
 <script>
-    const button = document.getElementById('toggleButton');
-    const iframe = document.querySelector('iframe');
-    const container = document.querySelector('.food-for-thought');
-    const fullyCollapsed = container.getAttribute('data-fully-collapsed') === 'true';
+  function initFoodForThought(container: HTMLElement) {
+    if (container.dataset.initialized === "true") return;
+    container.dataset.initialized = "true";
+
+    const button = container.querySelector("[data-food-toggle]") as HTMLButtonElement | null;
+    const iframe = container.querySelector("[data-food-frame]") as HTMLIFrameElement | null;
+    const fullyCollapsed = container.getAttribute("data-fully-collapsed") === "true";
+    const src = container.getAttribute("data-src") || "";
     let expanded = false;
 
-    const handleVisibility = () => {
-        iframe.style.height = expanded ? '500px' : (fullyCollapsed ? '0px' : '53px');
-        iframe.style.border = expanded ? '1px solid' : (fullyCollapsed ? 'none' : '1px solid');
-        button.textContent = expanded ? '📫Hide food-for-thought' : '📭 Show food-for-thought: curated links worth your time';
+    function ensureLoaded() {
+      if (iframe && src && iframe.getAttribute("src") !== src) {
+        iframe.setAttribute("src", src);
+      }
     }
-    handleVisibility();
 
-    button.addEventListener('click', () => {
-        expanded = !expanded;
-        handleVisibility();
+    function render() {
+      if (!button || !iframe) return;
+      const preview = !fullyCollapsed && !expanded;
+      if (expanded || preview) {
+        ensureLoaded();
+      }
+      iframe.style.height = expanded ? "520px" : (preview ? "64px" : "0px");
+      iframe.style.borderWidth = expanded || preview ? "1px" : "0";
+      iframe.setAttribute("aria-hidden", expanded || preview ? "false" : "true");
+      button.setAttribute("aria-expanded", expanded ? "true" : "false");
+      button.textContent = expanded ? "Hide food for thought" : "Show food for thought";
+    }
+
+    button?.addEventListener("click", () => {
+      expanded = !expanded;
+      render();
     });
+
+    render();
+  }
+
+  document.querySelectorAll("[data-food-for-thought]").forEach((container) => {
+    initFoodForThought(container as HTMLElement);
+  });
 </script>
 
 <style>
   .food-for-thought {
-    display: flex;
     align-items: center;
-    justify-content: center;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    width: 100%;
   }
 
-  .food-for-thought #toggleButton {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  .food-toggle {
+    min-height: 40px;
+    padding: 0.58rem 0.9rem;
   }
 
   .food-for-thought iframe {
+    border-color: var(--line);
+    border-radius: 8px;
+    border-style: solid;
+    margin-top: 1rem;
+    transition: height 0.28s ease-in-out, border-width 0.28s ease-in-out;
     width: 100%;
-    transition: height 0.3s ease-in-out;
-    border-radius: 20px;
-    border: 1px solid;
   }
 </style>

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n panel,astro --handle-input --default-input-target panel \"node dev-panel.js\" \"astro dev\"",
+    "check:content": "node scripts/check-post-utils.mjs",
     "prebuild": "node scripts/generate-llm-txt.js",
     "build": "astro build",
     "preview": "astro preview",

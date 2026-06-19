@@ -1,320 +1,411 @@
 ---
-import { Fragment } from 'astro/jsx-runtime';
-// Load posts once for both index and blog pages
-const modules = import.meta.glob('../pages/blog/*.md', {eager: true}) as Record<string, any>;
-const rawModules = import.meta.glob('../pages/blog/*.md', {as: 'raw', eager: true}) as Record<string, string>;
+import { Fragment } from "astro/jsx-runtime";
+import { posts as allPosts } from "../lib/posts";
 
-function extractBody(md: string): string {
-    // strip frontmatter
-    if (md.startsWith('---')) {
-        const end = md.indexOf('\n---', 3);
-        if (end !== -1) md = md.slice(end + 4);
-    }
-    return md.trim();
-}
+const {
+  variant = "full",
+  limit,
+  showHeader = false,
+  showSearch = true,
+  showFilters = true,
+  heading = "Latest writing",
+  subheading = "Search the archive or follow a topic path.",
+} = Astro.props;
 
-function toPlainText(text: string): string {
-    const plain = text
-        .replace(/```[\s\S]*?```/g, '')
-        .replace(/`[^`]*`/g, '')
-        .replace(/\!\[[^\]]*\]\([^\)]*\)/g, '')
-        .replace(/\[([^\]]*)\]\([^\)]*\)/g, '$1')
-        .replace(/[#>*_>-]/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-    return plain;
-}
-
-function summarize(text: string): string {
-    const plain = toPlainText(text);
-    const sentences = plain.split(/(?<=[.!?])\s+/).slice(0, 2).join(' ');
-    return sentences.slice(0, 220);
-}
-
-function estimateMinutes(text: string): number {
-    const words = text.split(/\s+/).filter(Boolean).length;
-    return Math.max(1, Math.ceil(words / 220));
-}
-
-const posts = Object.values(modules)
-    .map((m) => {
-        const url = (m as any).url as string;
-        const frontmatter = (m as any).frontmatter as any;
-        const raw = m.rawContent();
-        const body = extractBody(raw);
-        const summary = frontmatter.summary || summarize(body);
-        const minutes = estimateMinutes(body);
-        const searchText = [
-            String(frontmatter.title || '').toLowerCase(),
-            (frontmatter.tags || []).join(' ').toLowerCase(),
-            toPlainText(body).toLowerCase()
-        ]
-            .join(' ')
-            .toLowerCase()
-            .slice(0, 12000);
-        return {url, frontmatter, summary, minutes, searchText};
-    })
-    .filter((p) => p.frontmatter && p.frontmatter.title)
-    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+const visiblePosts = typeof limit === "number" ? allPosts.slice(0, limit) : allPosts;
+const moduleClass = `posts-module posts-module-${variant}`;
 ---
 
-<div class="filters-and-search">
-  <div class="post-search">
-    <label for="post-search" class="sr-only">Search posts</label>
-    <input id="post-search" type="search" placeholder="Search posts... (Press / to focus)" autocomplete="off"/>
-  </div>
+<section class={moduleClass} data-posts-module>
+  {showHeader && (
+    <div class="posts-module-header">
+      <div>
+        <p class="section-kicker">Archive</p>
+        <h2>{heading}</h2>
+        {subheading && <p>{subheading}</p>}
+      </div>
+      <span class="post-count" data-post-count>{visiblePosts.length} posts</span>
+    </div>
+  )}
 
-  <div class="post-filters" id="filters">
-    <button class="pill active" data-view="latest">Latest</button>
-    <button class="pill" data-tag="ai">AI</button>
-    <button class="pill" data-tag="python">Python</button>
-    <button class="pill" data-tag="devops">DevOps</button>
-  </div>
-</div>
+  {(showSearch || showFilters) && (
+    <div class="filters-and-search">
+      {showSearch && (
+        <div class="post-search">
+          <label class="sr-only">Search posts</label>
+          <input data-post-search type="search" placeholder="Search posts... (Press / to focus)" autocomplete="off" />
+        </div>
+      )}
 
-<section class="post-list" id="post-list">
-    {posts.map(({url, frontmatter, summary, minutes, searchText}) => {
-      const tags = frontmatter.tags || [];
-      return (
-        <a 
-          href={url} 
-          class="post-card"
-          data-tags={tags.map((t: any) => String(t).toLowerCase()).join(' ')}
-          data-date={new Date(frontmatter.date).getTime()} 
-          data-search={searchText}
-        >
-          <div class="post-title" data-title={frontmatter.title}>{frontmatter.title}</div>
-          <div class="post-meta">
-            <time>{String(frontmatter.date).split('T')[0]}</time>
-            {tags.length > 0 && (
-              <Fragment>
-                <span> · </span>
-                {tags.map((tag: string, idx: number) => {
-                  const tagLower = String(tag).toLowerCase();
-                  return (
-                    <Fragment>
-                      {idx > 0 && <span>, </span>}
-                      <span
-                        class="tag-link-inline"
-                        data-tag-url={`/tags/${encodeURIComponent(tagLower)}/`}
-                        role="link"
-                        tabindex="0"
-                      >
-                        {tag}
-                      </span>
-                    </Fragment>
-                  );
-                })}
-              </Fragment>
-            )}
-            <span> · {minutes} min read</span>
-          </div>
-          {summary && <p class="post-summary">{summary}</p>}
-        </a>
-      );
-    })}
+      {showFilters && (
+        <div class="post-filters" data-post-filters>
+          <button class="pill active" type="button" data-view="latest">Latest</button>
+          <button class="pill" type="button" data-tag="ai">AI</button>
+          <button class="pill" type="button" data-tag="python">Python</button>
+          <button class="pill" type="button" data-tag="devops">DevOps</button>
+        </div>
+      )}
+    </div>
+  )}
+
+  <div class="post-list" data-post-list>
+    {visiblePosts.map(({ url, title, summary, minutes, searchText, tags, date }) => (
+      <a
+        href={url}
+        class="post-card"
+        data-post-card
+        data-tags={tags.map((tag) => tag.toLowerCase()).join(" ")}
+        data-date={new Date(date).getTime()}
+        data-search={searchText}
+      >
+        <div class="post-title" data-title={title}>{title}</div>
+        <div class="post-meta">
+          <time>{date}</time>
+          {tags.length > 0 && (
+            <Fragment>
+              <span> · </span>
+              {tags.map((tag: string, index: number) => {
+                const tagLower = tag.toLowerCase();
+                return (
+                  <Fragment>
+                    {index > 0 && <span>, </span>}
+                    <span
+                      class="tag-link-inline"
+                      data-tag-url={`/tags/${encodeURIComponent(tagLower)}/`}
+                      role="link"
+                      tabindex="0"
+                    >
+                      {tag}
+                    </span>
+                  </Fragment>
+                );
+              })}
+            </Fragment>
+          )}
+          <span> · {minutes} min read</span>
+        </div>
+        {summary && <p class="post-summary">{summary}</p>}
+      </a>
+    ))}
+  </div>
+  <p class="no-results" data-no-results hidden>No posts match that search.</p>
 </section>
+
 <script>
-    const list = document.getElementById('post-list');
-    const items = Array.from(list?.children || []);
-    const pills = Array.from(document.querySelectorAll('#filters .pill'));
-    const searchInput = document.getElementById('post-search');
-    const postCount = document.getElementById('post-count');
-
-    function setActive(el) {
-        pills.forEach(p => p.classList.toggle('active', p === el));
-    }
-
-    function apply(view, tag, query) {
-        let filtered = items;
-        if (tag) {
-            filtered = items.filter((el) => {
-                const tags = (el.getAttribute('data-tags') || '').split(' ');
-                return tags.includes(tag);
-            });
-        }
-        if (query && query.length > 0) {
-            const q = query.toLowerCase();
-            filtered = filtered.filter((el) => {
-                const text = el.getAttribute('data-search') || '';
-                return text.includes(q);
-            });
-        }
-        if (view === 'popular') {
-            filtered.sort((a, b) => {
-                const at = (a.getAttribute('data-tags') || '').split(' ').filter(Boolean).length;
-                const bt = (b.getAttribute('data-tags') || '').split(' ').filter(Boolean).length;
-                if (bt !== at) return bt - at;
-                return Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date'));
-            });
-        } else {
-            filtered.sort((a, b) => Number(b.getAttribute('data-date')) - Number(a.getAttribute('data-date')));
-        }
-        list.innerHTML = '';
-        
-        // Highlight search terms in filtered results
-        filtered.forEach(el => {
-            const cloned = el.cloneNode(true) as HTMLElement;
-            if (query && query.length > 0) {
-                highlightSearchTerms(cloned, query);
-            }
-            list.appendChild(cloned);
-        });
-        
-        if (postCount) {
-            postCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'post' : 'posts'}`;
-        }
-    }
-
-    function highlightSearchTerms(element: HTMLElement, query: string) {
-        const terms = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
-        const titleEl = element.querySelector('.post-title');
-        if (titleEl && terms.length > 0) {
-            const originalText = titleEl.textContent || '';
-            let highlighted = originalText;
-            terms.forEach(term => {
-                const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                highlighted = highlighted.replace(regex, '<mark>$1</mark>');
-            });
-            titleEl.innerHTML = highlighted;
-        }
-    }
-
-    document.getElementById('filters')?.addEventListener('click', (e) => {
-        const target = (e.target as HTMLElement).closest('.pill') as HTMLElement | null;
-        if (!target) return;
-        setActive(target);
-        const tag = target.getAttribute('data-tag');
-        const view = target.getAttribute('data-view') || 'latest';
-        apply(view, tag || '', (searchInput as HTMLInputElement | null)?.value || '');
-    });
-    searchInput?.addEventListener('input', (e) => {
-        const query = (e.target as HTMLInputElement).value || '';
-        const active = document.querySelector('#filters .pill.active') as HTMLElement | null;
-        const tag = active?.getAttribute('data-tag') || '';
-        const view = active?.getAttribute('data-view') || 'latest';
-        apply(view, tag, query);
-    });
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        // Press / to focus search (but not when typing in input)
-        if (e.key === '/' && e.target !== searchInput && !(e.target as HTMLElement).isContentEditable) {
-            e.preventDefault();
-            searchInput?.focus();
-        }
-        // Press Esc to clear search
-        if (e.key === 'Escape' && e.target === searchInput) {
-            (searchInput as HTMLInputElement).value = '';
-            const active = document.querySelector('#filters .pill.active') as HTMLElement | null;
-            const tag = active?.getAttribute('data-tag') || '';
-            const view = active?.getAttribute('data-view') || 'latest';
-            apply(view, tag, '');
-            searchInput?.blur();
-        }
-    });
-
-    // Handle tag link clicks and prevent post card navigation
-    document.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      const tagLink = target.closest('.tag-link-inline');
-      if (tagLink) {
-        e.stopPropagation();
-        e.preventDefault();
-        const url = tagLink.getAttribute('data-tag-url');
-        if (url) {
-          window.location.href = url;
-        }
-      }
-    }, true);
-
-    // Handle keyboard navigation on tag links
-    document.addEventListener('keydown', (e) => {
-      const target = e.target as HTMLElement;
-      if (target.classList.contains('tag-link-inline') && (e.key === 'Enter' || e.key === ' ')) {
-        e.stopPropagation();
-        e.preventDefault();
-        const url = target.getAttribute('data-tag-url');
-        if (url) {
-          window.location.href = url;
-        }
-      }
-    }, true);
-
-    // initialize count
-    apply('latest', '', '');
-</script>
-
-
-<style>
-  .filters-and-search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
+  function escapeRegExp(value: string) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
-  @media screen and (max-width: 768px) {
-    .filters-and-search {
-      flex-direction: column;
+  function highlightSearchTerms(element: HTMLElement, query: string) {
+    const titleEl = element.querySelector("[data-title]");
+    if (!titleEl) return;
+
+    const originalText = titleEl.getAttribute("data-title") || titleEl.textContent || "";
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (terms.length === 0) {
+      titleEl.textContent = originalText;
+      return;
     }
+
+    let highlighted = originalText;
+    terms.forEach((term) => {
+      const regex = new RegExp(`(${escapeRegExp(term)})`, "gi");
+      highlighted = highlighted.replace(regex, "<mark>$1</mark>");
+    });
+    titleEl.innerHTML = highlighted;
+  }
+
+  function initPostsModule(module: HTMLElement) {
+    if (module.dataset.initialized === "true") return;
+    module.dataset.initialized = "true";
+
+    const list = module.querySelector("[data-post-list]");
+    const items = Array.from(module.querySelectorAll("[data-post-card]")) as HTMLElement[];
+    const pills = Array.from(module.querySelectorAll("[data-post-filters] .pill")) as HTMLElement[];
+    const searchInput = module.querySelector("[data-post-search]") as HTMLInputElement | null;
+    const postCount = module.querySelector("[data-post-count]");
+    const noResults = module.querySelector("[data-no-results]") as HTMLElement | null;
+
+    function activeControls() {
+      const active = module.querySelector("[data-post-filters] .pill.active") as HTMLElement | null;
+      return {
+        tag: active?.getAttribute("data-tag") || "",
+        view: active?.getAttribute("data-view") || "latest",
+        query: searchInput?.value || "",
+      };
+    }
+
+    function setActive(el: HTMLElement) {
+      pills.forEach((pill) => pill.classList.toggle("active", pill === el));
+    }
+
+    function apply(view: string, tag: string, query: string) {
+      if (!list) return;
+      const normalizedQuery = query.trim().toLowerCase();
+      let filtered = items;
+
+      if (tag) {
+        filtered = filtered.filter((el) => {
+          const tags = (el.getAttribute("data-tags") || "").split(" ");
+          return tags.includes(tag);
+        });
+      }
+
+      if (normalizedQuery) {
+        filtered = filtered.filter((el) => {
+          const text = el.getAttribute("data-search") || "";
+          return text.includes(normalizedQuery);
+        });
+      }
+
+      filtered.sort((a, b) => {
+        if (view === "popular") {
+          const at = (a.getAttribute("data-tags") || "").split(" ").filter(Boolean).length;
+          const bt = (b.getAttribute("data-tags") || "").split(" ").filter(Boolean).length;
+          if (bt !== at) return bt - at;
+        }
+        return Number(b.getAttribute("data-date")) - Number(a.getAttribute("data-date"));
+      });
+
+      items.forEach((item) => highlightSearchTerms(item, ""));
+      filtered.forEach((item) => {
+        highlightSearchTerms(item, query);
+        list.appendChild(item);
+      });
+
+      if (postCount) {
+        postCount.textContent = `${filtered.length} ${filtered.length === 1 ? "post" : "posts"}`;
+      }
+      if (noResults) {
+        noResults.hidden = filtered.length > 0;
+      }
+    }
+
+    module.querySelector("[data-post-filters]")?.addEventListener("click", (event) => {
+      const target = (event.target as HTMLElement).closest(".pill") as HTMLElement | null;
+      if (!target) return;
+      setActive(target);
+      const { tag, view, query } = activeControls();
+      apply(view, tag, query);
+    });
+
+    searchInput?.addEventListener("input", () => {
+      const { tag, view, query } = activeControls();
+      apply(view, tag, query);
+    });
+
+    apply("latest", "", searchInput?.value || "");
+  }
+
+  document.querySelectorAll("[data-posts-module]").forEach((module) => {
+    initPostsModule(module as HTMLElement);
+  });
+
+  if (!(window as any).__postListEventsBound) {
+    (window as any).__postListEventsBound = true;
+
+    document.addEventListener("keydown", (event) => {
+      const target = event.target as HTMLElement;
+      const searchInput = document.querySelector("[data-post-search]") as HTMLInputElement | null;
+      if (event.key === "/" && target !== searchInput && !target.isContentEditable) {
+        event.preventDefault();
+        searchInput?.focus();
+      }
+      if (event.key === "Escape" && target?.matches("[data-post-search]")) {
+        const input = target as HTMLInputElement;
+        input.value = "";
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.blur();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      const tagLink = target.closest(".tag-link-inline");
+      if (!tagLink) return;
+      event.stopPropagation();
+      event.preventDefault();
+      const url = tagLink.getAttribute("data-tag-url");
+      if (url) {
+        window.location.href = url;
+      }
+    }, true);
+
+    document.addEventListener("keydown", (event) => {
+      const target = event.target as HTMLElement;
+      if (!target.classList.contains("tag-link-inline") || (event.key !== "Enter" && event.key !== " ")) return;
+      event.stopPropagation();
+      event.preventDefault();
+      const url = target.getAttribute("data-tag-url");
+      if (url) {
+        window.location.href = url;
+      }
+    }, true);
+  }
+</script>
+
+<style>
+  .posts-module {
+    width: 100%;
+  }
+
+  .posts-module-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .posts-module-header h2 {
+    font-family: var(--font-fancy);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+    margin: 0.2rem 0 0;
+    letter-spacing: 0;
+  }
+
+  .posts-module-header p {
+    color: var(--muted);
+    max-width: 42rem;
+    margin: 0.35rem 0 0;
+  }
+
+  .section-kicker {
+    color: var(--accent-strong, var(--accent)) !important;
+    font-family: var(--font-normal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    margin: 0 !important;
+    text-transform: uppercase;
+  }
+
+  .post-count {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    flex: 0 0 auto;
+    font-size: 0.86rem;
+    padding: 0.45rem 0.8rem;
+  }
+
+  .filters-and-search {
+    align-items: center;
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: minmax(220px, 1fr) auto;
+    margin: 1rem 0 0;
   }
 
   .post-search {
-    display: flex;
-    flex: 1;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
     width: 100%;
   }
 
   .post-search input[type="search"] {
-    font-family: var(--font-fancy);
-    flex: 1 1 280px;
-    max-width: 520px;
-    padding: 10px 16px;
-    border: 1px solid var(--border-color);
+    background: color-mix(in oklab, var(--bg) 94%, white);
+    border: 1px solid var(--line);
     border-radius: 999px;
-    background: var(--bg);
     color: var(--ink);
-    font-size: 16px;
-    margin-bottom: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: var(--font-normal);
+    font-size: 1rem;
+    padding: 0.82rem 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    width: 100%;
   }
 
   .post-search input[type="search"]:focus {
+    border-color: var(--accent-strong, var(--accent));
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent-strong, var(--accent)) 18%, transparent);
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent);
   }
 
   .post-search input[type="search"]::placeholder {
     color: var(--muted);
   }
 
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  .post-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    justify-content: flex-end;
   }
 
-  #post-count {
-    color: var(--text-muted, #666);
-    font-size: 0.95em;
+  .pill {
+    appearance: none;
+    background: color-mix(in oklab, var(--bg) 96%, white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: var(--font-normal);
+    font-size: 0.9rem;
+    padding: 0.62rem 0.9rem;
+  }
+
+  .pill:hover,
+  .pill:focus-visible {
+    border-color: var(--accent-strong, var(--accent));
+    outline: none;
+  }
+
+  .pill.active {
+    background: var(--accent-strong, var(--accent));
+    border-color: var(--accent-strong, var(--accent));
+    color: var(--ink-inverted);
+  }
+
+  .post-list {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr;
+    padding: 1.1rem 0 0;
+  }
+
+  .post-card {
+    border-bottom: 1px solid var(--line);
+    border-left: 3px solid transparent;
+    display: block;
+    padding: 1.1rem 1rem 1.1rem calc(1rem - 3px);
+    position: relative;
+    text-decoration: none;
+    transition: background 160ms ease, border-left-color 160ms ease, transform 160ms ease;
+  }
+
+  .post-card:hover {
+    background: color-mix(in oklab, var(--bg) 93%, var(--ink));
+    border-left-color: var(--accent-strong, var(--accent));
+    color: var(--ink);
+    transform: translateX(2px);
+  }
+
+  .post-title {
+    color: var(--ink);
+    display: block;
+    font-family: var(--font-fancy);
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
+    line-height: 1.1;
+  }
+
+  .post-meta {
+    color: var(--muted);
+    display: block;
+    font-family: var(--font-normal);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-top: 0.45rem;
+  }
+
+  .post-summary {
+    color: var(--muted);
+    margin: 0.55rem 0 0;
+    max-width: 64rem;
   }
 
   .tag-link-inline {
-    color: var(--accent);
-    text-decoration: none;
-    transition: text-decoration 0.2s;
+    color: var(--accent-strong, var(--accent));
     cursor: pointer;
+    text-decoration: none;
   }
 
   .tag-link-inline:hover {
@@ -322,18 +413,67 @@ const posts = Object.values(modules)
   }
 
   .tag-link-inline:focus {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-strong, var(--accent));
     outline-offset: 2px;
   }
 
-  mark {
-    background: rgba(255, 255, 0, 0.3);
-    color: inherit;
-    padding: 0 2px;
-    border-radius: 2px;
+  .no-results {
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+    margin: 1rem 0 0;
+    padding: 1.25rem;
+    text-align: center;
   }
 
-  :root[data-theme='dark'] mark {
-    background: rgba(255, 255, 0, 0.2);
+  mark {
+    background: color-mix(in oklab, #f7c948 45%, transparent);
+    border-radius: 3px;
+    color: inherit;
+    padding: 0 2px;
+  }
+
+  .sr-only {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .posts-module-home .post-list {
+    gap: 0.65rem;
+    padding-top: 1rem;
+  }
+
+  .posts-module-home .post-card {
+    background: color-mix(in oklab, var(--bg) 95%, white);
+    border: 1px solid var(--line);
+    border-left: 3px solid transparent;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 760px) {
+    .posts-module-header,
+    .filters-and-search {
+      align-items: stretch;
+      grid-template-columns: 1fr;
+    }
+
+    .posts-module-header {
+      flex-direction: column;
+    }
+
+    .post-count {
+      align-self: flex-start;
+    }
+
+    .post-filters {
+      justify-content: flex-start;
+    }
   }
 </style>

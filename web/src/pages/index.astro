@@ -1,11 +1,515 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
 import PostsList from "../components/PostsList.astro";
 import FoodForThought from "../components/FoodForThought.astro";
+import { featuredPost, posts, postsByTag } from "../lib/posts";
+
+const latest = featuredPost;
+const secondaryPosts = posts.slice(1, 4);
+const topicPaths = [
+  {
+    label: "AI engineering",
+    href: "/tags/ai/",
+    count: postsByTag("ai").length,
+    copy: "Agents, local models, prompt systems, and judgment in the loop.",
+  },
+  {
+    label: "Python",
+    href: "/tags/python/",
+    count: postsByTag("python").length,
+    copy: "Practical Python notes, scripts, APIs, and small automation wins.",
+  },
+  {
+    label: "DevOps",
+    href: "/tags/devops/",
+    count: postsByTag("devops").length,
+    copy: "Local HTTPS, ports, shell shortcuts, deployment, and operational fixes.",
+  },
+  {
+    label: "Projects",
+    href: "/projects",
+    count: 7,
+    copy: "Open-source tools, experiments, and small products built for leverage.",
+  },
+];
+
+const latestImage = latest?.image || "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80";
 ---
-<BaseLayout title="Pythonic Ninja - Tech & AI" description="Fast, refined notes on engineering, AI, and craft.">
-  <Hero />
-  <FoodForThought fullyCollapsed="true" />
-  <PostsList />
+
+<BaseLayout
+  title="Pythonic Ninja - Tech & AI"
+  description="Fast, refined notes on engineering, AI, Python, DevOps, and practical craft."
+  ogImage={latestImage}
+  mainClass="container-wide homepage-shell"
+>
+  <section class="home-hero" style={`--hero-image: url("${latestImage}")`}>
+    <div class="home-hero-overlay"></div>
+    <div class="home-hero-content">
+      <p class="home-kicker">Tech, AI, engineering craft</p>
+      <h1>Pythonic Ninja</h1>
+      <p class="home-hero-copy">
+        Short, practical writing for engineers who want useful tools, sharper judgment, and less hype in the loop.
+      </p>
+      <div class="home-actions">
+        <a class="home-action primary" href={latest?.url || "/blog/"}>Read latest</a>
+        <a class="home-action" href="/blog/">Browse writing</a>
+        <a class="home-action subtle" href="/projects">See projects</a>
+      </div>
+      {latest && (
+        <a class="hero-latest-link" href={latest.url}>
+          <span>Latest</span>
+          <strong>{latest.title}</strong>
+          <small>{latest.date} · {latest.minutes} min read</small>
+        </a>
+      )}
+    </div>
+  </section>
+
+  <section class="home-section intro-grid">
+    {latest && (
+      <article class="featured-article">
+        <a href={latest.url} class="featured-image-link" aria-label={`Read ${latest.title}`}>
+          <img src={latest.image || latestImage} alt="" loading="eager" />
+        </a>
+        <div class="featured-copy">
+          <p class="home-kicker">Start here</p>
+          <h2><a href={latest.url}>{latest.title}</a></h2>
+          {latest.subtitle && <p class="featured-subtitle">{latest.subtitle}</p>}
+          <p>{latest.summary}</p>
+          <div class="featured-meta">
+            <time>{latest.date}</time>
+            <span>{latest.minutes} min read</span>
+            {latest.tags.slice(0, 3).map((tag) => (
+              <a href={`/tags/${encodeURIComponent(tag.toLowerCase())}/`}>{tag}</a>
+            ))}
+          </div>
+        </div>
+      </article>
+    )}
+
+    <aside class="now-panel" aria-label="Recent writing">
+      <div class="panel-heading">
+        <p class="home-kicker">Recent signals</p>
+        <h2>Fresh notes</h2>
+      </div>
+      <div class="recent-stack">
+        {secondaryPosts.map((post) => (
+          <a href={post.url} class="recent-link">
+            <span>{post.date}</span>
+            <strong>{post.title}</strong>
+          </a>
+        ))}
+      </div>
+      <a class="inline-link" href="/rss.xml">Subscribe via RSS</a>
+    </aside>
+  </section>
+
+  <section class="home-section">
+    <div class="section-heading">
+      <p class="home-kicker">Reading paths</p>
+      <h2>Choose a thread</h2>
+    </div>
+    <div class="topic-grid">
+      {topicPaths.map((topic) => (
+        <a href={topic.href} class="topic-card">
+          <span>{topic.count} items</span>
+          <strong>{topic.label}</strong>
+          <p>{topic.copy}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section">
+    <PostsList
+      variant="home"
+      limit={8}
+      showHeader={true}
+      heading="Latest writing"
+      subheading="Search the newest essays and notes, then jump into the full archive when you need more."
+    />
+  </section>
+
+  <section class="home-section reading-queue">
+    <div class="section-heading">
+      <p class="home-kicker">Curated input</p>
+      <h2>Food for thought</h2>
+      <p>Recent links worth opening when you want a sharper reading queue.</p>
+    </div>
+    <FoodForThought fullyCollapsed={true} />
+  </section>
 </BaseLayout>
+
+<style>
+  :global(.homepage-shell) {
+    --accent-strong: #8f3f2d;
+    --accent-cool: #256e79;
+    --surface: color-mix(in oklab, var(--bg) 94%, white);
+    --surface-strong: color-mix(in oklab, var(--bg) 88%, white);
+    padding-top: 18px;
+  }
+
+  .home-hero {
+    align-items: end;
+    background-image: var(--hero-image);
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    display: grid;
+    min-height: clamp(430px, 68vh, 660px);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .home-hero-overlay {
+    background:
+      linear-gradient(90deg, rgba(9, 17, 17, 0.92) 0%, rgba(9, 17, 17, 0.66) 44%, rgba(9, 17, 17, 0.18) 100%),
+      linear-gradient(0deg, rgba(9, 17, 17, 0.78) 0%, rgba(9, 17, 17, 0) 56%);
+    inset: 0;
+    position: absolute;
+  }
+
+  .home-hero-content {
+    color: #f7efe3;
+    max-width: 760px;
+    padding: clamp(2rem, 6vw, 5rem);
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-kicker {
+    color: var(--accent-strong);
+    font-family: var(--font-normal);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .home-hero .home-kicker {
+    color: #ffc46b;
+  }
+
+  .home-hero h1 {
+    font-family: var(--font-fancy);
+    font-size: clamp(4rem, 13vw, 9.5rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 0.84;
+    margin: 0.35rem 0 1.25rem;
+    max-width: 8ch;
+  }
+
+  .home-hero-copy {
+    color: rgba(247, 239, 227, 0.9);
+    font-size: clamp(1.05rem, 2vw, 1.32rem);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 44rem;
+  }
+
+  .home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.75rem;
+  }
+
+  .home-action {
+    align-items: center;
+    border: 1px solid rgba(247, 239, 227, 0.38);
+    border-radius: 999px;
+    color: #f7efe3;
+    display: inline-flex;
+    font-family: var(--font-normal);
+    font-weight: 700;
+    min-height: 44px;
+    padding: 0.72rem 1rem;
+  }
+
+  .home-action:hover {
+    background: rgba(247, 239, 227, 0.12);
+    color: #f7efe3;
+  }
+
+  .home-action.primary {
+    background: #f7efe3;
+    border-color: #f7efe3;
+    color: #17201f;
+  }
+
+  .home-action.subtle {
+    border-color: rgba(247, 239, 227, 0.22);
+  }
+
+  .hero-latest-link {
+    border-top: 1px solid rgba(247, 239, 227, 0.28);
+    color: #f7efe3;
+    display: grid;
+    font-family: var(--font-normal);
+    gap: 0.15rem;
+    margin-top: 2rem;
+    max-width: 38rem;
+    padding-top: 1rem;
+  }
+
+  .hero-latest-link span,
+  .hero-latest-link small {
+    color: rgba(247, 239, 227, 0.72);
+    font-size: 0.86rem;
+  }
+
+  .hero-latest-link strong {
+    font-family: var(--font-fancy);
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+
+  .home-section {
+    margin-top: clamp(2.5rem, 7vw, 5.5rem);
+  }
+
+  .intro-grid {
+    align-items: stretch;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.8fr);
+  }
+
+  .featured-article,
+  .now-panel,
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .featured-article {
+    display: grid;
+    gap: 0;
+    grid-template-columns: minmax(260px, 0.88fr) minmax(0, 1.12fr);
+    overflow: hidden;
+  }
+
+  .featured-image-link {
+    background: #111;
+    min-height: 100%;
+  }
+
+  .featured-image-link img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .featured-copy {
+    padding: clamp(1.25rem, 4vw, 2.4rem);
+  }
+
+  .featured-copy h2,
+  .section-heading h2,
+  .panel-heading h2 {
+    font-family: var(--font-fancy);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 0.95;
+    margin: 0.3rem 0 0;
+  }
+
+  .featured-copy h2 a {
+    color: var(--ink);
+  }
+
+  .featured-subtitle {
+    color: var(--ink);
+    font-size: 1.08rem;
+    font-weight: 600;
+    margin: 1rem 0 0;
+  }
+
+  .featured-copy p:not(.home-kicker):not(.featured-subtitle) {
+    color: var(--muted);
+    margin: 0.85rem 0 0;
+  }
+
+  .featured-meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.25rem;
+  }
+
+  .featured-meta time,
+  .featured-meta span,
+  .featured-meta a {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: var(--font-normal);
+    font-size: 0.82rem;
+    padding: 0.34rem 0.6rem;
+  }
+
+  .featured-meta a:hover {
+    border-color: var(--accent-strong);
+    color: var(--accent-strong);
+  }
+
+  .now-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.1rem, 3vw, 1.8rem);
+  }
+
+  .recent-stack {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+  }
+
+  .recent-link {
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    gap: 0.2rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .recent-link span {
+    color: var(--muted);
+    font-family: var(--font-normal);
+    font-size: 0.8rem;
+  }
+
+  .recent-link strong {
+    color: var(--ink);
+    font-family: var(--font-fancy);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.08;
+  }
+
+  .inline-link {
+    color: var(--accent-strong);
+    font-family: var(--font-normal);
+    font-weight: 700;
+  }
+
+  .section-heading {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .section-heading p:not(.home-kicker) {
+    color: var(--muted);
+    margin: 0.5rem 0 0;
+    max-width: 34rem;
+  }
+
+  .topic-grid {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .topic-card {
+    display: grid;
+    min-height: 210px;
+    padding: 1.15rem;
+    transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+  }
+
+  .topic-card:hover {
+    background: var(--surface-strong);
+    border-color: var(--accent-cool);
+    color: var(--ink);
+    transform: translateY(-3px);
+  }
+
+  .topic-card span {
+    color: var(--accent-cool);
+    font-family: var(--font-normal);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .topic-card strong {
+    align-self: end;
+    color: var(--ink);
+    font-family: var(--font-fancy);
+    font-size: clamp(1.55rem, 3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 0.98;
+    margin-top: 2rem;
+  }
+
+  .topic-card p {
+    color: var(--muted);
+    font-family: var(--font-normal);
+    margin: 0.7rem 0 0;
+  }
+
+  .reading-queue {
+    border-top: 1px solid var(--line);
+    padding-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  @media (max-width: 980px) {
+    .intro-grid,
+    .featured-article {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-image-link {
+      max-height: 320px;
+    }
+
+    .topic-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 680px) {
+    :global(.homepage-shell) {
+      padding: 14px;
+    }
+
+    .home-hero {
+      min-height: 560px;
+    }
+
+    .home-hero-content {
+      padding: 1.35rem;
+    }
+
+    .home-actions,
+    .section-heading {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .home-action {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .topic-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .topic-card {
+      min-height: 170px;
+    }
+  }
+</style>
