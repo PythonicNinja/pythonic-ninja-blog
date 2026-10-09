@@ -1,8 +1,7 @@
 ---
-import { Fragment } from 'astro/jsx-runtime';
 // Load posts once for both index and blog pages
 const modules = import.meta.glob('../pages/blog/*.md', {eager: true}) as Record<string, any>;
-const rawModules = import.meta.glob('../pages/blog/*.md', {as: 'raw', eager: true}) as Record<string, string>;
+const rawModules = import.meta.glob('../pages/blog/*.md', {query: '?raw', import: 'default', eager: true}) as Record<string, string>;
 
 function extractBody(md: string): string {
     // strip frontmatter
