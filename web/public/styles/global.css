@@ -510,6 +510,14 @@ a.post-card:hover {
 :root[data-theme='dark'] .prose .mermaid-wrapper {
   background: color-mix(in oklab, var(--bg) 98%, var(--line));
 }
+/* Mermaid node labels are <p>: keep .prose p styles out, nodes are sized without them */
+.prose .mermaid-wrapper foreignObject p {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: inherit;
+}
 
 /* Fix Mermaid text colors (classDef color not always applied) */
 .prose .mermaid-wrapper .node.some text,
